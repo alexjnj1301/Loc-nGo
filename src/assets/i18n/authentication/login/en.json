@@ -12,5 +12,19 @@
     "labels" : {
       "goToRegister": "Don't have an account? Sign up here!"
     }
+  },
+  "register": {
+    "title": "Register to the customer area",
+    "placeholder": {
+      "email": "Email",
+      "password": "Password"
+    },
+    "button": {
+      "register": "Register",
+      "googleRegister": "Register with Google"
+    },
+    "labels" : {
+      "goToLogin": "Already have an account? Log in here!"
+    }
   }
 }

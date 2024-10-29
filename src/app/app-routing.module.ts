@@ -5,6 +5,7 @@ import { ContactComponent } from './main/components/contact/contact.component';
 import { ErrorPageComponent } from './main/components/error-page/error-page.component';
 import { AdminComponent } from './main/components/admin/admin.component';
 import { LoginComponent } from './main/components/Authentication/login/login.component'
+import { RegisterComponent } from './main/components/Authentication/register/register.component'
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   // { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'register', component: RegisterComponent },
   { path: '**', redirectTo: 'error/404', pathMatch: 'full' }
 ];
 

@@ -12,5 +12,19 @@
     "labels" : {
       "goToRegister": "Vous n'avez pas encore de compte? Inscrivez-vous!"
     }
+  },
+  "register": {
+    "title": "S'inscrire à l'espace voyageurs",
+    "placeholder": {
+      "email": "Email",
+      "password": "Mot de passe"
+    },
+    "button": {
+      "register": "S'incrire",
+      "googleRegister": "S'inscrire avec Google"
+    },
+    "labels" : {
+      "goToLogin": "Vous avez déjà un compte? Connectez vous!"
+    }
   }
 }

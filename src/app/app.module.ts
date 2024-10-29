@@ -39,6 +39,7 @@ import { MatChipsModule } from '@angular/material/chips'
 import { ValidDeletionDialogComponent } from './main/components/admin/valid-deletion-dialog/valid-deletion-dialog.component'
 import { LoaderComponent } from "./main/components/loader/loader.component"
 import {LoginComponent} from "./main/components/Authentication/login/login.component";
+import { RegisterComponent } from './main/components/Authentication/register/register.component'
 export function createTranslateLoader(http: HttpClient, cookieService: CookieService) {
   return new MultipleTransLoaderHttp(http, cookieService);
 }
@@ -55,7 +56,8 @@ export function createTranslateLoader(http: HttpClient, cookieService: CookieSer
         AdminComponent,
         DialogComponent,
         ValidDeletionDialogComponent,
-        LoginComponent
+        LoginComponent,
+        RegisterComponent
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
     AppRoutingModule,

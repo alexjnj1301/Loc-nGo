@@ -1,0 +1,197 @@
+:host {
+  display: flex;
+  height: 100vh;
+  background-image: url("/assets/IMG/mountain.png");
+  background-size: cover;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 55%;
+  background-color: rgba(255, 255, 255, 0.95);
+  margin-left: auto;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.register-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 55%;
+  background-color: rgba(255, 255, 255, 0.95);
+  margin-right: auto;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.login-logo {
+  margin-top: 10%;
+  max-height: 15vh;
+}
+
+.login-title {
+  margin-top: 1em;
+  font-size: 2em;
+  text-align: center;
+  color: var(--secondary-color);
+  font-family: poppins, sans-serif;
+}
+
+.login-buttons-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 10%;
+  width: 55%;
+}
+
+.login-button {
+  background-color: var(--secondary-color);
+  font-family: poppins, sans-serif;
+  border-radius: 16px;
+  border: none;
+  color: white;
+  padding: 1rem;
+  font-size: 1rem;
+}
+.login-button:hover {
+  cursor: pointer;
+  color: var(--secondary-color);
+  background-color: rgba(5, 68, 126, 0.15);
+  transition: ease-in-out 0.1s;
+}
+
+.google-login {
+  background-color: transparent;
+  color: var(--secondary-color);
+  border: 1px solid var(--secondary-color);
+  span {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+}
+.google-login:hover {
+  border: 1px solid rgba(5, 68, 126, 0.15);
+}
+
+.login-register-redirect {
+  font-family: poppins, sans-serif;
+  font-size: 1rem;
+  color: rgba(102, 102, 102, 0.76);
+  margin:0 auto;
+  text-align: center;
+}
+.login-register-redirect:hover {
+  cursor: pointer;
+  color: var(--secondary-color);
+  text-decoration: underline;
+}
+
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.custom-input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  width: 60%;
+  margin-top: 10%;
+
+  .label-active {
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    color: #666666;
+    margin-bottom: 10px;
+  }
+  .label-inactive {
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    color: transparent;
+    margin-bottom: 10px;
+  }
+}
+
+.custom-input {
+  border: none;
+  border-bottom: 1px solid #666666;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  padding: 5px 0;
+  outline: none;
+  background-color: transparent;
+  width: 100%;
+}
+
+.custom-input:focus {
+  border-bottom: 1px solid #666666;
+}
+
+.custom-input::placeholder {
+  color: #666666;
+}
+
+.custom-input:focus::placeholder {
+  color: #ccc;
+}
+
+@media (max-width: 600px) {
+  .login-container {
+    width: 100%;
+  }
+  .register-container {
+    width: 100%;
+  }
+  .login-title {
+    font-size: 1.5em;
+  }
+  .custom-input-container {
+    width: 90%;
+    margin-top: 2rem;
+  }
+  .login-buttons-container {
+    width: 50%;
+  }
+  .login-button {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-height: 750px) {
+  .login-logo {
+    margin-top: 5%;
+  }
+  .custom-input-container {
+    margin-top: 8%;
+  }
+  .login-buttons-container {
+    margin-top: 8%;
+  }
+}
+
+@media (max-height: 600px) {
+  .login-logo {
+    margin-top: 0.7em;
+    width: auto;
+  }
+  .login-title {
+    margin-top: 0.5em;
+    font-size: 1.5em;
+  }
+  .custom-input-container {
+    gap: 3rem;
+    margin-top: 1.5rem;
+  }
+  .login-buttons-container {
+    margin-top: 3rem;
+  }
+}

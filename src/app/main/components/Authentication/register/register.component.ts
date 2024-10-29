@@ -1,20 +1,18 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MultipleTransLoaderHttp } from '../../../../MultipleTransLoaderHttp'
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
+  selector: 'app-register',
+  templateUrl: './register.component.html',
   styleUrl: '../authentication.styles.scss'
 })
-export class LoginComponent implements OnInit {
-  public isLoading = false
-  public loginForm: FormGroup
-  translateValues: any = {}
-
+export class RegisterComponent {
+  public registerForm: FormGroup
+  public translateValues: any = {}
   constructor(private formBuilder: FormBuilder,
               private translateService: MultipleTransLoaderHttp) {
-    this.loginForm = this.formBuilder.group({
+    this.registerForm = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
     })
@@ -22,7 +20,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.translateService.getTranslation().subscribe((result) => {
-      this.translateValues = result.login;
+      this.translateValues = result.register;
     });
   }
 }

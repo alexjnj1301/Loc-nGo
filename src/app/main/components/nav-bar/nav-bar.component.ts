@@ -28,7 +28,7 @@ export class NavBarComponent implements OnInit {
     window.location.reload();
   }
 
-  public isActiveRouteLogin(): boolean {
-    return this.router.url === '/login';
+  public isActiveRouteAuthentication(): boolean {
+    return this.router.url === '/login' || this.router.url === '/register';
   }
 }
