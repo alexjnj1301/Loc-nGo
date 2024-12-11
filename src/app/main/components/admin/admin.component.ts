@@ -23,15 +23,15 @@ export class AdminComponent implements OnInit {
     this.translateValues.getTranslation().subscribe((result) => {
       this.homePageTranslateValues = result.homePage;
     })
-    this.httpService.getAllReservations().subscribe({
-      next: (reservations: BookResponse[]) => {
-        this.reservationList = reservations;
-        console.log(this.reservationList);
-      },
-      error: (error) => {
-        console.error(error);
-      }
-    })
+    // this.httpService.getAllReservations().subscribe({
+    //   next: (reservations: BookResponse[]) => {
+    //     this.reservationList = reservations;
+    //     console.log(this.reservationList);
+    //   },
+    //   error: (error) => {
+    //     console.error(error);
+    //   }
+    // })
   }
 
   public seeDetails(id: number): void {

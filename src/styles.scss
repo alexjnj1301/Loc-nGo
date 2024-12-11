@@ -33,7 +33,11 @@
 
   @include mat.sidenav-overrides((
     content-background-color: var(--primary-color)
-  ))
+  ));
+
+  @include mat.divider-overrides((
+    color: var(--primary-color)
+  ));
 }
 
 .mat-expansion-panel:not([class*=mat-elevation-z]) {
@@ -58,4 +62,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mdc-dialog__surface {
   border-radius: 15px !important;
   width: 30rem !important;
+}
+
+.reservation-card .mat-mdc-card-header-text {
+  display: none !important;
+  visibility: hidden !important;
 }

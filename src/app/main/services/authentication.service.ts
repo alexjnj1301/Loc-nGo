@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { environment } from '../../../environments/environment'
 import { HttpClient } from '@angular/common/http'
-import { Observable } from 'rxjs'
+import { BehaviorSubject, Observable, tap } from 'rxjs'
 import { LoginRequest, LoginResponse } from '../../models/LoginModels'
 import { Constants } from '../Constants'
 import { jwtDecode } from 'jwt-decode'
@@ -12,9 +12,15 @@ import { CurrentUser } from '../../models/CurrentUser'
 })
 export class AuthenticationService {
   private baseUrl: string = environment.apiUrl + '/auth'
+  private currentUserSubject: BehaviorSubject<CurrentUser | null>
 
   constructor(private constants: Constants,
-              private httpClient: HttpClient) {}
+              private httpClient: HttpClient) {
+    const savedUser = localStorage.getItem(this.constants.CURRENT_USER_KEY)
+    this.currentUserSubject = new BehaviorSubject<CurrentUser | null>(
+      savedUser ? JSON.parse(savedUser) : null
+    )
+  }
 
   public isAuthenticated(): boolean {
     const token = this.getToken()
@@ -47,6 +53,10 @@ export class AuthenticationService {
     return JSON.parse(localStorage.getItem(this.constants.CURRENT_USER_KEY)!)
   }
 
+  public onAuthChange(): Observable<CurrentUser | null> {
+    return this.currentUserSubject.asObservable();
+  }
+
   public setCurrentUser() {
     const token = this.getToken()
     if (!token) {
@@ -57,18 +67,26 @@ export class AuthenticationService {
     const currentUser: CurrentUser = {
       firstname: decoded.firstname,
       lastname: decoded.lastname,
-      email: decoded.sub
+      email: decoded.sub,
+      id: decoded.id
     }
 
     localStorage.setItem(this.constants.CURRENT_USER_KEY, JSON.stringify(currentUser))
+    this.currentUserSubject.next(currentUser)
   }
 
   public logout(): void {
     localStorage.removeItem(this.constants.TOKEN_KEY)
     localStorage.removeItem(this.constants.CURRENT_USER_KEY)
+    this.currentUserSubject.next(null)
   }
 
   public login(loginRequest: LoginRequest): Observable<LoginResponse> {
-    return this.httpClient.post<LoginResponse>(`${this.baseUrl}/login`, loginRequest)
+    return this.httpClient.post<LoginResponse>(`${this.baseUrl}/login`, loginRequest).pipe(
+      tap((response: LoginResponse) => {
+        localStorage.setItem(this.constants.TOKEN_KEY, response.token)
+        this.setCurrentUser()
+      })
+    )
   }
 }

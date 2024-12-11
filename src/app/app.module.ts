@@ -41,6 +41,10 @@ import { LoaderComponent } from "./main/components/loader/loader.component"
 import { LoginComponent } from "./main/components/Authentication/login/login.component";
 import { RegisterComponent } from './main/components/Authentication/register/register.component'
 import { AuthInterceptor } from './main/services/auth.interceptor'
+import { SidenavComponent } from './main/components/sidenav/sidenav.component'
+import { MatDrawer, MatDrawerContainer } from '@angular/material/sidenav'
+import { ReservationCardComponent } from './main/components/sidenav/reservation-card/reservation-card.component'
+import { MatDivider } from '@angular/material/divider'
 
 export function createTranslateLoader(http: HttpClient) {
   return new MultipleTransLoaderHttp(http)
@@ -60,38 +64,39 @@ export function createTranslateLoader(http: HttpClient) {
         ValidDeletionDialogComponent,
         LoginComponent,
         RegisterComponent,
-        SidenavComponent
+        SidenavComponent,
+        ReservationCardComponent
     ],
     bootstrap: [AppComponent],
-  imports: [BrowserModule,
-    AppRoutingModule,
-    MatIconModule,
-    MatButtonModule,
-    MatToolbarModule,
-    MatTooltipModule,
-    MatMenuModule,
-    BrowserAnimationsModule,
-    MatCardModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatDatepickerModule,
-    MatSelectModule,
-    MatExpansionModule,
-    MatProgressBarModule,
-    MatTabsModule,
-    MatDialogModule,
-    MatProgressSpinnerModule,
-    MatChipsModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: createTranslateLoader,
-        deps: [HttpClient],
-      },
-    }),
-    LoaderComponent, NgOptimizedImage, MatDrawerContainer, MatDrawer],
+    imports: [BrowserModule,
+        AppRoutingModule,
+        MatIconModule,
+        MatButtonModule,
+        MatToolbarModule,
+        MatTooltipModule,
+        MatMenuModule,
+        BrowserAnimationsModule,
+        MatCardModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatDatepickerModule,
+        MatSelectModule,
+        MatExpansionModule,
+        MatProgressBarModule,
+        MatTabsModule,
+        MatDialogModule,
+        MatProgressSpinnerModule,
+        MatChipsModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: createTranslateLoader,
+                deps: [HttpClient],
+            },
+        }),
+        LoaderComponent, NgOptimizedImage, MatDrawerContainer, MatDrawer, MatDivider],
 
   providers: [
         { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

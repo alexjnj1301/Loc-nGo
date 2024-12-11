@@ -1,0 +1,33 @@
+.reservation-card {
+  border-radius: 10px;
+  color: var(--primary-color);
+  background-color: transparent;
+  padding: 0.5rem;
+  border: none;
+}
+.reservation-card:hover{
+  cursor: pointer;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+}
+
+.reservation-card-header{
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0;
+}
+
+.reservation-card-header-image {
+  border-radius: 10px;
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  margin: 0.2rem;
+}
+
+mat-card-title {
+  font-size: 1rem;
+  font-weight: bold;
+}

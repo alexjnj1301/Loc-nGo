@@ -9,6 +9,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment'
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -20,7 +21,7 @@ export class AuthInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     const token = localStorage.getItem('token')
 
-    if (req.url.startsWith('http://127.0.0.1:8080/api')) {
+    if (req.url.startsWith(`${environment.apiUrl}/api`)) {
       const clonedRequest = token
         ? req.clone({
           setHeaders: {

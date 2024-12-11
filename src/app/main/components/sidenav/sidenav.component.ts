@@ -1,36 +1,55 @@
-import { Component, OnInit, ViewChild } from '@angular/core'
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { MatDrawer } from '@angular/material/sidenav'
 import { SidenavService } from '../../services/sidenav.service'
-import { MultipleTransLoaderHttp } from '../../../MultipleTransLoaderHttp'
 import { AuthenticationService } from '../../services/authentication.service'
 import { CurrentUser } from '../../../models/CurrentUser'
-import { TranslateService } from '@ngx-translate/core'
+import { Reservation } from '../../../models/ReservationPerUser'
+import { HttpCallsService } from '../../services/httpCalls.service'
+import { Subscription } from 'rxjs'
 
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.scss'
 })
-export class SidenavComponent implements OnInit {
+export class SidenavComponent implements OnInit, OnDestroy {
   @ViewChild('drawer') public drawer!: MatDrawer
-  public translateValues: any = {}
   public currentUser: CurrentUser | null = null
-  public test: string = ''
+  public reservations: Reservation[] = []
+  private authSubscription!: Subscription
 
   constructor(protected sideNavService: SidenavService,
               protected authService: AuthenticationService,
-              private translateService: MultipleTransLoaderHttp) {
+              private httpCallsService: HttpCallsService) {
   }
 
   public ngOnInit(): void {
-    this.translateService.getTranslation().subscribe((result) => {
-      this.translateValues = result.sidenav
-      this.test = this.translateValues.welcomeUser
-      console.log("test", this.test)
-    })
     this.sideNavService.toggleSidenav$.subscribe(() => {
       this.toggleSideNav()
     })
+    this.authSubscription = this.authService.onAuthChange().subscribe({
+      next: (user: CurrentUser | null) => {
+        this.currentUser = user
+        if (user) {
+          this.getReservations()
+        } else {
+          this.reservations = []
+        }
+      },
+      error: (error: any) => {
+        console.error('Error:', error)
+      }
+    })
+
+    if (this.authService.isAuthenticated()) {
+      this.getReservations()
+    }
+  }
+
+  public ngOnDestroy(): void {
+    if (this.authSubscription) {
+      this.authSubscription.unsubscribe()
+    }
   }
 
   public toggleSideNav(): void {
@@ -43,5 +62,19 @@ export class SidenavComponent implements OnInit {
 
   public logout(): void {
     this.authService.logout()
+  }
+
+  public getReservations(): void {
+    if (this.isLoggedIn()) {
+      this.httpCallsService.getAllReservationsByUserId(this.authService.getCurrentUser()!.id).subscribe({
+        next: (reservations: Reservation[]) => {
+          this.reservations = reservations
+          console.log(this.reservations)
+        },
+        error: (error: any) => {
+          console.error('Error:', error)
+        }
+      })
+    }
   }
 }
