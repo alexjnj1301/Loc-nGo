@@ -3,14 +3,14 @@
     <mat-drawer #drawer class="sidenav-content" mode="side" [opened]="sideNavService.hasToBeOpened()">
       <div class="spacer">
         <div>
-          @if (isLoggedIn()) {
-            <p>
-              {{ 'sidenav.welcomeUser' | translate: { firstname: "alexis", lastname: "jeanjean" } }}
-            </p>
-          } @else {
-            <p>{{translateValues.welcomeGuest}}</p>
-          }
-          <p>Auto-resizing sidenav</p>
+          <h3 class="welcome-title"><strong>
+            @if (isLoggedIn()) {
+                {{ 'sidenav.welcomeUser' | translate: { firstname: "alexis", lastname: "jeanjean" } }}
+            } @else {
+              {{ 'sidenav.welcomeGuest' | translate }}
+            }
+          </strong></h3>
+          <h4>Voir mes reservations</h4>
           <p>Auto-resizing sidenav</p>
           <p>Auto-resizing sidenav</p>
           <p>Auto-resizing sidenav</p>
@@ -21,12 +21,11 @@
         </div>
         @if (isLoggedIn()) {
           <div class="footer">
-            <p (click)="logout()">{{ translateValues.logout }}</p>
+            <p (click)="logout()">{{ 'sidenav.logout' | translate }}</p>
           </div>
         }
       </div>
     </mat-drawer>
-
     <router-outlet></router-outlet>
   </mat-drawer-container>
 </div>

@@ -41,6 +41,8 @@ import { LoaderComponent } from "./main/components/loader/loader.component"
 import { LoginComponent } from "./main/components/Authentication/login/login.component";
 import { RegisterComponent } from './main/components/Authentication/register/register.component'
 import { AuthInterceptor } from './main/services/auth.interceptor'
+import { SidenavComponent } from './main/components/sidenav/sidenav.component'
+import { MatDrawer, MatDrawerContainer } from '@angular/material/sidenav'
 
 export function createTranslateLoader(http: HttpClient) {
   return new MultipleTransLoaderHttp(http)

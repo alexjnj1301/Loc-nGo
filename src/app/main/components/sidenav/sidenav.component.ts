@@ -1,10 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core'
 import { MatDrawer } from '@angular/material/sidenav'
 import { SidenavService } from '../../services/sidenav.service'
-import { MultipleTransLoaderHttp } from '../../../MultipleTransLoaderHttp'
 import { AuthenticationService } from '../../services/authentication.service'
 import { CurrentUser } from '../../../models/CurrentUser'
-import { TranslateService } from '@ngx-translate/core'
 
 @Component({
   selector: 'app-sidenav',
@@ -13,21 +11,13 @@ import { TranslateService } from '@ngx-translate/core'
 })
 export class SidenavComponent implements OnInit {
   @ViewChild('drawer') public drawer!: MatDrawer
-  public translateValues: any = {}
   public currentUser: CurrentUser | null = null
-  public test: string = ''
 
   constructor(protected sideNavService: SidenavService,
-              protected authService: AuthenticationService,
-              private translateService: MultipleTransLoaderHttp) {
+              protected authService: AuthenticationService) {
   }
 
   public ngOnInit(): void {
-    this.translateService.getTranslation().subscribe((result) => {
-      this.translateValues = result.sidenav
-      this.test = this.translateValues.welcomeUser
-      console.log("test", this.test)
-    })
     this.sideNavService.toggleSidenav$.subscribe(() => {
       this.toggleSideNav()
     })
