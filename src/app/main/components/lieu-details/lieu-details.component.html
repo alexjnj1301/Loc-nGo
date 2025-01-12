@@ -1,1 +1,39 @@
-<div class="lieu-details-container">bonjour {{lieuId}}</div>
+<div class="lieu-details-container">
+  <div class="lieu-details-pictures-showroom">
+    <mat-grid-list cols="4">
+      @for (tile of tiles; track tile) {
+        <mat-grid-tile [colspan]="tile.cols" [rowspan]="tile.rows" [ngClass]="tile.class"
+        >
+          @if (tile.class === 'bottom-right-right') {
+            Voir plus
+          } @else {
+            <img src="{{tile.img ? tile.img : constants.REPLACEMENT_PICTURE }}" alt="No more image to show">
+          }
+        </mat-grid-tile>
+      }
+    </mat-grid-list>
+  </div>
+  <div class="lieu-details-reservation">
+    <h3>Réservation</h3>
+  </div>
+</div>
+<div>
+  <div class="lieu-details-infos">
+    <div class="lieu-details-infos-title">
+      <h1>{{lieuDetails?.name}}</h1>
+    </div>
+    <div class="lieu-details-infos-description">
+      <p>{{lieuDetails?.description}}</p>
+    </div>
+    <div class="lieu-details-infos-features">
+      <div class="lieu-details-infos-features-title">
+        <h2>Caractéristiques</h2>
+      </div>
+      <div class="lieu-details-infos-features-list">
+        <ul>
+          <li *ngFor="let feature of lieuDetails?.services">{{feature}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
