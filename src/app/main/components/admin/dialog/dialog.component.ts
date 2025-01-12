@@ -5,12 +5,13 @@ import { ReservationsActions, UpdateBookRequest } from '../../../../enums/admin'
 import { HttpCallsService } from 'src/app/main/services/httpCalls.service';
 
 @Component({
-  selector: 'app-dialog',
-  providers: [{
-    provide: DEFAULT_CURRENCY_CODE, useValue: 'EUR'
-  }],
-  templateUrl: './dialog.component.html',
-  styleUrl: './dialog.component.scss',
+    selector: 'app-dialog',
+    providers: [{
+            provide: DEFAULT_CURRENCY_CODE, useValue: 'EUR'
+        }],
+    templateUrl: './dialog.component.html',
+    styleUrl: './dialog.component.scss',
+    standalone: false
 })
 export class DialogComponent {
   public reservation: BookResponse

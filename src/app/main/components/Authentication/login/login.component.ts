@@ -7,9 +7,10 @@ import { Constants } from '../../../Constants'
 import { Router } from '@angular/router'
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrl: '../authentication.styles.scss'
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrl: '../authentication.styles.scss',
+    standalone: false
 })
 export class LoginComponent implements OnInit {
   public loginForm: FormGroup

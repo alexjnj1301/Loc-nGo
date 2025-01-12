@@ -4,16 +4,15 @@ import { ImageDialogData } from '../../../../models/LieuModels'
 import { TranslateModule } from '@ngx-translate/core'
 
 @Component({
-  selector: 'app-pictures-dialog',
-  standalone: true,
-  imports: [
-    MatDialogTitle,
-    MatDialogContent,
-    MatDialogModule,
-    TranslateModule,
-  ],
-  templateUrl: './pictures-dialog.component.html',
-  styleUrl: './pictures-dialog.component.scss'
+    selector: 'app-pictures-dialog',
+    imports: [
+        MatDialogTitle,
+        MatDialogContent,
+        MatDialogModule,
+        TranslateModule,
+    ],
+    templateUrl: './pictures-dialog.component.html',
+    styleUrl: './pictures-dialog.component.scss'
 })
 export class PicturesDialogComponent {
   public images: ImageDialogData

@@ -5,9 +5,10 @@ import { Router } from '@angular/router'
 import { Constants } from '../../../Constants'
 
 @Component({
-  selector: 'app-lieu-card',
-  templateUrl: './lieu-card.component.html',
-  styleUrl: './lieu-card.component.scss'
+    selector: 'app-lieu-card',
+    templateUrl: './lieu-card.component.html',
+    styleUrl: './lieu-card.component.scss',
+    standalone: false
 })
 export class LieuCardComponent implements OnInit {
   @Input() lieu!: AllLieuResponse

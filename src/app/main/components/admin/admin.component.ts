@@ -7,9 +7,10 @@ import { DialogComponent } from './dialog/dialog.component';
 import { ValidDeletionDialogComponent } from './valid-deletion-dialog/valid-deletion-dialog.component';
 
 @Component({
-  selector: 'app-admin',
-  templateUrl: './admin.component.html',
-  styleUrl: './admin.component.scss'
+    selector: 'app-admin',
+    templateUrl: './admin.component.html',
+    styleUrl: './admin.component.scss',
+    standalone: false
 })
 export class AdminComponent implements OnInit {
   public reservationList: BookResponse[] = []

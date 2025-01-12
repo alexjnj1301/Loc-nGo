@@ -5,9 +5,10 @@ import { AuthenticationService } from '../../services/authentication.service'
 import { SidenavService } from '../../services/sidenav.service'
 
 @Component({
-  selector: 'app-nav-bar',
-  templateUrl: './nav-bar.component.html',
-  styleUrls: ['./nav-bar.component.scss']
+    selector: 'app-nav-bar',
+    templateUrl: './nav-bar.component.html',
+    styleUrls: ['./nav-bar.component.scss'],
+    standalone: false
 })
 export class NavBarComponent implements OnInit {
   translateValues: any = {}

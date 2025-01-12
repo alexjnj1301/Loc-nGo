@@ -19,9 +19,10 @@ import { BookRequest } from '../../../models/ContactInformations'
 import { toNumbers } from '@angular/compiler-cli/src/version_helpers'
 
 @Component({
-  selector: 'app-lieu-details',
-  templateUrl: './lieu-details.component.html',
-  styleUrl: './lieu-details.component.scss'
+    selector: 'app-lieu-details',
+    templateUrl: './lieu-details.component.html',
+    styleUrl: './lieu-details.component.scss',
+    standalone: false
 })
 export class LieuDetailsComponent implements OnInit {
   @ViewChild('picker') public picker! : MatDatepickerToggle<Date>
