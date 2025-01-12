@@ -1,3 +1,17 @@
 .lieu-details-container {
+  margin: 0 auto;
+  max-width: 90vw;
+  background-color: red;
   margin-top: 6rem;
 }
+
+.lieu-details-pictures-showroom {
+  height: fit-content;
+  max-width: 70%;
+}
+
+.principal-picture {
+  border-radius: 20px 0 0 20px;
+  object-fit: fill;
+}
+

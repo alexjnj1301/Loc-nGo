@@ -47,6 +47,7 @@ import { ReservationCardComponent } from './main/components/sidenav/reservation-
 import { MatDivider } from '@angular/material/divider'
 import { LieuCardComponent } from './main/components/home-page/lieu-card/lieu-card.component'
 import { LieuDetailsComponent } from './main/components/lieu-details/lieu-details.component'
+import { MatGridList, MatGridTile } from '@angular/material/grid-list'
 
 export function createTranslateLoader(http: HttpClient) {
   return new MultipleTransLoaderHttp(http)
@@ -72,35 +73,35 @@ export function createTranslateLoader(http: HttpClient) {
         LieuDetailsComponent
     ],
     bootstrap: [AppComponent],
-    imports: [BrowserModule,
-        AppRoutingModule,
-        MatIconModule,
-        MatButtonModule,
-        MatToolbarModule,
-        MatTooltipModule,
-        MatMenuModule,
-        BrowserAnimationsModule,
-        MatCardModule,
-        ReactiveFormsModule,
-        MatInputModule,
-        MatButtonModule,
-        MatFormFieldModule,
-        MatDatepickerModule,
-        MatSelectModule,
-        MatExpansionModule,
-        MatProgressBarModule,
-        MatTabsModule,
-        MatDialogModule,
-        MatProgressSpinnerModule,
-        MatChipsModule,
-        TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: createTranslateLoader,
-                deps: [HttpClient],
-            },
-        }),
-        LoaderComponent, NgOptimizedImage, MatDrawerContainer, MatDrawer, MatDivider],
+  imports: [BrowserModule,
+    AppRoutingModule,
+    MatIconModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatTooltipModule,
+    MatMenuModule,
+    BrowserAnimationsModule,
+    MatCardModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatSelectModule,
+    MatExpansionModule,
+    MatProgressBarModule,
+    MatTabsModule,
+    MatDialogModule,
+    MatProgressSpinnerModule,
+    MatChipsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient],
+      },
+    }),
+    LoaderComponent, NgOptimizedImage, MatDrawerContainer, MatDrawer, MatDivider, MatGridList, MatGridTile],
 
   providers: [
         { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

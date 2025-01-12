@@ -1,1 +1,14 @@
-<div class="lieu-details-container">bonjour {{lieuId}}</div>
+<div class="lieu-details-container">
+  <div class="lieu-details-title">Hola chico</div>
+  <div class="lieu-details-pictures-showroom">
+    <mat-grid-list cols="4">
+      @for (tile of tiles; track tile) {
+        <mat-grid-tile [colspan]="tile.cols" [rowspan]="tile.rows" [ngClass]="tile.class"
+                       [style.background]="tile.color"
+        >
+          <img src="{{tile.img}}" alt="No more image to show">
+        </mat-grid-tile>
+      }
+    </mat-grid-list>
+  </div>
+</div>
