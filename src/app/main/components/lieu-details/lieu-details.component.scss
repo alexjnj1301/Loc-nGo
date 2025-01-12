@@ -1,3 +1,224 @@
 .lieu-details-container {
-  margin-top: 6rem;
+  max-width: 90vw;
+  margin: 6rem auto 0;
+  padding: 2rem 0;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.lieu-details-pictures-showroom {
+  height: fit-content;
+  width: 75%;
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.tiles:hover {
+  cursor: pointer;
+  filter: brightness(0.8);
+}
+
+.lieu-details-reservation {
+  background-color: var(--primary-color);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  min-width: 23%;
+  height: 58.5vh;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+
+  h3 {
+    color: var(--secondary-color);
+    font-size: 1vw;
+    margin: 0.5rem auto;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 90%;
+  }
+
+  .book-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+.lieu-details-reservation-journey-container {
+  //background-color: red;
+  width: 85%;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  border-radius: 20px;
+  margin: 0 auto;
+
+  mat-expansion-panel {
+    mat-expansion-panel-header {
+      background-color: var(--secondary-color);
+    }
+    margin-top: 1rem;
+    .lieu-details-reservation-attendees {
+      background-color: var(--reservation-expansion-bg) !important;
+      padding: 0.5rem;
+    }
+  }
+}
+
+.lieu-details-reservation-journey-date-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  mat-hint {
+    color: var(--quadri-color);
+  }
+
+  button {
+    width: 50%;
+    color: var(--secondary-color);
+    border: 1px solid var(--secondary-color);
+  }
+}
+
+.lieu-details-reservation-attendees-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-height: 26vh;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.lieu-details-reservation-add-attendee {
+  background-color: rgba(191, 201, 209, 0.45);
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.principal-picture {
+  border-radius: 20px 0 0 20px;
+
+  img {
+    height: 100%;
+  }
+}
+
+.top-right-picture {
+  border-radius: 0 20px 0 0;
+
+  img {
+    width: 100%;
+  }
+}
+
+.bottom-right-left {
+  img {
+    height: 100%;
+  }
+}
+
+.bottom-right-right {
+  border-radius: 0 0 20px 0;
+  backdrop-filter: blur(10px);
+
+  img {
+    width: 100%;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: rgba(184, 184, 184, 0.8);
+  }
+}
+
+.custom-calendar {
+  //background-color: red;
+}
+
+.lieu-details-infos-container{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+}
+
+.lieu-details-infos {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  gap: 1rem;
+  width: 90%;
+  margin-top: 1rem;
+
+  .lieu-details-infos-title {
+    text-transform: capitalize;
+  }
+
+  h2 {
+    color: var(--secondary-color);
+    font-size: 1.5vw;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    color: var(--quadri-color);
+    font-size: 1vw;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.lieu-details-infos-features {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+.lieu-details-infos-features-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.service-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: fit-content;
+  padding: 0.5rem;
+  border-radius: 10px;
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  text-transform: capitalize;
+
+  img {
+    width: 1.5vw;
+    height: auto;
+    filter: invert(1);
+  }
 }

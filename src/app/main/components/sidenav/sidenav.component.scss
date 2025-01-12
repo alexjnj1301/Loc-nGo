@@ -53,9 +53,16 @@
   backdrop-filter: blur();
   overflow-y: scroll;
   max-height: 80vh;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .reservations-list-container {
   height: 70vh;
   overflow-y: scroll;
+  width: 100%;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }

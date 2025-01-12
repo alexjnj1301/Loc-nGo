@@ -1,0 +1,29 @@
+{
+  "lieuDetails": {
+    "reservation": {
+      "title": "Vous souhaitez réserver un séjour ici ?",
+      "buttons": {
+        "book": "Réserver",
+        "addAttendee": "Ajouter un participant"
+      },
+      "labels": {
+        "selectDates": "Veuillez sélectionner les dates",
+        "attendees": "Participants",
+        "loginToBook": "Connectez-vous pour réserver",
+        "firstName": "Prénom"
+      }
+    },
+    "dialog": {
+      "title": "Voir les images du lieu"
+    },
+    "infos": {
+      "pictures": {
+        "seeMore": "Voir plus"
+      },
+      "description": "Description",
+      "features": "Services",
+      "address": "Adresse",
+      "price": "Prix par nuit"
+    }
+  }
+}

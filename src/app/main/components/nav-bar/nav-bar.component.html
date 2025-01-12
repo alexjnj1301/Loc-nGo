@@ -1,7 +1,7 @@
 <mat-toolbar class="toolBar bigScreen" *ngIf="!isActiveRouteAuthentication()">
   <div class="menu_logo">
     <button class="menu-button" mat-icon-button (click)="toggleDrawer()">
-      @if (sidenavService.isSidenavOpened()) {
+      @if (sidenavService.hasToBeOpened()) {
         <mat-icon style="margin: 0; color: var(--secondary-color)" matTooltip="{{translateValues.tooltips?.closeMenu}}">close</mat-icon>
       } @else {
         <mat-icon style="margin: 0; color: var(--secondary-color)" matTooltip="{{translateValues.tooltips?.openMenu}}">menu</mat-icon>

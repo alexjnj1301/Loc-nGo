@@ -1,7 +1,8 @@
 <mat-card class="reservation-card" appearance="outlined">
   <mat-card-header class="reservation-card-header">
     <div>
-      <img class="reservation-card-header-image" src="{{reservation.lieuImages.at(0)}}" alt="lieu_image">
+      <img class="reservation-card-header-image" src="{{reservation.lieuImages ? reservation.lieuImages : constants.REPLACEMENT_PICTURE}}"
+           alt="place_image">
     </div>
     <div>
       <mat-card-title class="card-title">

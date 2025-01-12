@@ -5,7 +5,7 @@ import { UpdateBookRequest } from 'src/app/enums/admin';
 import { BookRequest } from 'src/app/models/ContactInformations';
 import { environment } from '../../../environments/environment'
 import { AllReservationsByUserId, Reservation } from '../../models/ReservationPerUser'
-import { AllLieuResponse } from '../../models/LieuModels'
+import { AllLieuResponse, LieuDetailsResponse } from '../../models/LieuModels'
 
 @Injectable({
   providedIn: 'root'
@@ -36,5 +36,9 @@ export class HttpCallsService {
 
   public getAllLieu(): Observable<AllLieuResponse[]> {
     return this.http.get<AllLieuResponse[]>(`${this.baseUrl}/lieu`);
+  }
+
+  public getLieuById(id: string): Observable<LieuDetailsResponse> {
+    return this.http.get<LieuDetailsResponse>(`${this.baseUrl}/lieu/${id}`);
   }
 }

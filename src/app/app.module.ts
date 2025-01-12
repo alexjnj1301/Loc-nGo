@@ -3,9 +3,8 @@ import { BrowserModule } from '@angular/platform-browser'
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
 import { HomePageComponent } from './main/components/home-page/home-page.component'
-import { ContactComponent } from './main/components/contact/contact.component'
 import { ErrorPageComponent } from './main/components/error-page/error-page.component'
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
 import { MultipleTransLoaderHttp } from './MultipleTransLoaderHttp'
 import { HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { CookieService } from 'ngx-cookie-service'
@@ -22,21 +21,21 @@ import { ReactiveFormsModule } from '@angular/forms'
 import { MatInputModule } from '@angular/material/input'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatDatepickerModule } from '@angular/material/datepicker'
-import { MAT_DATE_LOCALE, provideNativeDateAdapter } from '@angular/material/core'
+import { MAT_DATE_LOCALE, MatRipple, provideNativeDateAdapter } from '@angular/material/core'
 import { MatSelectModule } from '@angular/material/select'
-import {DatePipe, NgOptimizedImage} from '@angular/common'
+import { DatePipe, NgOptimizedImage } from '@angular/common'
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async'
 import { MatExpansionModule } from '@angular/material/expansion'
 import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { MatTabsModule } from '@angular/material/tabs'
-import { BookFormComponent } from './main/components/contact/book-form/book-form.component'
-import { ContactFormComponent } from './main/components/contact/contact-form/contact-form.component'
 import { AdminComponent } from './main/components/admin/admin.component'
 import { DialogComponent } from './main/components/admin/dialog/dialog.component'
 import { MatDialogModule } from '@angular/material/dialog'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { MatChipsModule } from '@angular/material/chips'
-import { ValidDeletionDialogComponent } from './main/components/admin/valid-deletion-dialog/valid-deletion-dialog.component'
+import {
+  ValidDeletionDialogComponent,
+} from './main/components/admin/valid-deletion-dialog/valid-deletion-dialog.component'
 import { LoaderComponent } from "./main/components/loader/loader.component"
 import { LoginComponent } from "./main/components/Authentication/login/login.component";
 import { RegisterComponent } from './main/components/Authentication/register/register.component'
@@ -47,6 +46,8 @@ import { ReservationCardComponent } from './main/components/sidenav/reservation-
 import { MatDivider } from '@angular/material/divider'
 import { LieuCardComponent } from './main/components/home-page/lieu-card/lieu-card.component'
 import { LieuDetailsComponent } from './main/components/lieu-details/lieu-details.component'
+import { MatGridList, MatGridTile } from '@angular/material/grid-list'
+import { MatTreeNodeToggle } from '@angular/material/tree'
 
 export function createTranslateLoader(http: HttpClient) {
   return new MultipleTransLoaderHttp(http)
@@ -55,12 +56,9 @@ export function createTranslateLoader(http: HttpClient) {
 @NgModule({ declarations: [
         AppComponent,
         HomePageComponent,
-        ContactComponent,
         ErrorPageComponent,
         NavBarComponent,
         TitlePictureComponent,
-        BookFormComponent,
-        ContactFormComponent,
         AdminComponent,
         DialogComponent,
         ValidDeletionDialogComponent,
@@ -72,35 +70,35 @@ export function createTranslateLoader(http: HttpClient) {
         LieuDetailsComponent
     ],
     bootstrap: [AppComponent],
-    imports: [BrowserModule,
-        AppRoutingModule,
-        MatIconModule,
-        MatButtonModule,
-        MatToolbarModule,
-        MatTooltipModule,
-        MatMenuModule,
-        BrowserAnimationsModule,
-        MatCardModule,
-        ReactiveFormsModule,
-        MatInputModule,
-        MatButtonModule,
-        MatFormFieldModule,
-        MatDatepickerModule,
-        MatSelectModule,
-        MatExpansionModule,
-        MatProgressBarModule,
-        MatTabsModule,
-        MatDialogModule,
-        MatProgressSpinnerModule,
-        MatChipsModule,
-        TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: createTranslateLoader,
-                deps: [HttpClient],
-            },
-        }),
-        LoaderComponent, NgOptimizedImage, MatDrawerContainer, MatDrawer, MatDivider],
+	imports: [BrowserModule,
+		AppRoutingModule,
+		MatIconModule,
+		MatButtonModule,
+		MatToolbarModule,
+		MatTooltipModule,
+		MatMenuModule,
+		BrowserAnimationsModule,
+		MatCardModule,
+		ReactiveFormsModule,
+		MatInputModule,
+		MatButtonModule,
+		MatFormFieldModule,
+		MatDatepickerModule,
+		MatSelectModule,
+		MatExpansionModule,
+		MatProgressBarModule,
+		MatTabsModule,
+		MatDialogModule,
+		MatProgressSpinnerModule,
+		MatChipsModule,
+		TranslateModule.forRoot({
+			loader: {
+				provide: TranslateLoader,
+				useFactory: createTranslateLoader,
+				deps: [HttpClient],
+			},
+		}),
+		LoaderComponent, NgOptimizedImage, MatDrawerContainer, MatDrawer, MatDivider, MatGridList, MatGridTile, MatTreeNodeToggle, MatRipple],
 
   providers: [
         { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

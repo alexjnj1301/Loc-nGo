@@ -24,7 +24,7 @@ export interface Attendee {
 
 export interface AllReservationsByUserId {
   id: number
-  lieuImages: string[]
+  lieuImages: string
   start_date: string
   end_date: string
   reference: string

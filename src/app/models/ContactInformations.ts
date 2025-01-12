@@ -1,12 +1,9 @@
 export interface BookRequest {
-  name: string
-  firstname: string
+  lieu: {
+    id: number
+  }
   start_date: string
   end_date: string
-  nb_person: number
-  email: string
-  phone: string
-  prix: number
   attendees: Attendee[]
 }
 
@@ -25,6 +22,6 @@ export interface BookResponse {
 }
 
 export interface Attendee {
-  prenom: string
-  nom: string
+  firstname: string
+  name: string
 }

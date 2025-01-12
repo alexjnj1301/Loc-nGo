@@ -1,0 +1,29 @@
+{
+  "lieuDetails": {
+    "reservation": {
+      "title": "You want to book a journey here?",
+      "buttons": {
+        "book": "Book",
+        "addAttendee": "Add an attendee"
+      },
+      "labels": {
+        "selectDates": "Please select dates",
+        "attendees": "Attendees",
+        "loginToBook": "Log in to book",
+        "firstName": "First name"
+      }
+    },
+    "dialog": {
+      "title": "View images of the place"
+    },
+    "infos": {
+      "pictures": {
+        "seeMore": "See more"
+      },
+      "description": "Description",
+      "features": "Features",
+      "address": "Address",
+      "price": "Price per night"
+    }
+  }
+}

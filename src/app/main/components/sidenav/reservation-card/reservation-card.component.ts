@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { AllReservationsByUserId, Reservation } from '../../../../models/ReservationPerUser'
+import { AllReservationsByUserId } from '../../../../models/ReservationPerUser'
+import { Constants } from '../../../Constants'
 
 @Component({
   selector: 'app-reservation-card',
@@ -8,4 +9,7 @@ import { AllReservationsByUserId, Reservation } from '../../../../models/Reserva
 })
 export class ReservationCardComponent {
   @Input() reservation!: AllReservationsByUserId
+
+  public constructor(public constants: Constants) {
+  }
 }

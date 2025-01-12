@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../../services/authentication.service'
-import { Constants } from '../../Constants'
+import { Component, OnInit } from '@angular/core'
 import { AllLieuResponse } from '../../../models/LieuModels'
 import { HttpCallsService } from '../../services/httpCalls.service'
 
