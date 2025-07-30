@@ -11,7 +11,6 @@ import { SidenavService } from '../../services/sidenav.service'
     standalone: false
 })
 export class NavBarComponent implements OnInit {
-  translateValues: any = {}
   langSelector: string[] = ['fr', 'en']
   currentLangDisplay: string
 
@@ -23,9 +22,6 @@ export class NavBarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.translateService.getTranslation().subscribe((result) => {
-      this.translateValues = result.nav_bar;
-    });
   }
 
   public changeLang(lang: string): void {
@@ -39,6 +35,10 @@ export class NavBarComponent implements OnInit {
 
   public isLoggedIn(): boolean {
     return this.authService.isAuthenticated();
+  }
+
+  public isProprietaire(): boolean {
+    return this.authService.isProprietor();
   }
 
   public logout(): void {

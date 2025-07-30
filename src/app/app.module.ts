@@ -47,6 +47,7 @@ import { LieuCardComponent } from './main/components/home-page/lieu-card/lieu-ca
 import { LieuDetailsComponent } from './main/components/lieu-details/lieu-details.component'
 import { MatGridList, MatGridTile } from '@angular/material/grid-list'
 import { MatTreeNodeToggle } from '@angular/material/tree'
+import { FaIconComponent } from '@fortawesome/angular-fontawesome'
 
 export function createTranslateLoader(http: HttpClient) {
   return new MultipleTransLoaderHttp(http)
@@ -97,7 +98,7 @@ export function createTranslateLoader(http: HttpClient) {
 				deps: [HttpClient],
 			},
 		}),
-		LoaderComponent, NgOptimizedImage, MatDrawerContainer, MatDrawer, MatDivider, MatGridList, MatGridTile, MatTreeNodeToggle, MatRipple],
+		LoaderComponent, NgOptimizedImage, MatDrawerContainer, MatDrawer, MatDivider, MatGridList, MatGridTile, MatTreeNodeToggle, MatRipple, FaIconComponent],
 
   providers: [
         { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

@@ -1,5 +1,5 @@
 <div class="lieu-details-container">
-  <div class="lieu-details-pictures-showroom">
+  <div #pictures class="lieu-details-pictures-showroom">
     <mat-grid-list cols="4">
       @for (tile of tiles; track tile) {
         <mat-grid-tile [colspan]="tile.cols" [rowspan]="tile.rows" class="tiles"
@@ -21,8 +21,9 @@
       }
     </mat-grid-list>
   </div>
-  <div class="lieu-details-reservation">
+  <div #reservation class="lieu-details-reservation">
     <h3>{{ 'lieuDetails.reservation.title' | translate }}</h3>
+    <h4>{{ 'lieuDetails.reservation.pricePart' | translate: {price: lieuDetails?.price} }}</h4>
     @if (authenticationService.isAuthenticated()) {
       <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
         <div class="lieu-details-reservation-dates">
@@ -49,7 +50,7 @@
               <button mat-flat-button type="button" (click)="picker.open()" style="border-radius: 8px 0 0 8px">{{ startDate | date: "dd-MM-yyyy" }}</button>
               <button mat-flat-button type="button" (click)="bookForm.reset(); bookForm.get('startDate')?.setValue(this.startDateReset); picker.open()" style="border-radius: 0 8px 8px 0">{{ endDate | date: "dd-MM-yyyy" }}</button>
             </div>
-            <div class="test">
+            <div>
               <mat-accordion>
                 <mat-expansion-panel expanded="true">
                   <mat-expansion-panel-header>
@@ -64,6 +65,9 @@
                         <mat-form-field appearance="outline">
                           <input matInput placeholder="{{ 'lieuDetails.reservation.labels.firstName' | translate }}"
                                  [formControlName]="i">
+                          <button matSuffix mat-icon-button aria-label="Clear" (click)="removeAttendee(i)">
+                            <mat-icon>delete</mat-icon>
+                          </button>
                         </mat-form-field>
                       }
                     </div>
@@ -78,7 +82,8 @@
           </div>
         </div>
         <div class="book-button" >
-          <button mat-button type="submit" color="primary" [disabled]="bookForm.invalid">{{ 'lieuDetails.reservation.buttons.book' | translate }}</button>
+          <button mat-button type="submit" color="primary" [disabled]="bookForm.invalid">
+            {{ 'lieuDetails.reservation.buttons.book' | translate: {total: calculateNumberOfDays() >=0 ? lieuDetails?.price! * calculateNumberOfDays() : 0} }}</button>
         </div>
       </form>
     } @else {
@@ -89,7 +94,10 @@
 <div class="lieu-details-infos-container">
   <div class="lieu-details-infos">
     <div class="lieu-details-infos-title">
-      <h1>{{lieuDetails?.name}}</h1>
+      <h1>{{lieuDetails?.name}} - {{lieuDetails?.city}}</h1>
+    </div>
+    <div class="lieu-details-infos-address">
+      <h2>{{lieuDetails?.city}} - {{lieuDetails?.postal_code}}</h2>
     </div>
     <div class="lieu-details-infos-description">
       <h2>{{ 'lieuDetails.infos.description' | translate }}</h2>
@@ -100,8 +108,17 @@
         <h2>{{ 'lieuDetails.infos.features' | translate }}</h2>
       </div>
       <div class="lieu-details-infos-features-list">
-        @for (feature of lieuDetails?.services;track feature) {
-          <mat-chip class="service-card">{{feature.name}}</mat-chip>
+        @for (feature of lieuDetails?.services; track feature) {
+          <mat-chip class="service-card">
+            <div class="in-chips">
+              @if (getFeatureName(feature.name)?.faIcon) {
+                <fa-icon [icon]="getFeatureName(feature.name)?.faIcon!"></fa-icon>
+              } @else {
+                <mat-icon class="material-icons">{{getFeatureName(feature.name)?.icon!}}</mat-icon>
+              }
+              {{ getFeatureName(feature.name)?.name! | translate}}
+            </div>
+          </mat-chip>
         }
       </div>
     </div>

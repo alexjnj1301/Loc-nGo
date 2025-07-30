@@ -41,4 +41,12 @@ export class HttpCallsService {
   public getLieuById(id: string): Observable<LieuDetailsResponse> {
     return this.http.get<LieuDetailsResponse>(`${this.baseUrl}/lieu/${id}`);
   }
+
+  public getReservationsByLieuId(id: number): Observable<Reservation[]> {
+    return this.http.get<Reservation[]>(`${this.baseUrl}/reservations/lieu/${id}`);
+  }
+
+  public getLieuByProprietorId(id: number): Observable<AllLieuResponse[]> {
+    return this.http.get<AllLieuResponse[]>(`${this.baseUrl}/lieu/proprietor/${id}`);
+  }
 }

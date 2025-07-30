@@ -6,6 +6,8 @@ import { AdminComponent } from './main/components/admin/admin.component'
 import { LoginComponent } from './main/components/Authentication/login/login.component'
 import { RegisterComponent } from './main/components/Authentication/register/register.component'
 import { LieuDetailsComponent } from './main/components/lieu-details/lieu-details.component'
+import { MyReservationsComponent } from './main/components/my-reservations/my-reservations.component'
+import { ProprietorGuard } from './main/services/ProprietorGuard'
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
@@ -15,6 +17,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'register', component: RegisterComponent },
   { path: 'lieu-details/:id', component: LieuDetailsComponent },
+  { path: 'my-reservations', component: MyReservationsComponent, canActivate: [ProprietorGuard] },
   { path: '**', redirectTo: 'error/404', pathMatch: 'full' }
 ];
 
@@ -22,4 +25,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

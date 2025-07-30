@@ -3,6 +3,7 @@ import { Subject } from 'rxjs';
 import { Router } from '@angular/router'
 import { AuthenticationService } from './authentication.service'
 import { Constants } from '../Constants'
+import { HttpCallsService } from './httpCalls.service'
 
 @Injectable({
   providedIn: 'root',

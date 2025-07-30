@@ -1,16 +1,17 @@
 .lieu-details-container {
   max-width: 90vw;
-  margin: 6rem auto 0;
-  padding: 2rem 0;
+  margin: 0 auto;
+  padding: 6rem 0 2rem;
   border-radius: 20px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   gap: 2rem;
+  height: fit-content;
 }
 
 .lieu-details-pictures-showroom {
-  height: fit-content;
+  height: 100%;
   width: 75%;
   border-radius: 20px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
@@ -25,13 +26,19 @@
   background-color: var(--primary-color);
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
   min-width: 23%;
-  height: 58.5vh;
+  height: 100%;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
 
   h3 {
     color: var(--secondary-color);
+    font-size: 1vw;
+    margin: 0.5rem auto;
+  }
+
+  h4 {
+    color: var(--quadri-color);
     font-size: 1vw;
     margin: 0.5rem auto;
   }
@@ -51,7 +58,6 @@
 }
 
 .lieu-details-reservation-journey-container {
-  //background-color: red;
   width: 85%;
   display: flex;
   flex-direction: column;
@@ -66,7 +72,7 @@
     margin-top: 1rem;
     .lieu-details-reservation-attendees {
       background-color: var(--reservation-expansion-bg) !important;
-      padding: 0.5rem;
+      min-height: fit-content;
     }
   }
 }
@@ -92,8 +98,10 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  max-height: 26vh;
   overflow-y: auto;
+  max-height: 17vh;
+  background-color: var(--reservation-expansion-bg) !important;
+  padding: 0.5rem;
 
   &::-webkit-scrollbar {
     display: none;
@@ -170,7 +178,19 @@
   margin-top: 1rem;
 
   .lieu-details-infos-title {
+    h1 {
+      font-size: 3rem;
+      text-transform: capitalize;
+    }
+  }
+
+  .lieu-details-infos-address {
     text-transform: capitalize;
+
+    h2 {
+      color: #333333;
+      font-size: 1.5vw;
+    }
   }
 
   h2 {
@@ -198,9 +218,22 @@
 .lieu-details-infos-features-list {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
   gap: 1rem;
   margin-top: 1rem;
+  flex-wrap: wrap;
+
+  mat-chip {
+    background-color: var(--primary-color);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+
+    .in-chips{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+  }
 }
 
 .service-card {

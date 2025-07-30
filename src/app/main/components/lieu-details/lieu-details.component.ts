@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, ViewChild } from '@angular/core'
+import { AfterViewInit, Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { AppComponent } from '../../../app.component'
 import { HttpCallsService } from '../../services/httpCalls.service'
@@ -11,12 +11,13 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { DatePipe } from '@angular/common'
 import { MatDatepickerToggle } from '@angular/material/datepicker'
 import * as moment from 'moment'
-import { MatDialog, MatDialogContainer } from '@angular/material/dialog'
+import { MatDialog } from '@angular/material/dialog'
 import { PicturesDialogComponent } from './pictures-dialog/pictures-dialog.component'
 import { Attendee } from '../../../models/Attendee'
 import { AuthenticationService } from '../../services/authentication.service'
 import { BookRequest } from '../../../models/ContactInformations'
-import { toNumbers } from '@angular/compiler-cli/src/version_helpers'
+import { Features, featuresItem } from '../../../models/Features'
+import { SidenavComponent } from '../sidenav/sidenav.component'
 
 @Component({
     selector: 'app-lieu-details',
@@ -24,8 +25,10 @@ import { toNumbers } from '@angular/compiler-cli/src/version_helpers'
     styleUrl: './lieu-details.component.scss',
     standalone: false
 })
-export class LieuDetailsComponent implements OnInit {
+export class LieuDetailsComponent implements OnInit, AfterViewInit {
   @ViewChild('picker') public picker! : MatDatepickerToggle<Date>
+  @ViewChild('pictures') picturesRef!: ElementRef
+  @ViewChild('reservation') reservationRef!: ElementRef
 
   public lieuId: string = ''
   public tiles: Tile[] = []
@@ -38,6 +41,7 @@ export class LieuDetailsComponent implements OnInit {
   public dtf: string = 'dd-MM-yyyy'
   public dialog = inject(MatDialog)
   public attendeesList: Attendee[] = []
+  protected readonly featuresItem = featuresItem
 
   constructor(private route: ActivatedRoute,
               private datePipe: DatePipe,
@@ -45,7 +49,8 @@ export class LieuDetailsComponent implements OnInit {
               private appComponent: AppComponent,
               private httpCallsService: HttpCallsService,
               public constants: Constants,
-              public authenticationService: AuthenticationService) {
+              public authenticationService: AuthenticationService,
+              public sideNavComponent: SidenavComponent) {
     this.bookForm = this.formBuilder.group({
       startDate: (new FormControl<Date | null>(null), Validators.required),
       endDate: (new FormControl<Date | null>(null), Validators.required),
@@ -54,6 +59,19 @@ export class LieuDetailsComponent implements OnInit {
     this.addAttendee()
     this.minDate = new Date()
     this.maxDate = moment(this.minDate).add(1, 'years').toDate()
+  }
+
+  public ngAfterViewInit(): void {
+    const pictures = this.picturesRef?.nativeElement;
+    const reservation = this.reservationRef?.nativeElement;
+
+    if (pictures && reservation) {
+      const observer = new ResizeObserver(() => {
+        reservation.style.height = `${pictures.offsetHeight}px`;
+      });
+
+      observer.observe(pictures);
+    }
   }
 
   public ngOnInit(): void {
@@ -118,6 +136,7 @@ export class LieuDetailsComponent implements OnInit {
         console.log('Réservation réussie:', response);
         this.bookForm.reset()
         this.startDateReset = null
+        this.sideNavComponent.getReservations()
       },
       error: (error) => {
         console.error('Erreur lors de la réservation:', error);
@@ -175,6 +194,28 @@ export class LieuDetailsComponent implements OnInit {
     console.log('addAttendee', this.attendeesList.length)
     // this.attendeesList.push({ name: '', firstname: '' })
     this.attendeesFormArray.push(this.formBuilder.control('', Validators.required))
+  }
+
+  public getFeatureName(featureId: string): Features | undefined {
+    return this.featuresItem.find(el => el.id === featureId)
+  }
+
+  public calculateNumberOfDays(): number {
+    if (this.startDate && this.endDate) {
+      const start = moment(this.startDate)
+      const end = moment(this.endDate)
+      console.log(end.diff(start, 'days') + 1)
+      return end.diff(start, 'days') + 1
+    }
+    return 0
+  }
+
+  public removeAttendee(i: number) {
+    if (this.attendeesFormArray.length > 1) {
+      this.attendeesFormArray.removeAt(i)
+    } else {
+      this.attendeesFormArray.setValue([''])
+    }
   }
 }
 
