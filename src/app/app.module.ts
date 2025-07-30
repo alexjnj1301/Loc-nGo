@@ -7,7 +7,6 @@ import { ErrorPageComponent } from './main/components/error-page/error-page.comp
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
 import { MultipleTransLoaderHttp } from './MultipleTransLoaderHttp'
 import { HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
-import { CookieService } from 'ngx-cookie-service'
 import { NavBarComponent } from './main/components/nav-bar/nav-bar.component'
 import { MatIconModule } from '@angular/material/icon'
 import { MatButtonModule } from '@angular/material/button'
@@ -102,14 +101,12 @@ export function createTranslateLoader(http: HttpClient) {
 
   providers: [
         { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-        CookieService,
         provideNativeDateAdapter(),
         DatePipe,
         provideAnimationsAsync(),
         {
             provide: MAT_DATE_LOCALE,
-            deps: [CookieService],
-            useFactory: (cookieService: CookieService) => cookieService.get('lang') || 'fr'
+            useFactory: () => localStorage.getItem('lang') || 'fr'
         },
         provideHttpClient(withInterceptorsFromDi())
     ]
