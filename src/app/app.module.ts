@@ -14,7 +14,6 @@ import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatTooltipModule } from '@angular/material/tooltip'
 import { MatMenuModule } from '@angular/material/menu'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { TitlePictureComponent } from './main/components/title-picture/title-picture.component'
 import { MatCardModule } from '@angular/material/card'
 import { ReactiveFormsModule } from '@angular/forms'
 import { MatInputModule } from '@angular/material/input'
@@ -48,68 +47,70 @@ import { LieuDetailsComponent } from './main/components/lieu-details/lieu-detail
 import { MatGridList, MatGridTile } from '@angular/material/grid-list'
 import { MatTreeNodeToggle } from '@angular/material/tree'
 import { FaIconComponent } from '@fortawesome/angular-fontawesome'
+import { TitlePictureComponent } from './main/components/title-picture/title-picture.component'
 
 export function createTranslateLoader(http: HttpClient) {
   return new MultipleTransLoaderHttp(http)
 }
 
-@NgModule({ declarations: [
-        AppComponent,
-        HomePageComponent,
-        ErrorPageComponent,
-        NavBarComponent,
-        TitlePictureComponent,
-        AdminComponent,
-        DialogComponent,
-        ValidDeletionDialogComponent,
-        LoginComponent,
-        RegisterComponent,
-        SidenavComponent,
-        ReservationCardComponent,
-        LieuCardComponent,
-        LieuDetailsComponent
-    ],
-    bootstrap: [AppComponent],
-	imports: [BrowserModule,
-		AppRoutingModule,
-		MatIconModule,
-		MatButtonModule,
-		MatToolbarModule,
-		MatTooltipModule,
-		MatMenuModule,
-		BrowserAnimationsModule,
-		MatCardModule,
-		ReactiveFormsModule,
-		MatInputModule,
-		MatButtonModule,
-		MatFormFieldModule,
-		MatDatepickerModule,
-		MatSelectModule,
-		MatExpansionModule,
-		MatProgressBarModule,
-		MatTabsModule,
-		MatDialogModule,
-		MatProgressSpinnerModule,
-		MatChipsModule,
-		TranslateModule.forRoot({
-			loader: {
-				provide: TranslateLoader,
-				useFactory: createTranslateLoader,
-				deps: [HttpClient],
-			},
-		}),
-		LoaderComponent, NgOptimizedImage, MatDrawerContainer, MatDrawer, MatDivider, MatGridList, MatGridTile, MatTreeNodeToggle, MatRipple, FaIconComponent],
+@NgModule({
+  declarations: [
+    AppComponent,
+    HomePageComponent,
+    ErrorPageComponent,
+    NavBarComponent,
+    AdminComponent,
+    DialogComponent,
+    ValidDeletionDialogComponent,
+    LoginComponent,
+    RegisterComponent,
+    SidenavComponent,
+    ReservationCardComponent,
+    LieuCardComponent,
+    LieuDetailsComponent,
+  ],
+  bootstrap: [AppComponent],
+  imports: [BrowserModule,
+    AppRoutingModule,
+    MatIconModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatTooltipModule,
+    MatMenuModule,
+    BrowserAnimationsModule,
+    MatCardModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatSelectModule,
+    MatExpansionModule,
+    MatProgressBarModule,
+    MatTabsModule,
+    MatDialogModule,
+    MatProgressSpinnerModule,
+    MatChipsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient],
+      },
+    }),
+    LoaderComponent, NgOptimizedImage, MatDrawerContainer, MatDrawer, MatDivider, MatGridList, MatGridTile, MatTreeNodeToggle, MatRipple, FaIconComponent, TitlePictureComponent],
+  exports: [],
 
   providers: [
-        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-        provideNativeDateAdapter(),
-        DatePipe,
-        provideAnimationsAsync(),
-        {
-            provide: MAT_DATE_LOCALE,
-            useFactory: () => localStorage.getItem('lang') || 'fr'
-        },
-        provideHttpClient(withInterceptorsFromDi())
-    ]
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    provideNativeDateAdapter(),
+    DatePipe,
+    provideAnimationsAsync(),
+    {
+      provide: MAT_DATE_LOCALE,
+      useFactory: () => localStorage.getItem('lang') || 'fr',
+    },
+    provideHttpClient(withInterceptorsFromDi()),
+  ],
 })
 export class AppModule {}

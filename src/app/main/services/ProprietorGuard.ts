@@ -19,7 +19,10 @@ export class ProprietorGuard implements CanActivate {
   ) {}
 
   public canActivate(): boolean {
-    if(this.authService.isProprietor()) return true
+    if(this.authService.isProprietor() && this.authService.isAuthenticated()) {
+      console.log('ProprietorGuard: User is a proprietor, access granted.')
+      return true
+    }
     else {
       this.router.navigate(['/error/403'])
       return false

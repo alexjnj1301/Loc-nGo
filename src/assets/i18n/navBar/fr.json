@@ -8,7 +8,7 @@
       "booking": "mes reservations",
       "login": "connexion",
       "logout": "déconnexion",
-      "my-reservations": "Mes réservations"
+      "my-demands": "Mes demandes"
     },
     "tooltips": {
       "home": "Retour à l'accueil",
@@ -18,7 +18,7 @@
       "lang": "Changer de langue",
       "openMenu": "Ouvrir le menu",
       "closeMenu": "Fermer le menu",
-      "my-reservations": "Voir mes réservations"
+      "my-demands": "Voir mes demandes"
     }
   }
 }

@@ -70,6 +70,7 @@ export class SidenavComponent implements OnInit, OnDestroy {
       this.httpCallsService.getAllReservationsByUserId(this.authService.getCurrentUser()!.id).subscribe({
         next: (reservations: AllReservationsByUserId[]) => {
           this.reservations = reservations
+          console.log('reservations:', this.reservations)
         },
         error: (error: any) => {
           console.error('Error:', error)

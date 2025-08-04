@@ -38,7 +38,7 @@ export class NavBarComponent implements OnInit {
   }
 
   public isProprietaire(): boolean {
-    return this.authService.isProprietor();
+    return this.authService.isProprietor() && this.isLoggedIn();
   }
 
   public logout(): void {

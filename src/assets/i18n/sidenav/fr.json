@@ -5,6 +5,6 @@
     "welcomeUser": "Bonjour {{firstname}} {{lastname}} !",
     "myReservations": "Mes réservations",
     "reservationCardTitle": "Du {{startDate}} au {{endDate}}",
-    "reservationCardSubtitle": "Ref: {{reference}}"
+    "reservationCardSubtitle": "Lieu: {{name}}"
   }
 }

@@ -22,8 +22,8 @@ export class HttpCallsService {
     return this.http.post(`${this.baseUrl}/reservations`, bookRequest);
   }
 
-  public updateReservation(id: number, requestBody: UpdateBookRequest): Observable<any> {
-    return this.http.put(`${this.baseUrl}/reservations/${id}`, requestBody);
+  public updateReservationStatus(id: number, requestBody: UpdateBookRequest): Observable<any> {
+    return this.http.put(`${this.baseUrl}/reservations/status/${id}`, requestBody);
   }
 
   public deleteReservation(id: number): Observable<any> {
@@ -48,5 +48,9 @@ export class HttpCallsService {
 
   public getLieuByProprietorId(id: number): Observable<AllLieuResponse[]> {
     return this.http.get<AllLieuResponse[]>(`${this.baseUrl}/lieu/proprietor/${id}`);
+  }
+
+  public getReservationById(id: number): Observable<Reservation> {
+    return this.http.get<Reservation>(`${this.baseUrl}/reservations/${id}`);
   }
 }

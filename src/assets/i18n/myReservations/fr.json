@@ -1,0 +1,29 @@
+{
+  "myReservations": {
+    "title": "Gestion de mes demandes",
+    "description": "Gérez les demandes de réservations des locataires pour vos logements",
+    "descriptionV2": "Tout ca en un seul endroit !",
+    "noReservations": "Vous n'avez pas de réservations pour le moment.",
+    "dates": "Dates",
+    "accommodations": "Mes demandes par logements",
+    "dialog": {
+      "title": "Details de la réservation de M. ou Mme {{name}}",
+      "firstName": "Prénom: {{firstName}}",
+      "lastName": "Nom: {{lastName}}",
+      "startDate": "Date de début: {{startDate}}",
+      "endDate": "Date de fin: {{endDate}}",
+      "nbPersons": "Nombre de personnes: {{nbPersons}}",
+      "price": "Prix: {{price}}€",
+      "actions": {
+        "cancel": "Annuler",
+        "confirm": "Confirmer",
+        "close": "Fermer"
+      },
+      "placeholder": {
+        "cancel": "Annuler la réservation",
+        "confirm": "Confirmer la réservation",
+        "close": "Fermer cette fenêtre et laisser cette réservation inchangée"
+      }
+    }
+  }
+}

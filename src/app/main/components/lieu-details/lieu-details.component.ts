@@ -192,7 +192,6 @@ export class LieuDetailsComponent implements OnInit, AfterViewInit {
 
   public addAttendee(): void {
     console.log('addAttendee', this.attendeesList.length)
-    // this.attendeesList.push({ name: '', firstname: '' })
     this.attendeesFormArray.push(this.formBuilder.control('', Validators.required))
   }
 
@@ -204,8 +203,7 @@ export class LieuDetailsComponent implements OnInit, AfterViewInit {
     if (this.startDate && this.endDate) {
       const start = moment(this.startDate)
       const end = moment(this.endDate)
-      console.log(end.diff(start, 'days') + 1)
-      return end.diff(start, 'days') + 1
+      return end.diff(start, 'days')
     }
     return 0
   }

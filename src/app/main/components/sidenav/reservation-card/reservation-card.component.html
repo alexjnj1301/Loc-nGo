@@ -1,7 +1,7 @@
 <mat-card class="reservation-card" appearance="outlined">
   <mat-card-header class="reservation-card-header">
-    <div>
-      <img class="reservation-card-header-image" src="{{reservation.lieuImages ? reservation.lieuImages : constants.REPLACEMENT_PICTURE}}"
+    <div class="img-container">
+      <img class="lieu-image" src="{{reservation.lieuImages ? reservation.lieuImages : constants.REPLACEMENT_PICTURE}}"
            alt="place_image">
     </div>
     <div>
@@ -9,7 +9,14 @@
         {{'sidenav.reservationCardTitle' | translate: { startDate: reservation.start_date, endDate: reservation.end_date } }}
       </mat-card-title>
       <mat-card-subtitle>
-        {{'sidenav.reservationCardSubtitle' | translate: { reference: reservation.reference } }}
+        {{'sidenav.reservationCardSubtitle' | translate: { name: reservation.lieu.name } }}
+        <mat-chip [ngClass]="{
+          'accepted': reservation.status === 'CONFIRMED',
+          'pending': reservation.status === 'PENDING',
+          'canceled': reservation.status === 'CANCELED'
+        }">
+          <span>{{reservation.status}}</span>
+        </mat-chip>
       </mat-card-subtitle>
     </div>
   </mat-card-header>

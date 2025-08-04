@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'register', component: RegisterComponent },
   { path: 'lieu-details/:id', component: LieuDetailsComponent },
-  { path: 'my-reservations', component: MyReservationsComponent, canActivate: [ProprietorGuard] },
+  { path: 'my-demands', component: MyReservationsComponent, canActivate: [ProprietorGuard] },
   { path: '**', redirectTo: 'error/404', pathMatch: 'full' }
 ];
 

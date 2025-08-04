@@ -1,19 +1,20 @@
 <mat-spinner *ngIf="isLoading; else normalDisplay"></mat-spinner>
 <ng-template #normalDisplay>
   <mat-icon mat-button mat-dialog-close class="close">close</mat-icon>
-  <h2 mat-dialog-title>Détails de la reservation de M. ou Mme. {{reservation.nom }}</h2>
+  <h2 mat-dialog-title>{{'myReservations.dialog.title' | translate: {name: reservation.attendees.at(0)?.name} }}</h2>
   <mat-dialog-content>
-    <div>
-      <p>Prénom: {{ reservation.prenom }}</p>
-      <p>Nom: {{ reservation.nom }}</p>
+    <div class="identite">
+      <p>{{'myReservations.dialog.firstName' | translate: {firstName: reservation.attendees.at(0)?.firstname} }}</p>
+      <p>{{'myReservations.dialog.lastName' | translate: {lastName: reservation.attendees.at(0)?.name} }}</p>
     </div>
-    <p>Email: {{ reservation.email }}</p>
-    <p>Date de début: {{ reservation.dateDebut | date: "dd/MM/yyyy" }}</p>
-    <p>Date de fin: {{ reservation.dateFin | date: "dd/MM/yyyy" }}</p>
-    <p>Nombre de personnes: {{ reservation.nbPersonnes }}</p>
-    <p>Prix: {{reservation.prix | currency}}</p>
+    <p>{{'myReservations.dialog.startDate' | translate: {startDate: reservation.start_date | date: "dd/MM/yyyy"} }}</p>
+    <p>{{'myReservations.dialog.endDate' | translate: {endDate: reservation.end_date | date: "dd/MM/yyyy"} }}</p>
+    <p>{{'myReservations.dialog.nbPersons' | translate: {nbPersons: reservation.nb_person} }}</p>
+    <p>{{'myReservations.dialog.price' | translate: {price: reservation.lieu!.price * calculateNumberOfDays() | currency} }}</p>
   </mat-dialog-content>
   <mat-dialog-actions>
-    <button *ngFor="let action of reservationsActions | keyvalue" mat-button mat-dialog-close cdkFocusInitial (click)="updateReservation(action.key)">{{action.value}}</button>
+    @for (action of reservationsActions | keyvalue; track action.key) {
+      <button mat-button mat-dialog-close (click)="updateReservation(action.key)">{{action.value | translate}}</button>
+    }
   </mat-dialog-actions>
 </ng-template>

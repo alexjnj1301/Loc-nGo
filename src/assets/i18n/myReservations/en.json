@@ -1,0 +1,29 @@
+{
+  "myReservations": {
+    "title": "Manage My Reservations",
+    "description": "Manage the booking requests from tenants for your accommodations",
+    "descriptionV2": "All in one place !",
+    "noReservations": "You have no reservations at the moment.",
+    "dates": "Dates",
+    "accommodations": "My reservations by accommodation",
+    "dialog": {
+      "title": "Details of the reservation for Mr. or Mrs. {{name}}",
+      "firstName": "First Name: {{firstName}}",
+      "lastName": "Last Name: {{lastName}}",
+      "startDate": "Start Date: {{startDate}}",
+      "endDate": "End Date: {{endDate}}",
+      "nbPersons": "Number of Persons: {{nbPersons}}",
+      "price": "Price: {{price}}€",
+      "actions": {
+        "cancel": "Cancel",
+        "confirm": "Confirm",
+        "close": "Close"
+      },
+      "placeholder": {
+        "cancel": "Cancel the reservation",
+        "confirm": "Confirm the reservation",
+        "close": "Close this window and leave this reservation unchanged"
+      }
+    }
+  }
+}

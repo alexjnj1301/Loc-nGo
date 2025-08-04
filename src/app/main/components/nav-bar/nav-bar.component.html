@@ -2,7 +2,7 @@
   <div class="menu_logo">
     <button class="menu-button" mat-icon-button (click)="toggleDrawer()">
       @if (sidenavService.hasToBeOpened()) {
-        <mat-icon style="margin: 0; color: var(--secondary-color)" matTooltip="{{'nav_bar.tootltips.closeMenu' | translate}}">close</mat-icon>
+        <mat-icon style="margin: 0; color: var(--secondary-color)" matTooltip="{{'nav_bar.tooltips.closeMenu' | translate}}">close</mat-icon>
       } @else {
         <mat-icon style="margin: 0; color: var(--secondary-color)" matTooltip="{{'nav_bar.tooltips.openMenu' | translate}}">menu</mat-icon>
       }
@@ -17,7 +17,7 @@
     <a class="link" href="" routerLink="/home" routerLinkActive="active-link" matTooltip="{{'nav_bar.tooltips.home' | translate}}"><strong>{{'nav_bar.links.home' | translate}}</strong></a>
     <a class="link" href="" routerLink="/contact" routerLinkActive="active-link" matTooltip="{{'nav_bar.tooltips.contact' | translate}}"><strong>{{'nav_bar.links.contact' | translate}}</strong></a>
     @if(isProprietaire()) {
-      <a class="link" href="" routerLink="/my-reservations" routerLinkActive="active-link" matTooltip="{{'nav_bar.tooltips.my-reservations' | translate}}"><strong>{{'nav_bar.links.my-reservations' | translate}}</strong></a>
+      <a class="link" href="" routerLink="/my-demands" routerLinkActive="active-link" matTooltip="{{'nav_bar.tooltips.my-demands' | translate}}"><strong>{{'nav_bar.links.my-demands' | translate}}</strong></a>
     }
   </div>
   @if (isLoggedIn()) {
