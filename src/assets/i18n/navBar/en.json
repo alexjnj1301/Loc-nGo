@@ -8,7 +8,8 @@
       "booking": "my bookings",
       "login": "Log in",
       "logout": "log out",
-      "my-demands": "My requests"
+      "my-demands": "My requests",
+      "my-lieux": "My accommodations"
     },
     "tooltips": {
       "home": "Go to the home page",
@@ -18,7 +19,8 @@
       "lang": "Change language",
       "openMenu": "Open the menu",
       "closeMenu": "Close the menu",
-      "my-demands": "View my requests"
+      "my-demands": "View my requests",
+      "my-lieux": "View my accommodations"
     }
   }
 }

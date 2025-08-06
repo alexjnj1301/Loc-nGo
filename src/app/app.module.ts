@@ -99,7 +99,9 @@ export function createTranslateLoader(http: HttpClient) {
       },
     }),
     LoaderComponent, NgOptimizedImage, MatDrawerContainer, MatDrawer, MatDivider, MatGridList, MatGridTile, MatTreeNodeToggle, MatRipple, FaIconComponent, TitlePictureComponent],
-  exports: [],
+  exports: [
+    LieuCardComponent,
+  ],
 
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},

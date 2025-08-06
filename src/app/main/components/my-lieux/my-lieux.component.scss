@@ -1,0 +1,34 @@
+.description-texts-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: -1rem;
+  margin-top: 2rem;
+}
+
+.description-text {
+  font-size: 1.2rem;
+  color: var(--quadri-color);
+  text-align: center;
+}
+
+.lieux-container {
+  max-width: 90vw;
+  margin: 2rem auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2rem;
+  // manage responsive design
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  @media (max-width: 992px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (max-width: 576px) {
+    grid-template-columns: 1fr;
+  }
+}

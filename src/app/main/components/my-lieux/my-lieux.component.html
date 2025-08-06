@@ -1,0 +1,10 @@
+<app-title-picture title="{{'myLieux.title' | translate }}"></app-title-picture>
+
+<div class="description-texts-container">
+  <p class="description-text">{{'myLieux.description' | translate }}</p>
+</div>
+<div class="lieux-container">
+  @for (lieu of myLieux; track lieu.id) {
+    <app-lieu-card [lieu]="lieu" />
+  }
+</div>

@@ -53,4 +53,8 @@ export class HttpCallsService {
   public getReservationById(id: number): Observable<Reservation> {
     return this.http.get<Reservation>(`${this.baseUrl}/reservations/${id}`);
   }
+
+  public deleteLieuById(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/lieu/${id}`);
+  }
 }

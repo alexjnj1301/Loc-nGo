@@ -8,6 +8,7 @@ import { RegisterComponent } from './main/components/Authentication/register/reg
 import { LieuDetailsComponent } from './main/components/lieu-details/lieu-details.component'
 import { MyReservationsComponent } from './main/components/my-reservations/my-reservations.component'
 import { ProprietorGuard } from './main/services/ProprietorGuard'
+import { MyLieuxComponent } from './main/components/my-lieux/my-lieux.component'
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'lieu-details/:id', component: LieuDetailsComponent },
   { path: 'my-demands', component: MyReservationsComponent, canActivate: [ProprietorGuard] },
+  { path: 'my-lieux', component: MyLieuxComponent, canActivate: [ProprietorGuard] },
   { path: '**', redirectTo: 'error/404', pathMatch: 'full' }
 ];
 
