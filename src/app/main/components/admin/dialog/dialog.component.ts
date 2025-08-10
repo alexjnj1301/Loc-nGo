@@ -1,6 +1,5 @@
 import { Component, DEFAULT_CURRENCY_CODE, Inject } from '@angular/core'
 import { MAT_DIALOG_DATA } from '@angular/material/dialog'
-import { BookResponse } from 'src/app/models/ContactInformations'
 import { ReservationsActions, UpdateBookRequest } from '../../../../enums/admin'
 import { HttpCallsService } from 'src/app/main/services/httpCalls.service'
 import { Reservation } from '../../../../models/ReservationPerUser'
@@ -24,8 +23,6 @@ export class DialogComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public data: { reservation: Reservation },
     private httpService: HttpCallsService) {
     this.reservation = data.reservation
-    console.log(this.reservation)
-    console.log(data.reservation.lieu)
   }
 
   public updateReservation(action: string): void {

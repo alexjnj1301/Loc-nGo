@@ -9,6 +9,7 @@ import { MatTooltip } from '@angular/material/tooltip'
 import { TranslateModule } from '@ngx-translate/core'
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog'
 import { ValidDeletionDialogComponent } from '../../admin/valid-deletion-dialog/valid-deletion-dialog.component'
+import { AddLieuDialogComponent } from '../../admin/add-lieu-dialog/add-lieu-dialog.component'
 
 @Component({
   selector: 'app-lieu-card',
@@ -39,5 +40,15 @@ export class LieuCardComponent {
     dialogConfig.exitAnimationDuration = '0ms'
 
     this.dialog.open(ValidDeletionDialogComponent, dialogConfig)
+  }
+
+  public openUpdateDialog(lieuId: number): void {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.data = { id: lieuId }
+    dialogConfig.enterAnimationDuration = '0ms'
+    dialogConfig.exitAnimationDuration = '0ms'
+
+    this.dialog.open(AddLieuDialogComponent, dialogConfig);
   }
 }

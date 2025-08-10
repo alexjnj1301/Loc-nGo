@@ -51,7 +51,6 @@ export class MyReservationsComponent implements OnInit {
   public getReservationsByLieuId(lieuId: number): void {
     this.httpCallService.getReservationsByLieuId(lieuId).subscribe({
       next: (res) => {
-        console.log('Reservations for lieuId:', lieuId, res)
         this.reservationsList.push(...res)
       },
       error: (error) => {

@@ -122,7 +122,6 @@ export class LieuDetailsComponent implements OnInit, AfterViewInit {
     if (this.bookForm.invalid) {
       return
     }
-    console.log('bookForm:', this.bookForm.value)
 
     const request: BookRequest = {
       lieu: {id: parseInt(this.lieuId)},
@@ -133,7 +132,6 @@ export class LieuDetailsComponent implements OnInit, AfterViewInit {
 
     this.httpCallsService.postBookRequest(request).subscribe({
       next: (response) => {
-        console.log('Réservation réussie:', response);
         this.bookForm.reset()
         this.startDateReset = null
         this.sideNavComponent.getReservations()
@@ -175,7 +173,6 @@ export class LieuDetailsComponent implements OnInit, AfterViewInit {
       return
     }
 
-    console.log(`this.lieuDetails?.images.at(${tile.position})`, this.lieuDetails?.images.at(tile.position))
     if (!this.lieuDetails?.images.at(tile.position)?.imageUrl) {
       for (let i = 0; i < this.lieuDetails.images.length; i++) {
         if (this.lieuDetails.images.at(i)?.imageUrl) {
@@ -191,7 +188,6 @@ export class LieuDetailsComponent implements OnInit, AfterViewInit {
   }
 
   public addAttendee(): void {
-    console.log('addAttendee', this.attendeesList.length)
     this.attendeesFormArray.push(this.formBuilder.control('', Validators.required))
   }
 

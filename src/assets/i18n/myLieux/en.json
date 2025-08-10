@@ -6,7 +6,8 @@
       "tooltip": {
         "edit": "Edit Accommodation",
         "delete": "Delete Accommodation",
-        "view": "View Accommodation Details"
+        "view": "View Accommodation Details",
+        "add": "Add New Accommodation"
       }
     },
     "dialog": {
@@ -14,6 +15,15 @@
         "title": "Delete Accommodation",
         "message": "Are you sure you want to delete this accommodation? This action is irreversible.",
         "confirm": "Delete",
+        "cancel": "Cancel"
+      }
+    },
+    "add": {
+      "titleAdd": "Add Accommodation",
+      "titleUpdate": "Update Accommodation",
+      "message": "Please fill in the details for the new accommodation.",
+      "actions": {
+        "confirm": "Add",
         "cancel": "Cancel"
       }
     }

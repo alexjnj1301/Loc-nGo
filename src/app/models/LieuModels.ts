@@ -38,3 +38,13 @@ export interface ImageDialogData {
   index: number
   url: string
 }
+
+export interface AddLieuRequest {
+  name: string
+  address: string
+  city: string
+  postal_code: string
+  description: string
+  price: number
+  favorite_picture: string
+}

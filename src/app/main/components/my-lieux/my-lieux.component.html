@@ -4,6 +4,9 @@
   <p class="description-text">{{'myLieux.description' | translate }}</p>
 </div>
 <div class="lieux-container">
+  <mat-card class="add-card" matTooltip="{{'myLieux.cards.tooltip.add' | translate }}" (click)="openDialog()">
+    <mat-icon>add</mat-icon>
+  </mat-card>
   @for (lieu of myLieux; track lieu.id) {
     <app-lieu-card [lieu]="lieu" />
   }

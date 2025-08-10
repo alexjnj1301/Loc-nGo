@@ -32,3 +32,24 @@
     grid-template-columns: 1fr;
   }
 }
+
+.add-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary-color);
+  border-radius: 20px;
+  padding: 1rem;
+  max-height: 300px;
+  max-width: 250px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border: dashed 2px var(--navBar-hover-color);
+  box-shadow: none;
+  color: var(--navBar-hover-color);
+
+  &:hover {
+    background-color: var(--navBar-hover-color);
+  }
+}

@@ -10,7 +10,7 @@
       <button mat-icon-button routerLink="/lieu-details/{{lieu.id}}" [matTooltip]="'myLieux.cards.tooltip.view' | translate">
         <mat-icon>visibility</mat-icon>
       </button>
-      <button mat-icon-button [matTooltip]="'myLieux.cards.tooltip.edit' | translate">
+      <button mat-icon-button [matTooltip]="'myLieux.cards.tooltip.edit' | translate" (click)="openUpdateDialog(lieu.id)">
         <mat-icon>edit</mat-icon>
       </button>
       <button mat-icon-button [matTooltip]="'myLieux.cards.tooltip.delete' | translate" (click)="openDeletionDialog(lieu.id)">
