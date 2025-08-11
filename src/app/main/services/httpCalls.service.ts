@@ -70,4 +70,20 @@ export class HttpCallsService {
   public addServicesToLieu(id: number, servicesId: number[]): Observable<AllLieuResponse> {
     return this.http.post<AllLieuResponse>(`${this.baseUrl}/lieu/${id}/addservice`, {servicesId})
   }
+
+  public addImageToLieu(file: File, lieuId: number): Observable<any> {
+    // add a multipart form data to send the file
+    const formData = new FormData()
+    formData.append('file', file)
+
+    return this.http.post<any>(`${this.baseUrl}/images/lieu/s3/${lieuId}`, formData)
+  }
+
+  public getImagesOfLieu(lieuId: number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/images/lieu/${lieuId}`)
+  }
+
+  public setImageAsFavorite(lieuId: number, imageId: number): Observable<string> {
+    return this.http.post<string>(`${this.baseUrl}/lieu/favorite-picture`, { lieuId: lieuId, imageId: imageId })
+  }
 }

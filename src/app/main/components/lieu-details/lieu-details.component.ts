@@ -84,7 +84,7 @@ export class LieuDetailsComponent implements OnInit, AfterViewInit {
           { img: this.lieuDetails.favorite_picture, cols: 2, rows: 2, class: 'principal-picture', position: 0 },
           { img: this.lieuDetails.images?.at(0)?.imageUrl ? this.lieuDetails.images.at(0)?.imageUrl : '', cols: 2, rows: 1, class: 'top-right-picture', position: 1 },
           { img: this.lieuDetails.images?.at(1)?.imageUrl ? this.lieuDetails.images.at(1)?.imageUrl : '', cols: 1, rows: 1, class: 'bottom-right-left', position: 2 },
-          { img: this.lieuDetails.images?.at(1)?.imageUrl ? this.lieuDetails.images.at(1)?.imageUrl : '', cols: 1, rows: 1, class: 'bottom-right-right', position: 0 }
+          { img: this.lieuDetails.images?.at(0)?.imageUrl ? this.lieuDetails.images.at(0)?.imageUrl : '', cols: 1, rows: 1, class: 'bottom-right-right', position: 0 }
         ];
       },
       error: (err) => {
@@ -166,7 +166,7 @@ export class LieuDetailsComponent implements OnInit, AfterViewInit {
     const imageDialogData = {
       images: this.lieuDetails?.images,
       index: tile.position -1,
-      url: tile.img || ''
+      url: tile.img
     }
 
     if (!this.lieuDetails?.images || tile.position < 0 || tile.position >= this.lieuDetails.images.length) {

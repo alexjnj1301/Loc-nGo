@@ -1,5 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogContent, MatDialogModule } from '@angular/material/dialog'
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogConfig,
+  MatDialogContent,
+  MatDialogModule,
+} from '@angular/material/dialog'
 import { HttpCallsService } from '../../../services/httpCalls.service'
 import { LieuDetailsResponse } from '../../../../models/LieuModels'
 import { TranslateModule } from '@ngx-translate/core'
@@ -12,6 +18,7 @@ import { GetAllServices } from '../../../../models/Services'
 import { Features, featuresItem } from '../../../../models/Features'
 import { MatTooltip } from '@angular/material/tooltip'
 import { AddingLieuConfirmationComponent } from './adding-lieu-confirmation/adding-lieu-confirmation.component'
+import { SetFavoriteImageDialogComponent } from './set-favorite-image-dialog/set-favorite-image-dialog.component'
 
 @Component({
   selector: 'app-add-lieu-dialog',
@@ -41,6 +48,7 @@ export class AddLieuDialogComponent implements OnInit {
   public services: GetAllServices[] = []
   public selectedServices: number[] = []
   public isLinear: boolean = false
+  public file: File | null = null
 
   public constructor(@Inject(MAT_DIALOG_DATA) public data: { id: number },
                      private httpService: HttpCallsService,
@@ -64,13 +72,13 @@ export class AddLieuDialogComponent implements OnInit {
       city: ['', Validators.required],
       postal_code: ['', Validators.required],
       description: ['', Validators.required],
-      price: [0, Validators.required],
-      favorite_picture: ['', Validators.required]
+      price: [0, Validators.required]
     })
   }
 
   public ngOnInit() {
     this.getAllServices()
+    this.getImagesOfLieu()
   }
 
   public addLieu() {
@@ -101,6 +109,20 @@ export class AddLieuDialogComponent implements OnInit {
     })
   }
 
+  public getImagesOfLieu() {
+    if (this.lieu) {
+      this.httpService.getImagesOfLieu(this.lieu.id).subscribe({
+        next: (response) => {
+          console.log('Images fetched successfully:', response)
+          this.lieu!.images = response
+        },
+        error: (error) => {
+          console.error('Error fetching images:', error)
+        }
+      })
+    }
+  }
+
   public getFeatureName(featureId: string): Features | undefined {
     return this.featuresItem.find(el => el.id === featureId)
   }
@@ -129,11 +151,33 @@ export class AddLieuDialogComponent implements OnInit {
   }
 
   public openConfirmDialog() {
-    this.dialog.open(AddingLieuConfirmationComponent)
+    this.httpService.addImageToLieu(this.file!, this.lieu?.id!).subscribe({
+      next: (response) => {
+        console.log('Image added successfully:', response)
+        window.location.reload()
+      },
+      error: (error) => {
+        console.error('Error adding image:', error)
+        window.location.reload()
+      }
+    })
   }
 
   public onFileSelected($event: Event) {
     const input = $event.target as HTMLInputElement
-    console.log('File selected:', input.files)
+    this.file = input.files ? input.files[0] : null
+  }
+
+  public setFavoriteImage(imageUrl: string, imageId: number) {
+    const imageData = {
+      imageUrl: imageUrl,
+      lieuId: this.lieu?.id,
+      imageId: imageId
+    }
+
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = imageData
+
+    this.dialog.open(SetFavoriteImageDialogComponent, dialogConfig)
   }
 }

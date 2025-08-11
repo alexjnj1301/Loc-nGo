@@ -1,0 +1,8 @@
+<h2>Vous voulez ajouter ca ?</h2>
+<mat-dialog-content>
+  <img src="{{data.imageUrl}}" alt="Lieu Image" class="image">
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="setFavoriteImage(data.imageId)">{{ 'myLieux.dialog.add.actions.confirm' | translate }}</button>
+  <button mat-button [mat-dialog-close]="false">{{ 'myLieux.dialog.add.actions.cancel' | translate }}</button>
+</mat-dialog-actions>

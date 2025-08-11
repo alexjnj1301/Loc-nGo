@@ -4,7 +4,7 @@
   <h2 mat-dialog-title>{{'myLieux.dialog.add.titleUpdate' | translate}}</h2>
 }
 <mat-dialog-content>
-  <mat-stepper [linear]="isLinear" #stepper>
+  <mat-stepper [linear]="isAddModeOrIsUpdateMode" #stepper>
     <mat-step [stepControl]="lieuForm" label="{{'myLieux.dialog.add.stepFirstTitle' | translate}}" matTooltip="caca">
       <form [formGroup]="lieuForm">
         <div class="custom-input-container">
@@ -32,17 +32,17 @@
             <label [ngClass]="lieuForm.get('price')?.valid ? 'label-active' : 'label-inactive'" for="price">{{'myLieux.dialog.add.placeholder.price' | translate}}</label>
             <input id="price" type="number" formControlName="price" [value]="lieu?.price" placeholder="{{'myLieux.dialog.add.placeholder.price' | translate}}" class="custom-input">
           </div>
-          <div>
-            <label [ngClass]="lieuForm.get('favorite_picture')?.valid ? 'label-active' : 'label-inactive'" for="favorite_picture">{{'myLieux.dialog.add.placeholder.favorite_picture' | translate}}</label>
-            <input id="favorite_picture" type="text" formControlName="favorite_picture" [value]="lieu?.favorite_picture" placeholder="{{'myLieux.dialog.add.placeholder.favorite_picture' | translate}}" class="custom-input">
-          </div>
+<!--          <div>-->
+<!--            <label [ngClass]="lieuForm.get('favorite_picture')?.valid ? 'label-active' : 'label-inactive'" for="favorite_picture">{{'myLieux.dialog.add.placeholder.favorite_picture' | translate}}</label>-->
+<!--            <input id="favorite_picture" type="text" formControlName="favorite_picture" [value]="lieu?.favorite_picture" placeholder="{{'myLieux.dialog.add.placeholder.favorite_picture' | translate}}" class="custom-input">-->
+<!--          </div>-->
         </div>
         <mat-dialog-actions align="end">
           <button mat-button [mat-dialog-close]="false">{{ 'myLieux.dialog.add.actions.cancel' | translate }}</button>
           @if (isAddModeOrIsUpdateMode) {
             <button mat-button matStepperNext [disabled]="lieuForm.invalid" (click)="addLieu()">{{ 'myLieux.dialog.add.actions.next' | translate }}</button>
           } @else {
-            <button mat-button matStepperNext [disabled]="lieuForm.invalid" (click)="updateLieu()">{{ 'myLieux.dialog.add.actions.next' | translate }}</button>
+            <button mat-button matStepperNext (click)="updateLieu()">{{ 'myLieux.dialog.add.actions.next' | translate }}</button>
           }
         </mat-dialog-actions>
       </form>
@@ -68,8 +68,17 @@
       <mat-dialog-actions align="end">
         <button mat-button [mat-dialog-close]="false">{{ 'myLieux.dialog.add.actions.cancel' | translate }}</button>
         <button mat-button matStepperPrevious>{{ 'myLieux.dialog.add.actions.previous' | translate }}</button>
-        <button mat-button matStepperNext (click)="openConfirmDialog()">{{ 'myLieux.dialog.add.actions.confirm' | translate }}</button>
+        <button mat-button matStepperNext [disabled]="!file" (click)="openConfirmDialog()">{{ 'myLieux.dialog.add.actions.confirm' | translate }}</button>
       </mat-dialog-actions>
+    </mat-step>
+    <mat-step label="setFavorite">
+      <div class="image-container">
+
+        @for (image of lieu?.images; track image.id) {
+          <img [src]="image.imageUrl" alt="Lieu Image" class="lieu-image" (click)="setFavoriteImage(image.imageUrl, image.id)">
+        }
+      </div>
+<!--      <button mat-button (click)="getImagesOfLieu()">vsy</button>-->
     </mat-step>
   </mat-stepper>
 </mat-dialog-content>
