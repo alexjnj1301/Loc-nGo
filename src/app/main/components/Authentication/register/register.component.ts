@@ -7,9 +7,10 @@ import { Constants } from '../../../Constants'
 import { Router } from '@angular/router'
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrl: '../authentication.styles.scss'
+    selector: 'app-register',
+    templateUrl: './register.component.html',
+    styleUrl: '../authentication.styles.scss',
+    standalone: false
 })
 export class RegisterComponent implements OnInit {
   public registerForm: FormGroup;

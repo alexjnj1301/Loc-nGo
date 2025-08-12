@@ -3,34 +3,34 @@
     <mat-drawer #drawer class="sidenav-content" mode="over" [opened]="sideNavService.hasToBeOpened()">
       <div class="spacer">
         <div>
-            @if (isLoggedIn()) {
-              <div class="sidenav-title">
-                <h3 class="welcome-title"><strong>
-                    {{ 'sidenav.welcomeUser' | translate: { firstname: this.authService.getCurrentUser()!.firstname,
-                  lastname: this.authService.getCurrentUser()!.lastname } }}
-                </strong></h3>
-                <mat-icon class="logout-icon" (click)="this.logout()" matTooltip="{{'sidenav.logout' | translate}}">
-                  power_settings_new</mat-icon>
-              </div>
-              <mat-accordion>
-                <mat-expansion-panel class="panel-reservations" [expanded]="true">
-                  <mat-expansion-panel-header>
-                    <mat-panel-title>
-                      {{ 'sidenav.myReservations' | translate }}
-                    </mat-panel-title>
-                  </mat-expansion-panel-header>
-                  <div class="reservations-list-container">
-                    @for (reservation of reservations; track reservation.id) {
-                      <app-reservation-card [reservation]="reservation"></app-reservation-card>
-                    }
-                  </div>
-                </mat-expansion-panel>
-              </mat-accordion>
-            } @else {
-                <h3 class="welcome-title"><strong>
-                    {{ 'sidenav.welcomeGuest' | translate }}
-                </strong></h3>
-            }
+          @if (isLoggedIn()) {
+            <div class="sidenav-title">
+              <h3 class="welcome-title"><strong>
+                  {{ 'sidenav.welcomeUser' | translate: { firstname: this.authService.getCurrentUser()!.firstname,
+                lastname: this.authService.getCurrentUser()!.lastname } }}
+              </strong></h3>
+              <mat-icon class="logout-icon" (click)="this.logout()" matTooltip="{{'sidenav.logout' | translate}}">
+                power_settings_new</mat-icon>
+            </div>
+            <mat-accordion>
+              <mat-expansion-panel class="panel-reservations" [expanded]="true">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    {{ 'sidenav.myReservations' | translate }}
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="reservations-list-container">
+                  @for (reservation of reservations; track reservation.id) {
+                    <app-reservation-card [reservation]="reservation"></app-reservation-card>
+                  }
+                </div>
+              </mat-expansion-panel>
+            </mat-accordion>
+          } @else {
+            <h3 class="welcome-title"><strong>
+                {{ 'sidenav.welcomeGuest' | translate }}
+            </strong></h3>
+          }
         </div>
       </div>
     </mat-drawer>

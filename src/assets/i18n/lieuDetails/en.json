@@ -1,0 +1,66 @@
+{
+  "lieuDetails": {
+    "reservation": {
+      "title": "You want to book a journey here?",
+      "pricePart": "From {{price}} € per night",
+      "buttons": {
+        "book": "Book: {{total}} €",
+        "addAttendee": "Add an attendee"
+      },
+      "labels": {
+        "selectDates": "Please select dates",
+        "attendees": "Attendees",
+        "loginToBook": "Log in to book",
+        "firstName": "First name"
+      }
+    },
+    "dialog": {
+      "title": "View images of the place"
+    },
+    "infos": {
+      "pictures": {
+        "seeMore": "See more"
+      },
+      "description": "Description",
+      "features": "Features",
+      "address": "Address",
+      "price": "Price per night"
+    },
+    "items": {
+      "tv": "Television",
+      "cafe": "Coffee maker",
+      "lit": "Bed",
+      "wifi": "Wi-Fi",
+      "vaisselle": "Dishes",
+      "draps": "Sheets",
+      "serviettes": "Towels",
+      "parking": "Parking",
+      "localSki": "Ski storage",
+      "keyBox": "Key box",
+      "cleaning": "Cleaning",
+      "pets": "Pets allowed",
+      "noAnimal": "No pets allowed",
+      "smoking": "Smoking allowed",
+      "noSmoking": "Non-smoking",
+      "laveVaisselle": "Dishwasher",
+      "laveLinge": "Washing machine",
+      "microOnde": "Microwave",
+      "four": "Oven",
+      "refrigerateur": "Refrigerator",
+      "bouilloire": "Kettle",
+      "canapelit": "Sofa bed",
+      "balcon": "Balcony",
+      "litdouble": "Double bed",
+      "litsimple": "Single bed",
+      "litsimplex2": "2 single beds",
+      "litdoublex2": "2 double beds",
+      "litsimplex3": "3 single beds",
+      "litdoublex3": "3 double beds",
+      "litsimplex4": "4 single beds",
+      "litdoublex4": "4 double beds",
+      "douche": "Shower",
+      "baignoire": "Bathtub",
+      "toilettes": "Toilets"
+    }
+  }
+}

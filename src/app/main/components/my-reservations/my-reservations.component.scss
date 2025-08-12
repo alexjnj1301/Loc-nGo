@@ -1,0 +1,79 @@
+.my-reservations-container {
+  margin: 1rem auto;
+  max-width: 90vw;
+
+  h1 {
+    text-transform: capitalize;
+  }
+}
+
+.description-texts-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: -1rem;
+  margin-top: 2rem;
+}
+
+.description-text {
+  font-size: 1.2rem;
+  color: var(--quadri-color);
+  text-align: center;
+}
+
+.title-container {
+  max-width: 90vw;
+  margin: 2.5rem auto 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  color: var(--secondary-color);
+
+  h2 {
+    font-size: 2.8rem;
+  }
+}
+
+.lieu-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+
+  h1 {
+    margin: auto 0;
+  }
+
+  .img-container {
+    width: 60px;
+    height: 40px;
+    margin-right: 0.5rem;
+
+    .lieu-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+  }
+}
+
+.reservations-container {
+  display: flex;
+  flex-direction: row;
+  overflow-y: scroll;
+  gap: 1rem;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.no-reservation {
+  font-size: 1rem;
+  color: var(--quadri-color);
+  //text-align: center;
+  margin-top: 1rem;
+  width: 100%;
+}

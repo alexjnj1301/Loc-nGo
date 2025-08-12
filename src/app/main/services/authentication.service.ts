@@ -33,6 +33,15 @@ export class AuthenticationService {
     return !this.isTokenExpired(token)
   }
 
+  public isProprietor(): boolean {
+    const currentUser = this.getCurrentUser()
+    if (!currentUser || !currentUser.roles) {
+      return false
+    }
+
+    return currentUser.roles.includes('ROLE_PROPRIETAIRE')
+  }
+
   public getToken(): string | null {
     return localStorage.getItem(this.constants.TOKEN_KEY)
   }
@@ -70,7 +79,8 @@ export class AuthenticationService {
       firstname: decoded.firstname,
       lastname: decoded.lastname,
       email: decoded.sub,
-      id: decoded.id
+      id: decoded.id,
+      roles: decoded.roles
     }
 
     localStorage.setItem(this.constants.CURRENT_USER_KEY, JSON.stringify(currentUser))

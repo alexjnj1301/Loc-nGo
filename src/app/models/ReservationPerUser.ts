@@ -6,6 +6,7 @@ export interface Reservation {
   nb_person: number
   reference: string
   attendees: Attendee[]
+  status: string
 }
 
 export interface Lieu {
@@ -14,6 +15,7 @@ export interface Lieu {
   address: string
   city: string
   postal_code: string
+  price: number
 }
 
 export interface Attendee {
@@ -24,8 +26,10 @@ export interface Attendee {
 
 export interface AllReservationsByUserId {
   id: number
-  lieuImages: string[]
+  lieuImages: string
   start_date: string
   end_date: string
   reference: string
+  lieu: Lieu
+  status: string
 }

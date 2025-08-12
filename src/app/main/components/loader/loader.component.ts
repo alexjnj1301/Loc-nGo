@@ -4,13 +4,12 @@ import { MatProgressBar } from "@angular/material/progress-bar"
 import { MatCard } from "@angular/material/card"
 
 @Component({
-  selector: 'app-loader',
-  standalone: true,
-  imports: [
-    MatCard
-  ],
-  templateUrl: './loader.component.html',
-  styleUrl: './loader.component.scss'
+    selector: 'app-loader',
+    imports: [
+        MatCard
+    ],
+    templateUrl: './loader.component.html',
+    styleUrl: './loader.component.scss'
 })
 export class LoaderComponent {
 

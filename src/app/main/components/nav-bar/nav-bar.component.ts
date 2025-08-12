@@ -5,12 +5,12 @@ import { AuthenticationService } from '../../services/authentication.service'
 import { SidenavService } from '../../services/sidenav.service'
 
 @Component({
-  selector: 'app-nav-bar',
-  templateUrl: './nav-bar.component.html',
-  styleUrls: ['./nav-bar.component.scss']
+    selector: 'app-nav-bar',
+    templateUrl: './nav-bar.component.html',
+    styleUrls: ['./nav-bar.component.scss'],
+    standalone: false
 })
 export class NavBarComponent implements OnInit {
-  translateValues: any = {}
   langSelector: string[] = ['fr', 'en']
   currentLangDisplay: string
 
@@ -22,9 +22,6 @@ export class NavBarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.translateService.getTranslation().subscribe((result) => {
-      this.translateValues = result.nav_bar;
-    });
   }
 
   public changeLang(lang: string): void {
@@ -38,6 +35,10 @@ export class NavBarComponent implements OnInit {
 
   public isLoggedIn(): boolean {
     return this.authService.isAuthenticated();
+  }
+
+  public isProprietaire(): boolean {
+    return this.authService.isProprietor() && this.isLoggedIn();
   }
 
   public logout(): void {

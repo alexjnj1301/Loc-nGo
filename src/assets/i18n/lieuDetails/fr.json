@@ -1,0 +1,66 @@
+{
+  "lieuDetails": {
+    "reservation": {
+      "title": "Vous souhaitez réserver un séjour ici ?",
+      "pricePart": "A partir de {{price}} € la nuit",
+      "buttons": {
+        "book": "Réserver: {{total}} €",
+        "addAttendee": "Ajouter un participant"
+      },
+      "labels": {
+        "selectDates": "Veuillez sélectionner les dates",
+        "attendees": "Participants",
+        "loginToBook": "Connectez-vous pour réserver",
+        "firstName": "Prénom"
+      }
+    },
+    "dialog": {
+      "title": "Voir les images du lieu"
+    },
+    "infos": {
+      "pictures": {
+        "seeMore": "Voir plus"
+      },
+      "description": "Description",
+      "features": "Services",
+      "address": "Adresse",
+      "price": "Prix par nuit"
+    },
+    "items": {
+      "tv": "Télévision",
+      "cafe": "Cafetière",
+      "lit": "Lit",
+      "wifi": "Wi-Fi",
+      "vaisselle": "Vaisselle",
+      "draps": "Draps",
+      "serviettes": "Serviettes",
+      "parking": "Parking",
+      "localSki": "Local à ski",
+      "keyBox": "Boîte à clés",
+      "cleaning": "Ménage",
+      "pets": "Animaux autorisés",
+      "noAnimal": "Animaux non autorisés",
+      "smoking": "Fumeur",
+      "noSmoking": "Non fumeur",
+      "laveVaisselle": "Lave-vaisselle",
+      "laveLinge": "Lave-linge",
+      "microOnde": "Micro-ondes",
+      "four": "Four",
+      "refrigerateur": "Réfrigérateur",
+      "bouilloire": "Bouilloire",
+      "canapelit": "Canapé-lit",
+      "balcon": "Balcon",
+      "litdouble": "Lit double",
+      "litsimple": "Lit simple",
+      "litsimplex2": "2 lits simples",
+      "litdoublex2": "2 lits doubles",
+      "litsimplex3": "3 lits simples",
+      "litdoublex3": "3 lits doubles",
+      "litsimplex4": "4 lits simples",
+      "litdoublex4": "4 lits doubles",
+      "douche": "Douche",
+      "toilettes": "Toilettes",
+      "baignoire": "Baignoire"
+    }
+  }
+}

@@ -7,7 +7,9 @@
       "contact": "Contact",
       "booking": "my bookings",
       "login": "Log in",
-      "logout": "log out"
+      "logout": "log out",
+      "my-demands": "My requests",
+      "my-lieux": "My accommodations"
     },
     "tooltips": {
       "home": "Go to the home page",
@@ -16,7 +18,9 @@
       "share": "Share this page",
       "lang": "Change language",
       "openMenu": "Open the menu",
-      "closeMenu": "Close the menu"
+      "closeMenu": "Close the menu",
+      "my-demands": "View my requests",
+      "my-lieux": "View my accommodations"
     }
   }
 }

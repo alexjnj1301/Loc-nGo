@@ -3,4 +3,5 @@ export interface CurrentUser {
   lastname: string
   email: string
   id: number
+  roles: string[]
 }

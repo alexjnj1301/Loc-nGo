@@ -6,7 +6,8 @@
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
-@include mat.core();
+@include mat.elevation-classes();
+@include mat.app-background();
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
 
 :root{
@@ -19,6 +20,7 @@
   --black: #000;
   --image-filter: rgba(28, 32, 34, 0.207);
   --navBar-hover-color: #3e476b91;
+  --reservation-expansion-bg: rgba(159, 177, 230, 0.15);
   --mat-datepicker-calendar-container-shape: 30px;
   --mat-expansion-container-background-color: none;
   --mat-select-panel-background-color: var(--form-color);
@@ -42,6 +44,10 @@
 
 .mat-expansion-panel:not([class*=mat-elevation-z]) {
   box-shadow: none !important;
+}
+
+.test .mat-expansion-panel-body {
+  padding: 0 !important;
 }
 
 body {
@@ -71,4 +77,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .panel-reservations .mat-expansion-panel-body {
   padding: 0 10px 16px !important;
+}
+
+mat-datepicker-content {
+  border-radius: 20px !important;
 }

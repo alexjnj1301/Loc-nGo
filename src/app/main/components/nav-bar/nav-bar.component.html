@@ -1,21 +1,25 @@
 <mat-toolbar class="toolBar bigScreen" *ngIf="!isActiveRouteAuthentication()">
   <div class="menu_logo">
     <button class="menu-button" mat-icon-button (click)="toggleDrawer()">
-      @if (sidenavService.isSidenavOpened()) {
-        <mat-icon style="margin: 0; color: var(--secondary-color)" matTooltip="{{translateValues.tooltips?.closeMenu}}">close</mat-icon>
+      @if (sidenavService.hasToBeOpened()) {
+        <mat-icon style="margin: 0; color: var(--secondary-color)" matTooltip="{{'nav_bar.tooltips.closeMenu' | translate}}">close</mat-icon>
       } @else {
-        <mat-icon style="margin: 0; color: var(--secondary-color)" matTooltip="{{translateValues.tooltips?.openMenu}}">menu</mat-icon>
+        <mat-icon style="margin: 0; color: var(--secondary-color)" matTooltip="{{'nav_bar.tooltips.openMenu' | translate}}">menu</mat-icon>
       }
     </button>
-    <div class="logoDiv" routerLink="/home" matTooltip="{{translateValues.tooltips?.home}}">
+    <div class="logoDiv" routerLink="/home" matTooltip="{{'nav_bar.tooltips.home' | translate}}">
       <img class="logo" src="./assets/IMG/icon_locngo.png" alt="Loc'nGo's logo"/>
-      {{translateValues.title}}
+      {{'nav_bar.title' | translate}}
     </div>
   </div>
 
   <div class="links">
-    <a class="link" href="" routerLink="/home" routerLinkActive="active-link" matTooltip="{{translateValues.tooltips?.home}}"><strong>{{translateValues.links?.home}}</strong></a>
-    <a class="link" href="" routerLink="/contact" routerLinkActive="active-link" matTooltip="{{translateValues.tooltips?.contact}}"><strong>{{translateValues.links?.contact}}</strong></a>
+    <a class="link" href="" routerLink="/home" routerLinkActive="active-link" matTooltip="{{'nav_bar.tooltips.home' | translate}}"><strong>{{'nav_bar.links.home' | translate}}</strong></a>
+    <a class="link" href="" routerLink="/contact" routerLinkActive="active-link" matTooltip="{{'nav_bar.tooltips.contact' | translate}}"><strong>{{'nav_bar.links.contact' | translate}}</strong></a>
+    @if(isProprietaire()) {
+      <a class="link" href="" routerLink="/my-demands" routerLinkActive="active-link" matTooltip="{{'nav_bar.tooltips.my-demands' | translate}}"><strong>{{'nav_bar.links.my-demands' | translate}}</strong></a>
+      <a class="link" href="" routerLink="/my-lieux" routerLinkActive="active-link" matTooltip="{{'nav_bar.tooltips.my-lieux' | translate}}"><strong>{{'nav_bar.links.my-lieux' | translate}}</strong></a>
+    }
   </div>
   @if (isLoggedIn()) {
     <div class="links">
@@ -25,17 +29,17 @@
       <mat-menu #menu="matMenu">
         <button mat-menu-item>
           <mat-icon>calendar_today</mat-icon>
-          <span>{{translateValues.links?.booking}}</span>
+          <span>{{'nav_bar.links.booking' | translate}}</span>
         </button>
         <button mat-menu-item (click)="logout()">
           <mat-icon fontIcon="logout"></mat-icon>
-          <span>{{translateValues.links?.logout}}</span>
+          <span>{{'nav_bar.links.logout' | translate}}</span>
         </button>
       </mat-menu>
 
       <div class="langSelector">
         <button class="langSelectorButton"
-                [matMenuTriggerFor]="selector" matTooltip="{{translateValues.tooltips?.lang}}">
+                [matMenuTriggerFor]="selector" matTooltip="{{'nav_bar.tooltips.lang' | translate}}">
           {{currentLangDisplay.toUpperCase()}}
         </button>
         <mat-menu #selector="matMenu">
@@ -45,10 +49,10 @@
     </div>
   } @else {
     <div class="links">
-      <a class="link" href="/login">{{translateValues.links?.login}}</a>
+      <a class="link" href="/login">{{'nav_bar.links.login' | translate}}</a>
       <div class="langSelector">
         <button class="langSelectorButton"
-                [matMenuTriggerFor]="selector" matTooltip="{{translateValues.tooltips?.lang}}">
+                [matMenuTriggerFor]="selector" matTooltip="{{'nav_bar.tooltips.lang' | translate}}">
           {{currentLangDisplay.toUpperCase()}}
         </button>
         <mat-menu #selector="matMenu">
@@ -59,9 +63,9 @@
   }
 </mat-toolbar>
 <mat-toolbar class="toolBar littleScreen" *ngIf="!isActiveRouteAuthentication()">
-  <div class="logoDiv" routerLink="/home" matTooltip="{{translateValues.tooltips?.home}}">
+  <div class="logoDiv" routerLink="/home" matTooltip="{{'nav_bar.tooltips.home' | translate}}">
     <img class="logo" src="./assets/IMG/icon_locngo.png" alt="Loc'nGo's logo"/>
-    {{translateValues.title}}
+    {{'nav_bar.title' | translate}}
   </div>
   <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="User profile menu">
     <mat-icon style="margin: 0; color: var(--secondary-color)">menu</mat-icon>
@@ -69,25 +73,25 @@
   <mat-menu #menu="matMenu">
     <button mat-menu-item routerLink="/home">
       <mat-icon>home</mat-icon>
-      <span style="text-transform: lowercase">{{translateValues.links?.home}}</span>
+      <span style="text-transform: lowercase">{{'nav_bar.links.home' | translate}}</span>
     </button>
     <button mat-menu-item routerLink="/contact">
       <mat-icon>contact_support</mat-icon>
-      <span style="text-transform: lowercase">{{translateValues.links?.contact}}</span>
+      <span style="text-transform: lowercase">{{'nav_bar.links.contact' | translate}}</span>
     </button>
     @if (isLoggedIn()) {
       <button mat-menu-item>
         <mat-icon>calendar_today</mat-icon>
-        <span>{{translateValues.links?.booking}}</span>
+        <span>{{'nav_bar.links.booking' | translate}}</span>
       </button>
       <button mat-menu-item (click)="logout()">
         <mat-icon fontIcon="logout"></mat-icon>
-        <span>{{translateValues.links?.logout}}</span>
+        <span>{{'nav_bar.links.logout' | translate}}</span>
       </button>
     } @else {
       <button mat-menu-item routerLink="/login">
         <mat-icon>login</mat-icon>
-        <span>{{translateValues.links?.login}}</span>
+        <span>{{'nav_bar.links.login' | translate}}</span>
       </button>
     }
   </mat-menu>

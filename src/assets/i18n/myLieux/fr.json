@@ -1,0 +1,48 @@
+{
+  "myLieux": {
+    "title": "Mes logements",
+    "description": "Gérez vos logements ici. Vous pouvez ajouter, modifier ou supprimer des logements.",
+    "cards": {
+      "tooltip": {
+        "edit": "Modifier le logement",
+        "delete": "Supprimer le logement",
+        "view": "Voir les détails du logement",
+        "add": "Ajouter un nouveau logement"
+      }
+    },
+    "dialog": {
+      "delete": {
+        "title": "Supprimer le logement",
+        "message": "Êtes-vous sûr de vouloir supprimer ce logement ? Cette action est irréversible.",
+        "confirm": "Supprimer",
+        "cancel": "Annuler"
+      },
+      "add": {
+        "titleAdd": "Ajouter un logement",
+        "titleUpdate": "Mettre à jour le logement",
+        "message": "Veuillez remplir les détails du nouveau logement.",
+        "placeholder": {
+          "name": "Nom du logement",
+          "description": "Description du logement. Soyez le plus précis possible.",
+          "address": "Adresse du logement",
+          "price": "Prix par nuit",
+          "favorite_picture": "Image de couverture du logement",
+          "postal_code": "Code postal",
+          "city": "Ville"
+        },
+        "actions": {
+          "confirm": "Ajouter",
+          "update": "Mettre à jour",
+          "cancel": "Fermer",
+          "next": "Suivant",
+          "previous": "Précédent"
+        },
+        "stepFirstTitle": "Informations générales",
+        "stepSecondTitle": "Services et commodités",
+        "stepThirdTitle": "Images du logement",
+        "confirmTitle": "Felicitations !!",
+        "confirmMessage": "Votre logement a été ajouté avec succès."
+      }
+    }
+  }
+}

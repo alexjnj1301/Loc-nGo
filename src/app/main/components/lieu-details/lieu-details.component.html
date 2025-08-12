@@ -1,1 +1,126 @@
-<div class="lieu-details-container">bonjour {{lieuId}}</div>
+<div class="lieu-details-container">
+  <div #pictures class="lieu-details-pictures-showroom">
+    <mat-grid-list cols="4">
+      @for (tile of tiles; track tile) {
+        <mat-grid-tile [colspan]="tile.cols" [rowspan]="tile.rows" class="tiles"
+                       [ngClass]="tile.class" (click)="openDialog(tile)">
+          @if (tile.class === 'bottom-right-right') {
+            {{ 'lieuDetails.infos.pictures.seeMore' | translate }}
+          } @else {
+            @if (!isImageLoaded) {
+              <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+            }
+
+            @if (tile.img || constants.REPLACEMENT_PICTURE) {
+              <img src="{{tile.img ? tile.img : constants.REPLACEMENT_PICTURE }}" alt="No more image to show"
+                   (load)="onImageLoad()"
+                   (error)="onImageLoad()">
+            }
+          }
+        </mat-grid-tile>
+      }
+    </mat-grid-list>
+  </div>
+  <div #reservation class="lieu-details-reservation">
+    <h3>{{ 'lieuDetails.reservation.title' | translate }}</h3>
+    <h4>{{ 'lieuDetails.reservation.pricePart' | translate: {price: lieuDetails?.price} }}</h4>
+    @if (authenticationService.isAuthenticated()) {
+      <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+        <div class="lieu-details-reservation-dates">
+          <div [hidden]="true">
+            <mat-form-field>
+              <mat-label>Enter a date range</mat-label>
+              <mat-date-range-input [rangePicker]="picker" [min]="minDate" [max]="maxDate">
+                <input matStartDate formControlName="startDate" placeholder="Start date" (dateChange)="onStartDateChange()">
+                <input matEndDate formControlName="endDate" placeholder="End date" (dateChange)="onEndDateChange()">
+              </mat-date-range-input>
+
+              @if (bookForm.get('startDate')?.hasError('matStartDateInvalid')) {
+                <mat-error>Invalid start date</mat-error>
+              }
+              @if (bookForm.get('endDate')?.hasError('matEndDateInvalid')) {
+                <mat-error>Invalid end date</mat-error>
+              }
+            </mat-form-field>
+          </div>
+          <mat-date-range-picker touchUi #picker (closed)="onClose()" panelClass="custom-calendar"></mat-date-range-picker>
+          <div class="lieu-details-reservation-journey-container">
+            <mat-hint>{{ 'lieuDetails.reservation.labels.selectDates' | translate }}</mat-hint>
+            <div class="lieu-details-reservation-journey-date-container">
+              <button mat-flat-button type="button" (click)="picker.open()" style="border-radius: 8px 0 0 8px">{{ startDate | date: "dd-MM-yyyy" }}</button>
+              <button mat-flat-button type="button" (click)="bookForm.reset(); bookForm.get('startDate')?.setValue(this.startDateReset); picker.open()" style="border-radius: 0 8px 8px 0">{{ endDate | date: "dd-MM-yyyy" }}</button>
+            </div>
+            <div>
+              <mat-accordion>
+                <mat-expansion-panel expanded="true">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title style="gap: 1rem">
+                      <mat-icon>people</mat-icon>
+                      <span>{{ 'lieuDetails.reservation.labels.attendees' | translate }}</span>
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <div class="lieu-details-reservation-attendees">
+                    <div class="lieu-details-reservation-attendees-list" formArrayName="attendees">
+                      @for (attendee of attendeesFormArray.controls; track attendee; let i = $index) {
+                        <mat-form-field appearance="outline">
+                          <input matInput placeholder="{{ 'lieuDetails.reservation.labels.firstName' | translate }}"
+                                 [formControlName]="i">
+                          <button matSuffix mat-icon-button aria-label="Clear" (click)="removeAttendee(i)">
+                            <mat-icon>delete</mat-icon>
+                          </button>
+                        </mat-form-field>
+                      }
+                    </div>
+                    <div matRipple class="lieu-details-reservation-add-attendee" (click)="addAttendee()">
+                      <mat-icon>add</mat-icon>
+                      <span>{{ 'lieuDetails.reservation.buttons.addAttendee' | translate }}</span>
+                    </div>
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
+          </div>
+        </div>
+        <div class="book-button" >
+          <button mat-button type="submit" color="primary" [disabled]="bookForm.invalid">
+            {{ 'lieuDetails.reservation.buttons.book' | translate: {total: calculateNumberOfDays() >=0 ? lieuDetails?.price! * calculateNumberOfDays() : 0} }}</button>
+        </div>
+      </form>
+    } @else {
+      {{ 'lieuDetails.reservation.labels.loginToBook' | translate }}
+    }
+  </div>
+</div>
+<div class="lieu-details-infos-container">
+  <div class="lieu-details-infos">
+    <div class="lieu-details-infos-title">
+      <h1>{{lieuDetails?.name}} - {{lieuDetails?.city}}</h1>
+    </div>
+    <div class="lieu-details-infos-address">
+      <h2>{{lieuDetails?.city}} - {{lieuDetails?.postal_code}}</h2>
+    </div>
+    <div class="lieu-details-infos-description">
+      <h2>{{ 'lieuDetails.infos.description' | translate }}</h2>
+      <p>{{lieuDetails?.description}}</p>
+    </div>
+    <div class="lieu-details-infos-features">
+      <div class="lieu-details-infos-features-title">
+        <h2>{{ 'lieuDetails.infos.features' | translate }}</h2>
+      </div>
+      <div class="lieu-details-infos-features-list">
+        @for (feature of lieuDetails?.services; track feature) {
+          <mat-chip class="service-card">
+            <div class="in-chips">
+              @if (getFeatureName(feature.name)?.faIcon) {
+                <fa-icon [icon]="getFeatureName(feature.name)?.faIcon!"></fa-icon>
+              } @else {
+                <mat-icon class="material-icons">{{getFeatureName(feature.name)?.icon!}}</mat-icon>
+              }
+              {{ getFeatureName(feature.name)?.name! | translate}}
+            </div>
+          </mat-chip>
+        }
+      </div>
+    </div>
+  </div>
+</div>

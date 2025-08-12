@@ -8,9 +8,10 @@ import { HttpCallsService } from '../../services/httpCalls.service'
 import { Subscription } from 'rxjs'
 
 @Component({
-  selector: 'app-sidenav',
-  templateUrl: './sidenav.component.html',
-  styleUrl: './sidenav.component.scss'
+    selector: 'app-sidenav',
+    templateUrl: './sidenav.component.html',
+    styleUrl: './sidenav.component.scss',
+    standalone: false
 })
 export class SidenavComponent implements OnInit, OnDestroy {
   @ViewChild('drawer') public drawer!: MatDrawer

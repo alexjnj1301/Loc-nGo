@@ -1,0 +1,84 @@
+  @if (isAddModeOrIsUpdateMode) {
+  <h2 mat-dialog-title>{{'myLieux.dialog.add.titleAdd' | translate}}</h2>
+} @else {
+  <h2 mat-dialog-title>{{'myLieux.dialog.add.titleUpdate' | translate}}</h2>
+}
+<mat-dialog-content>
+  <mat-stepper [linear]="isAddModeOrIsUpdateMode" #stepper>
+    <mat-step [stepControl]="lieuForm" label="{{'myLieux.dialog.add.stepFirstTitle' | translate}}" matTooltip="caca">
+      <form [formGroup]="lieuForm">
+        <div class="custom-input-container">
+          <div>
+            <label [ngClass]="lieuForm.get('name')?.valid ? 'label-active' : 'label-inactive'" for="name">{{'myLieux.dialog.add.placeholder.name' | translate}}</label>
+            <input id="name" type="text" formControlName="name" [value]="lieu?.name" placeholder="{{'myLieux.dialog.add.placeholder.name' | translate}}" class="custom-input">
+          </div>
+          <div>
+            <label [ngClass]="lieuForm.get('address')?.valid ? 'label-active' : 'label-inactive'" for="address">{{'myLieux.dialog.add.placeholder.address' | translate}}</label>
+            <input id="address" type="text" formControlName="address" [value]="lieu?.address" placeholder="{{'myLieux.dialog.add.placeholder.address' | translate}}" class="custom-input">
+          </div>
+          <div>
+            <label [ngClass]="lieuForm.get('city')?.valid ? 'label-active' : 'label-inactive'" for="city">{{'myLieux.dialog.add.placeholder.city' | translate}}</label>
+            <input id="city" type="text" formControlName="city" [value]="lieu?.city" placeholder="{{'myLieux.dialog.add.placeholder.city' | translate}}" class="custom-input">
+          </div>
+          <div>
+            <label [ngClass]="lieuForm.get('postal_code')?.valid ? 'label-active' : 'label-inactive'" for="postal_code">{{'myLieux.dialog.add.placeholder.postal_code' | translate}}</label>
+            <input id="postal_code" type="text" formControlName="postal_code" [value]="lieu?.postal_code" placeholder="{{'myLieux.dialog.add.placeholder.postal_code' | translate}}" class="custom-input">
+          </div>
+          <div>
+            <label [ngClass]="lieuForm.get('description')?.valid ? 'label-active' : 'label-inactive'" for="description">{{'myLieux.dialog.add.placeholder.description' | translate}}</label>
+            <textarea id="description" formControlName="description" [value]="lieu?.description" placeholder="{{'myLieux.dialog.add.placeholder.description' | translate}}" class="custom-input"></textarea>
+          </div>
+          <div>
+            <label [ngClass]="lieuForm.get('price')?.valid ? 'label-active' : 'label-inactive'" for="price">{{'myLieux.dialog.add.placeholder.price' | translate}}</label>
+            <input id="price" type="number" formControlName="price" [value]="lieu?.price" placeholder="{{'myLieux.dialog.add.placeholder.price' | translate}}" class="custom-input">
+          </div>
+<!--          <div>-->
+<!--            <label [ngClass]="lieuForm.get('favorite_picture')?.valid ? 'label-active' : 'label-inactive'" for="favorite_picture">{{'myLieux.dialog.add.placeholder.favorite_picture' | translate}}</label>-->
+<!--            <input id="favorite_picture" type="text" formControlName="favorite_picture" [value]="lieu?.favorite_picture" placeholder="{{'myLieux.dialog.add.placeholder.favorite_picture' | translate}}" class="custom-input">-->
+<!--          </div>-->
+        </div>
+        <mat-dialog-actions align="end">
+          <button mat-button [mat-dialog-close]="false">{{ 'myLieux.dialog.add.actions.cancel' | translate }}</button>
+          @if (isAddModeOrIsUpdateMode) {
+            <button mat-button matStepperNext [disabled]="lieuForm.invalid" (click)="addLieu()">{{ 'myLieux.dialog.add.actions.next' | translate }}</button>
+          } @else {
+            <button mat-button matStepperNext (click)="updateLieu()">{{ 'myLieux.dialog.add.actions.next' | translate }}</button>
+          }
+        </mat-dialog-actions>
+      </form>
+    </mat-step>
+    <mat-step label="{{'myLieux.dialog.add.stepSecondTitle' | translate}}">
+      <div class="services-dialog-container">
+        @for (service of services; track service.id) {
+          <mat-checkbox (change)="manageService(service.id)" [checked]="hasToBeChecked(service.id)" [value]="String(service.id)">{{getFeatureName(service.name)?.name! | translate}}</mat-checkbox>
+        }
+      </div>
+      <mat-dialog-actions align="end">
+        <button mat-button [mat-dialog-close]="false">{{ 'myLieux.dialog.add.actions.cancel' | translate }}</button>
+        <button mat-button matStepperPrevious>{{ 'myLieux.dialog.add.actions.previous' | translate }}</button>
+        <button mat-button matStepperNext (click)="addServices()">{{ 'myLieux.dialog.add.actions.confirm' | translate }}</button>
+      </mat-dialog-actions>
+    </mat-step>
+    <mat-step label="{{'myLieux.dialog.add.stepThirdTitle' | translate}}">
+      <div class="pictures-dialog-container">
+        <div>
+          <input type="file" (change)="onFileSelected($event)" multiple>
+        </div>
+      </div>
+      <mat-dialog-actions align="end">
+        <button mat-button [mat-dialog-close]="false">{{ 'myLieux.dialog.add.actions.cancel' | translate }}</button>
+        <button mat-button matStepperPrevious>{{ 'myLieux.dialog.add.actions.previous' | translate }}</button>
+        <button mat-button matStepperNext [disabled]="!file" (click)="openConfirmDialog()">{{ 'myLieux.dialog.add.actions.confirm' | translate }}</button>
+      </mat-dialog-actions>
+    </mat-step>
+    <mat-step label="setFavorite">
+      <div class="image-container">
+
+        @for (image of lieu?.images; track image.id) {
+          <img [src]="image.imageUrl" alt="Lieu Image" class="lieu-image" (click)="setFavoriteImage(image.imageUrl, image.id)">
+        }
+      </div>
+<!--      <button mat-button (click)="getImagesOfLieu()">vsy</button>-->
+    </mat-step>
+  </mat-stepper>
+</mat-dialog-content>

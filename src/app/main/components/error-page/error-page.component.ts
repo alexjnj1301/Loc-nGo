@@ -5,9 +5,10 @@ import { MultipleTransLoaderHttp } from 'src/app/MultipleTransLoaderHttp';
 import { ErrorDetails } from '../../../enums/errorsPages';
 
 @Component({
-  selector: 'app-error-page',
-  templateUrl: './error-page.component.html',
-  styleUrls: ['./error-page.component.scss']
+    selector: 'app-error-page',
+    templateUrl: './error-page.component.html',
+    styleUrls: ['./error-page.component.scss'],
+    standalone: false
 })
 export class ErrorPageComponent implements OnInit {
   public code: string = ''

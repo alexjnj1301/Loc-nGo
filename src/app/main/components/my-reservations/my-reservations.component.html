@@ -1,0 +1,39 @@
+<app-title-picture title="{{'myReservations.title' | translate }}"></app-title-picture>
+
+<div class="description-texts-container">
+  <p class="description-text">{{'myReservations.description' | translate }}</p>
+  <p class="description-text">{{'myReservations.descriptionV2' | translate }}</p>
+</div>
+
+<div class="title-container">
+  <h2>{{'myReservations.accommodations' | translate }}</h2>
+</div>
+<div class="my-reservations-container">
+  @for (lieu of lieuxList; track lieu) {
+    @if (lieu.favorite_picture) {
+      <div class="lieu-title">
+        <div class="img-container">
+          <img src="{{lieu.favorite_picture}}" alt="" class="lieu-image">
+        </div>
+        <h1> - {{lieu.name}}</h1>
+      </div>
+    } @else {
+      <div class="lieu-title">
+        <h1>{{lieu.name}}</h1>
+      </div>
+    }
+    <div class="reservations-container">
+      @if (noReservationWithLieu(lieu.id)) {
+        <p class="no-reservation">{{'myReservations.noReservations' | translate}}</p>
+      } @else {
+        @for (reservation of reservationsList; track reservation) {
+          @if (reservation.lieu.id === lieu.id) {
+            <app-reservation-card [reservation]="reservation"
+                                  (click)="openDialog(reservation.id, '0ms', '0ms')"
+            />
+          }
+        }
+      }
+    </div>
+  }
+</div>

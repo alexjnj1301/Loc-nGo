@@ -25,6 +25,9 @@ export class MultipleTransLoaderHttp implements TranslateLoader {
       this.http.get(`./assets/i18n/homePage/${this.currentLang}.json`),
       this.http.get(`./assets/i18n/authentication/login/${this.currentLang}.json`),
       this.http.get(`./assets/i18n/sidenav/${this.currentLang}.json`),
+      this.http.get(`./assets/i18n/lieuDetails/${this.currentLang}.json`),
+      this.http.get(`./assets/i18n/myDemands/${this.currentLang}.json`),
+      this.http.get(`./assets/i18n/myLieux/${this.currentLang}.json`)
     ]).pipe(
       map((translations) => {
         return Object.assign({}, ...translations)

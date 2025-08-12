@@ -1,0 +1,19 @@
+<div class="reservation-card">
+  <div class="reservation-details">
+    <p class="reference"><strong>{{ 'myReservations.dates' | translate }}:</strong>
+      {{ reservation.start_date | date: 'dd/MM/yyyy' }} - {{ reservation.end_date | date: 'dd/MM/yyyy' }}</p>
+    <p class="dates">
+      {{ reservation.reference }} - {{ reservation.nb_person }} pers.
+    </p>
+  </div>
+  <div class="chips-container">
+    <mat-chip style="margin: 0 auto" [ngClass]="{
+      'accepted': reservation.status === 'CONFIRMED',
+      'pending': reservation.status === 'PENDING',
+      'canceled': reservation.status === 'CANCELED'
+      }">
+      <span>{{reservation.status}}</span>
+    </mat-chip>
+  </div>
+</div>
+
