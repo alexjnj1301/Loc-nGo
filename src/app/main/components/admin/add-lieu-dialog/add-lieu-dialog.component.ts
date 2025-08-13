@@ -2,42 +2,46 @@ import { Component, Inject, OnInit } from '@angular/core';
 import {
   MAT_DIALOG_DATA,
   MatDialog,
+  MatDialogActions, MatDialogClose,
   MatDialogConfig,
   MatDialogContent,
-  MatDialogModule,
+  MatDialogTitle,
 } from '@angular/material/dialog'
 import { HttpCallsService } from '../../../services/httpCalls.service'
 import { LieuDetailsResponse } from '../../../../models/LieuModels'
-import { TranslateModule } from '@ngx-translate/core'
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
-import { NgClass } from '@angular/common'
-import { MatButton } from '@angular/material/button'
-import { MatStep, MatStepper, MatStepperNext, MatStepperPrevious } from '@angular/material/stepper'
-import { MatCheckbox } from '@angular/material/checkbox'
 import { GetAllServices } from '../../../../models/Services'
 import { Features, featuresItem } from '../../../../models/Features'
-import { MatTooltip } from '@angular/material/tooltip'
-import { AddingLieuConfirmationComponent } from './adding-lieu-confirmation/adding-lieu-confirmation.component'
 import { SetFavoriteImageDialogComponent } from './set-favorite-image-dialog/set-favorite-image-dialog.component'
+import { AppComponent } from '../../../../app.component'
+import { TranslateModule } from '@ngx-translate/core'
+import { MatStep, MatStepper, MatStepperNext, MatStepperPrevious } from '@angular/material/stepper'
+import { NgClass, NgIf } from '@angular/common'
+import { MatButton } from '@angular/material/button'
+import { MatCheckbox } from '@angular/material/checkbox'
+import { LoaderComponent } from '../../loader/loader.component'
 
 @Component({
   selector: 'app-add-lieu-dialog',
   templateUrl: './add-lieu-dialog.component.html',
   styleUrl: './add-lieu-dialog.component.scss',
   imports: [
+    MatDialogTitle,
     MatDialogContent,
-    MatDialogModule,
     TranslateModule,
-    ReactiveFormsModule,
-    NgClass,
-    MatButton,
     MatStepper,
     MatStep,
-    MatCheckbox,
-    MatTooltip,
+    ReactiveFormsModule,
+    NgClass,
+    MatDialogActions,
+    MatButton,
+    MatDialogClose,
     MatStepperNext,
+    MatCheckbox,
     MatStepperPrevious,
+    LoaderComponent
   ],
+  standalone: true,
 })
 export class AddLieuDialogComponent implements OnInit {
   protected readonly String = String
@@ -47,8 +51,9 @@ export class AddLieuDialogComponent implements OnInit {
   public lieuForm: FormGroup
   public services: GetAllServices[] = []
   public selectedServices: number[] = []
-  public isLinear: boolean = false
   public file: File | null = null
+  public isLoading: boolean = false
+  public lieuImages: string[] = []
 
   public constructor(@Inject(MAT_DIALOG_DATA) public data: { id: number },
                      private httpService: HttpCallsService,
@@ -78,7 +83,7 @@ export class AddLieuDialogComponent implements OnInit {
 
   public ngOnInit() {
     this.getAllServices()
-    this.getImagesOfLieu()
+    // this.getImagesOfLieu()
   }
 
   public addLieu() {
@@ -110,14 +115,18 @@ export class AddLieuDialogComponent implements OnInit {
   }
 
   public getImagesOfLieu() {
+    this.isLoading = true
     if (this.lieu) {
       this.httpService.getImagesOfLieu(this.lieu.id).subscribe({
-        next: (response) => {
+        next: (response: {imagesUrl: string[], lieuId: number}) => {
           console.log('Images fetched successfully:', response)
-          this.lieu!.images = response
+          // for each url of imagesUrl, add it to the lieu.images array
+          this.lieuImages = response.imagesUrl
+          this.isLoading = false
         },
         error: (error) => {
           console.error('Error fetching images:', error)
+          this.isLoading = false
         }
       })
     }
@@ -151,14 +160,18 @@ export class AddLieuDialogComponent implements OnInit {
   }
 
   public openConfirmDialog() {
+    this.isLoading = true
     this.httpService.addImageToLieu(this.file!, this.lieu?.id!).subscribe({
       next: (response) => {
         console.log('Image added successfully:', response)
-        window.location.reload()
+        this.isLoading = false
+        this.getImagesOfLieu()
+        // window.location.reload()
       },
       error: (error) => {
         console.error('Error adding image:', error)
-        window.location.reload()
+        this.isLoading = false
+        // window.location.reload()
       }
     })
   }
