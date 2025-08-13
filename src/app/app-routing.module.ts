@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'error/:errorKey', component: ErrorPageComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'login', component: LoginComponent },
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'register', component: RegisterComponent },
   { path: 'lieu-details/:id', component: LieuDetailsComponent },
   { path: 'my-demands', component: MyReservationsComponent, canActivate: [ProprietorGuard] },

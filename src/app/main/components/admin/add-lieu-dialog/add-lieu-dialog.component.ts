@@ -8,7 +8,7 @@ import {
   MatDialogTitle,
 } from '@angular/material/dialog'
 import { HttpCallsService } from '../../../services/httpCalls.service'
-import { LieuDetailsResponse } from '../../../../models/LieuModels'
+import { getImagesOfLieuResponse, LieuDetailsResponse } from '../../../../models/LieuModels'
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { GetAllServices } from '../../../../models/Services'
 import { Features, featuresItem } from '../../../../models/Features'
@@ -53,7 +53,7 @@ export class AddLieuDialogComponent implements OnInit {
   public selectedServices: number[] = []
   public file: File | null = null
   public isLoading: boolean = false
-  public lieuImages: string[] = []
+  public lieuImages: getImagesOfLieuResponse[] = []
 
   public constructor(@Inject(MAT_DIALOG_DATA) public data: { id: number },
                      private httpService: HttpCallsService,
@@ -118,10 +118,9 @@ export class AddLieuDialogComponent implements OnInit {
     this.isLoading = true
     if (this.lieu) {
       this.httpService.getImagesOfLieu(this.lieu.id).subscribe({
-        next: (response: {imagesUrl: string[], lieuId: number}) => {
+        next: (response: getImagesOfLieuResponse[]) => {
           console.log('Images fetched successfully:', response)
-          // for each url of imagesUrl, add it to the lieu.images array
-          this.lieuImages = response.imagesUrl
+          this.lieuImages = response
           this.isLoading = false
         },
         error: (error) => {
@@ -166,6 +165,11 @@ export class AddLieuDialogComponent implements OnInit {
         console.log('Image added successfully:', response)
         this.isLoading = false
         this.getImagesOfLieu()
+        // reset the file input
+        const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement
+        if (fileInput) {
+          fileInput.value = ''
+        }
         // window.location.reload()
       },
       error: (error) => {

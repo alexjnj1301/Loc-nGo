@@ -73,7 +73,7 @@
     </mat-step>
     <mat-step label="setFavorite">
       <div class="image-container">
-        @for (image of lieu?.images; track image.id) {
+        @for (image of lieuImages; track image.id) {
           <img [src]="image.imageUrl" alt="Lieu Image" class="lieu-image" (click)="setFavoriteImage(image.imageUrl, image.id)">
         }
       </div>
