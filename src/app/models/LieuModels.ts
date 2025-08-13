@@ -48,3 +48,9 @@ export interface AddLieuRequest {
   price: number
   favorite_picture: string
 }
+
+export interface getImagesOfLieuResponse {
+  id: number
+  imageUrl: string
+  lieuId: number
+}

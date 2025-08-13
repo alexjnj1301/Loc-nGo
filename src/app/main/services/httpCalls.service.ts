@@ -5,7 +5,7 @@ import { UpdateBookRequest } from 'src/app/enums/admin'
 import { BookRequest } from 'src/app/models/ContactInformations'
 import { environment } from '../../../environments/environment'
 import { AllReservationsByUserId, Reservation } from '../../models/ReservationPerUser'
-import { AddLieuRequest, AllLieuResponse, LieuDetailsResponse } from '../../models/LieuModels'
+import { AddLieuRequest, AllLieuResponse, getImagesOfLieuResponse, LieuDetailsResponse } from '../../models/LieuModels'
 import { GetAllServices } from '../../models/Services'
 
 @Injectable({
@@ -79,8 +79,8 @@ export class HttpCallsService {
     return this.http.post<any>(`${this.baseUrl}/images/lieu/s3/${lieuId}`, formData)
   }
 
-  public getImagesOfLieu(lieuId: number): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/images/lieu/${lieuId}`)
+  public getImagesOfLieu(lieuId: number): Observable<getImagesOfLieuResponse[]> {
+    return this.http.get<getImagesOfLieuResponse[]>(`${this.baseUrl}/images/lieu/${lieuId}`)
   }
 
   public setImageAsFavorite(lieuId: number, imageId: number): Observable<string> {
