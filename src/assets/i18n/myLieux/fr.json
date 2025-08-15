@@ -35,7 +35,9 @@
           "update": "Mettre à jour",
           "cancel": "Fermer",
           "next": "Suivant",
-          "previous": "Précédent"
+          "previous": "Précédent",
+          "setFavorite": "Définir comme favori",
+          "reload": "Recharger les images"
         },
         "stepFirstTitle": "Informations générales",
         "stepSecondTitle": "Services et commodités",
