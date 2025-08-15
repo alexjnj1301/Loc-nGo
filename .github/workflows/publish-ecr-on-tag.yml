@@ -7,7 +7,7 @@ on:
 
 permissions:
   contents: read
-  id-token: write   # utile si tu passes à OIDC
+  environment: prod
 
 concurrency:
   group: publish-ecr-${{ github.ref }}
