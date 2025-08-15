@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core'
+import { Injectable, inject } from '@angular/core'
 import { environment } from '../../../environments/environment'
 import { HttpClient } from '@angular/common/http'
 import { BehaviorSubject, Observable, tap } from 'rxjs'
@@ -13,11 +13,13 @@ import { RegisterRequest, RegisterResponse } from '../../models/RegisterModels'
   providedIn: 'root'
 })
 export class AuthenticationService {
+  private constants = inject(Constants);
+  private httpClient = inject(HttpClient);
+
   private baseUrl: string = environment.apiUrl + '/auth'
   private currentUserSubject: BehaviorSubject<CurrentUser | null>
 
-  constructor(private constants: Constants,
-              private httpClient: HttpClient) {
+  constructor() {
     const savedUser = localStorage.getItem(this.constants.CURRENT_USER_KEY)
     this.currentUserSubject = new BehaviorSubject<CurrentUser | null>(
       savedUser ? JSON.parse(savedUser) : null

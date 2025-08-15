@@ -1,27 +1,30 @@
-import { Component, Input, OnInit } from '@angular/core'
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { Component, inject, OnInit } from '@angular/core'
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms'
 import { MultipleTransLoaderHttp } from '../../../../MultipleTransLoaderHttp'
 import { AuthenticationService } from '../../../services/authentication.service'
 import { AppComponent } from '../../../../app.component'
 import { Constants } from '../../../Constants'
-import { Router } from '@angular/router'
+import { Router, RouterLink } from '@angular/router'
+import { NgClass, NgOptimizedImage } from '@angular/common';
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrl: '../authentication.styles.scss',
-    standalone: false
+    imports: [ReactiveFormsModule, NgClass, NgOptimizedImage, RouterLink]
 })
 export class LoginComponent implements OnInit {
+  private formBuilder = inject(FormBuilder);
+  private translateService = inject(MultipleTransLoaderHttp);
+  private authenticationService = inject(AuthenticationService);
+  private appComponent = inject(AppComponent);
+  private constants = inject(Constants);
+  private router = inject(Router);
+
   public loginForm: FormGroup
   translateValues: any = {}
 
-  constructor(private formBuilder: FormBuilder,
-              private translateService: MultipleTransLoaderHttp,
-              private authenticationService: AuthenticationService,
-              private appComponent: AppComponent,
-              private constants: Constants,
-              private router: Router) {
+  constructor() {
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required]

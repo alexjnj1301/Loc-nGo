@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MultipleTransLoaderHttp } from 'src/app/MultipleTransLoaderHttp';
 
@@ -7,20 +7,17 @@ import { ErrorDetails } from '../../../enums/errorsPages';
 @Component({
     selector: 'app-error-page',
     templateUrl: './error-page.component.html',
-    styleUrls: ['./error-page.component.scss'],
-    standalone: false
+    styleUrls: ['./error-page.component.scss']
 })
 export class ErrorPageComponent implements OnInit {
-  public code: string = ''
-  public message: string = ''
-  public description: string = ''
+  private route = inject(ActivatedRoute);
+  private translateService = inject(MultipleTransLoaderHttp);
+
+  public code = ''
+  public message = ''
+  public description = ''
 
   translateValues: any = {}
-
-  constructor(
-    private route: ActivatedRoute,
-    private translateService: MultipleTransLoaderHttp
-  ) {}
 
   ngOnInit() {
     const errorKey = this.route.snapshot.paramMap.get('errorKey');

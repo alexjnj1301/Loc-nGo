@@ -1,3 +1,5 @@
-<app-loader *ngIf="isLoading"></app-loader>
+@if (isLoading) {
+  <app-loader></app-loader>
+}
 <app-nav-bar></app-nav-bar>
 <app-sidenav></app-sidenav>

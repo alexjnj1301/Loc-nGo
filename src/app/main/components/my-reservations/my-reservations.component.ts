@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { HttpCallsService } from '../../services/httpCalls.service'
 import { Reservation } from '../../../models/ReservationPerUser'
 import { AuthenticationService } from '../../services/authentication.service'
@@ -6,7 +6,6 @@ import { AllLieuResponse } from '../../../models/LieuModels'
 import { TitlePictureComponent } from '../title-picture/title-picture.component'
 import { TranslateModule } from '@ngx-translate/core'
 import { ReservationCardComponent } from './reservation-card/reservation-card.component'
-import { BookResponse } from '../../../models/ContactInformations'
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog'
 import { DialogComponent } from '../admin/dialog/dialog.component'
 
@@ -21,13 +20,12 @@ import { DialogComponent } from '../admin/dialog/dialog.component'
   styleUrl: './my-reservations.component.scss'
 })
 export class MyReservationsComponent implements OnInit {
+  httpCallService = inject(HttpCallsService);
+  authService = inject(AuthenticationService);
+  dialog = inject(MatDialog);
+
   public reservationsList: Reservation[] = []
   public lieuxList: AllLieuResponse[] = []
-
-  public constructor(public httpCallService: HttpCallsService,
-                     public authService: AuthenticationService,
-                     public dialog: MatDialog) {
-  }
 
   public ngOnInit() {
     this.getMyLieux();

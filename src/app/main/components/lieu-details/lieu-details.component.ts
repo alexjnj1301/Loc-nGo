@@ -7,9 +7,9 @@ import { Tile } from '../../../models/Tile'
 import { Observable, tap, throwError } from 'rxjs'
 import { catchError } from 'rxjs/operators'
 import { Constants } from '../../Constants'
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
-import { DatePipe } from '@angular/common'
-import { MatDatepickerToggle } from '@angular/material/datepicker'
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms'
+import { DatePipe, NgClass } from '@angular/common'
+import { MatDatepickerToggle, MatDateRangeInput, MatStartDate, MatEndDate, MatDateRangePicker } from '@angular/material/datepicker'
 import * as moment from 'moment'
 import { MatDialog } from '@angular/material/dialog'
 import { PicturesDialogComponent } from './pictures-dialog/pictures-dialog.component'
@@ -18,39 +18,51 @@ import { AuthenticationService } from '../../services/authentication.service'
 import { BookRequest } from '../../../models/ContactInformations'
 import { Features, featuresItem } from '../../../models/Features'
 import { SidenavComponent } from '../sidenav/sidenav.component'
+import { MatGridList, MatGridTile } from '@angular/material/grid-list';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { MatFormField, MatLabel, MatError, MatHint, MatInput, MatSuffix } from '@angular/material/input';
+import { MatButton, MatIconButton } from '@angular/material/button';
+import { MatAccordion, MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle } from '@angular/material/expansion';
+import { MatIcon } from '@angular/material/icon';
+import { MatRipple } from '@angular/material/core';
+import { MatChip } from '@angular/material/chips';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-lieu-details',
     templateUrl: './lieu-details.component.html',
     styleUrl: './lieu-details.component.scss',
-    standalone: false
+    imports: [MatGridList, MatGridTile, NgClass, MatProgressSpinner, ReactiveFormsModule, MatFormField, MatLabel, MatDateRangeInput, MatStartDate, MatEndDate, MatError, MatDateRangePicker, MatHint, MatButton, MatAccordion, MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle, MatIcon, MatInput, MatIconButton, MatSuffix, MatRipple, MatChip, FaIconComponent, DatePipe, TranslateModule]
 })
 export class LieuDetailsComponent implements OnInit, AfterViewInit {
+  private route = inject(ActivatedRoute);
+  private datePipe = inject(DatePipe);
+  private formBuilder = inject(FormBuilder);
+  private appComponent = inject(AppComponent);
+  private httpCallsService = inject(HttpCallsService);
+  constants = inject(Constants);
+  authenticationService = inject(AuthenticationService);
+  sideNavComponent = inject(SidenavComponent);
+
   @ViewChild('picker') public picker! : MatDatepickerToggle<Date>
   @ViewChild('pictures') picturesRef!: ElementRef
   @ViewChild('reservation') reservationRef!: ElementRef
 
-  public lieuId: string = ''
+  public lieuId = ''
   public tiles: Tile[] = []
   public lieuDetails: LieuDetailsResponse | null = null
   public bookForm: FormGroup
   public startDateReset: string | null = null
-  public isImageLoaded: boolean = false
+  public isImageLoaded = false
   public minDate: Date
   public maxDate: Date
-  public dtf: string = 'dd-MM-yyyy'
+  public dtf = 'dd-MM-yyyy'
   public dialog = inject(MatDialog)
   public attendeesList: Attendee[] = []
   protected readonly featuresItem = featuresItem
 
-  constructor(private route: ActivatedRoute,
-              private datePipe: DatePipe,
-              private formBuilder: FormBuilder,
-              private appComponent: AppComponent,
-              private httpCallsService: HttpCallsService,
-              public constants: Constants,
-              public authenticationService: AuthenticationService,
-              public sideNavComponent: SidenavComponent) {
+  constructor() {
     this.bookForm = this.formBuilder.group({
       startDate: (new FormControl<Date | null>(null), Validators.required),
       endDate: (new FormControl<Date | null>(null), Validators.required),
@@ -131,7 +143,7 @@ export class LieuDetailsComponent implements OnInit, AfterViewInit {
     }
 
     this.httpCallsService.postBookRequest(request).subscribe({
-      next: (response) => {
+      next: () => {
         this.bookForm.reset()
         this.startDateReset = null
         this.sideNavComponent.getReservations()
@@ -155,8 +167,8 @@ export class LieuDetailsComponent implements OnInit, AfterViewInit {
   }
 
   public onEndDateChange() {
-    let start = this.datePipe.transform(this.startDate, this.dtf)
-    let end = this.datePipe.transform(this.endDate, this.dtf)
+    const start = this.datePipe.transform(this.startDate, this.dtf)
+    const end = this.datePipe.transform(this.endDate, this.dtf)
     if (end === start) {
       this.bookForm.reset()
     }

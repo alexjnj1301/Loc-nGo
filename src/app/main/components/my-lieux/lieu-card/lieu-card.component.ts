@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { AllLieuResponse } from '../../../../models/LieuModels'
 import { MatCard, MatCardContent } from '@angular/material/card'
 import { Constants } from '../../../Constants'
@@ -27,10 +27,10 @@ import { AddLieuDialogComponent } from '../../admin/add-lieu-dialog/add-lieu-dia
   standalone: true
 })
 export class LieuCardComponent {
+  constants = inject(Constants);
+  dialog = inject(MatDialog);
+
   @Input() lieu!: AllLieuResponse
-  public constructor(public constants: Constants,
-                     public dialog: MatDialog) {
-  }
 
   public openDeletionDialog(lieuId: number): void {
     const dialogConfig = new MatDialogConfig();

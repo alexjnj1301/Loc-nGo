@@ -1,8 +1,9 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import {
   MAT_DIALOG_DATA,
   MatDialog,
-  MatDialogActions, MatDialogClose,
+  MatDialogActions,
+  MatDialogClose,
   MatDialogConfig,
   MatDialogContent,
   MatDialogTitle,
@@ -13,10 +14,9 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { GetAllServices } from '../../../../models/Services'
 import { Features, featuresItem } from '../../../../models/Features'
 import { SetFavoriteImageDialogComponent } from './set-favorite-image-dialog/set-favorite-image-dialog.component'
-import { AppComponent } from '../../../../app.component'
 import { TranslateModule } from '@ngx-translate/core'
 import { MatStep, MatStepper, MatStepperNext, MatStepperPrevious } from '@angular/material/stepper'
-import { NgClass, NgIf } from '@angular/common'
+import { NgClass } from '@angular/common'
 import { MatButton } from '@angular/material/button'
 import { MatCheckbox } from '@angular/material/checkbox'
 import { LoaderComponent } from '../../loader/loader.component'
@@ -44,21 +44,27 @@ import { LoaderComponent } from '../../loader/loader.component'
   standalone: true,
 })
 export class AddLieuDialogComponent implements OnInit {
+  data = inject<{
+    id: number;
+}>(MAT_DIALOG_DATA);
+  private httpService = inject(HttpCallsService);
+  private fb = inject(FormBuilder);
+  dialog = inject(MatDialog);
+
   protected readonly String = String
   protected readonly featuresItem = featuresItem
   public lieu: LieuDetailsResponse | undefined
-  public isAddModeOrIsUpdateMode: boolean = true
+  public isAddModeOrIsUpdateMode = true
   public lieuForm: FormGroup
   public services: GetAllServices[] = []
   public selectedServices: number[] = []
   public file: File | null = null
-  public isLoading: boolean = false
+  public isLoading = false
   public lieuImages: getImagesOfLieuResponse[] = []
 
-  public constructor(@Inject(MAT_DIALOG_DATA) public data: { id: number },
-                     private httpService: HttpCallsService,
-                     private fb: FormBuilder,
-                     public dialog: MatDialog) {
+  public constructor() {
+    const data = this.data;
+
     if (data) {
       this.isAddModeOrIsUpdateMode = false
       this.httpService.getLieuById(data.id.toString()).subscribe({
@@ -154,7 +160,7 @@ export class AddLieuDialogComponent implements OnInit {
     }
   }
 
-  public hasToBeChecked(id: number): boolean {
+  public hasToBeChecked(): boolean {
     return false
   }
 

@@ -1,16 +1,22 @@
-import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose } from '@angular/material/dialog';
 import { HttpCallsService } from 'src/app/main/services/httpCalls.service';
+import { CdkScrollable } from '@angular/cdk/scrolling';
+import { MatButton } from '@angular/material/button';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-valid-deletion-dialog',
     templateUrl: './valid-deletion-dialog.component.html',
     styleUrl: './valid-deletion-dialog.component.scss',
-    standalone: false
+    imports: [MatDialogTitle, CdkScrollable, MatDialogContent, MatDialogActions, MatButton, MatDialogClose, TranslateModule]
 })
 export class ValidDeletionDialogComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { id: number },
-  private httpService: HttpCallsService) { }
+  data = inject<{
+    id: number;
+}>(MAT_DIALOG_DATA);
+  private httpService = inject(HttpCallsService);
+
 
   public delete() {
     this.httpService.deleteLieuById(this.data.id).subscribe({

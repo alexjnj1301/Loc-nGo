@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogActions, MatDialogClose, MatDialogContent } from '@angular/material/dialog'
 import { HttpCallsService } from '../../../../services/httpCalls.service'
 import { TranslateModule } from '@ngx-translate/core'
@@ -17,9 +17,13 @@ import { MatButton } from '@angular/material/button'
   styleUrl: './set-favorite-image-dialog.component.scss'
 })
 export class SetFavoriteImageDialogComponent {
-  public constructor(@Inject(MAT_DIALOG_DATA) public data: { imageUrl: string, lieuId: number, imageId: number },
-                     public httpService: HttpCallsService) {
-  }
+  data = inject<{
+    imageUrl: string;
+    lieuId: number;
+    imageId: number;
+}>(MAT_DIALOG_DATA);
+  httpService = inject(HttpCallsService);
+
 
   public setFavoriteImage(imageId: number) {
     console.log(imageId)

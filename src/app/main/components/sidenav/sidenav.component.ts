@@ -1,28 +1,33 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
-import { MatDrawer } from '@angular/material/sidenav'
+import { Component, inject, OnDestroy, OnInit, ViewChild } from '@angular/core'
+import { MatDrawer, MatDrawerContainer } from '@angular/material/sidenav'
 import { SidenavService } from '../../services/sidenav.service'
 import { AuthenticationService } from '../../services/authentication.service'
 import { CurrentUser } from '../../../models/CurrentUser'
-import { AllReservationsByUserId, Reservation } from '../../../models/ReservationPerUser'
+import { AllReservationsByUserId } from '../../../models/ReservationPerUser'
 import { HttpCallsService } from '../../services/httpCalls.service'
 import { Subscription } from 'rxjs'
+import { MatIcon } from '@angular/material/icon';
+import { MatTooltip } from '@angular/material/tooltip';
+import { MatAccordion, MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle } from '@angular/material/expansion';
+import { ReservationCardComponent } from './reservation-card/reservation-card.component';
+import { RouterOutlet } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-sidenav',
     templateUrl: './sidenav.component.html',
     styleUrl: './sidenav.component.scss',
-    standalone: false
+    imports: [MatDrawerContainer, MatDrawer, MatIcon, MatTooltip, MatAccordion, MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle, ReservationCardComponent, RouterOutlet, TranslateModule]
 })
 export class SidenavComponent implements OnInit, OnDestroy {
+  protected sideNavService = inject(SidenavService);
+  protected authService = inject(AuthenticationService);
+  private httpCallsService = inject(HttpCallsService);
+
   @ViewChild('drawer') public drawer!: MatDrawer
   public currentUser: CurrentUser | null = null
   public reservations: AllReservationsByUserId[] = []
   private authSubscription!: Subscription
-
-  constructor(protected sideNavService: SidenavService,
-              protected authService: AuthenticationService,
-              private httpCallsService: HttpCallsService) {
-  }
 
   public ngOnInit(): void {
     this.sideNavService.toggleSidenav$.subscribe(() => {

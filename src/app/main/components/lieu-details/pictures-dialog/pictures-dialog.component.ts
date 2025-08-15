@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogContent, MatDialogModule, MatDialogTitle } from '@angular/material/dialog'
 import { ImageDialogData } from '../../../../models/LieuModels'
 import { TranslateModule } from '@ngx-translate/core'
@@ -15,9 +15,13 @@ import { TranslateModule } from '@ngx-translate/core'
     styleUrl: './pictures-dialog.component.scss'
 })
 export class PicturesDialogComponent {
+  data = inject<ImageDialogData>(MAT_DIALOG_DATA);
+
   public images: ImageDialogData
   public imgUrl: string
-  public constructor(@Inject(MAT_DIALOG_DATA) public data: ImageDialogData) {
+  public constructor() {
+    const data = this.data;
+
     this.images = data
     this.imgUrl = this.getImageToDisplayViaUrl(data.url)
   }

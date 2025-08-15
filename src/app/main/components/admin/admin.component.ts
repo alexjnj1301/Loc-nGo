@@ -1,24 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { BookResponse } from 'src/app/models/ContactInformations';
 import { MultipleTransLoaderHttp } from 'src/app/MultipleTransLoaderHttp';
 import { HttpCallsService } from '../../services/httpCalls.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DialogComponent } from './dialog/dialog.component';
 import { ValidDeletionDialogComponent } from './valid-deletion-dialog/valid-deletion-dialog.component';
+import { TitlePictureComponent } from '../title-picture/title-picture.component';
+import { NgFor, NgClass, DatePipe } from '@angular/common';
+import { MatCard, MatCardHeader, MatCardTitle, MatCardSubtitle, MatCardContent, MatCardActions } from '@angular/material/card';
+import { MatChipSet, MatChip } from '@angular/material/chips';
+import { MatButton } from '@angular/material/button';
 
 @Component({
     selector: 'app-admin',
     templateUrl: './admin.component.html',
     styleUrl: './admin.component.scss',
-    standalone: false
+    imports: [TitlePictureComponent, NgFor, MatCard, MatCardHeader, MatCardTitle, MatCardSubtitle, MatCardContent, MatChipSet, MatChip, NgClass, MatCardActions, MatButton, DatePipe]
 })
 export class AdminComponent implements OnInit {
+  private httpService = inject(HttpCallsService);
+  private translateValues = inject(MultipleTransLoaderHttp);
+  dialog = inject(MatDialog);
+
   public reservationList: BookResponse[] = []
   public homePageTranslateValues: any = {}
-
-  constructor(private httpService: HttpCallsService,
-    private translateValues: MultipleTransLoaderHttp,
-    public dialog: MatDialog) { }
 
   public ngOnInit(): void {
     this.translateValues.getTranslation().subscribe((result) => {

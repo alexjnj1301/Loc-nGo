@@ -1,22 +1,14 @@
-import { Injectable } from '@angular/core'
-import {
-  ActivatedRouteSnapshot,
-  CanActivate,
-  GuardResult,
-  MaybeAsync,
-  Router,
-  RouterStateSnapshot,
-} from '@angular/router'
+import { inject, Injectable } from '@angular/core'
+import { CanActivate, Router } from '@angular/router'
 import { AuthenticationService } from './authentication.service'
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProprietorGuard implements CanActivate {
-  constructor(
-    private authService: AuthenticationService,
-    private router: Router
-  ) {}
+  private authService = inject(AuthenticationService);
+  private router = inject(Router);
+
 
   public canActivate(): boolean {
     if(this.authService.isProprietor() && this.authService.isAuthenticated()) {

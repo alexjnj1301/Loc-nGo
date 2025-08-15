@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core'
-import { Features } from '../models/Features'
 
 @Injectable({
   providedIn: 'root',

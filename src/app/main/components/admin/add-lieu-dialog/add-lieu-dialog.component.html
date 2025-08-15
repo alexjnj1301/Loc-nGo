@@ -50,7 +50,7 @@
     <mat-step label="{{'myLieux.dialog.add.stepSecondTitle' | translate}}">
       <div class="services-dialog-container">
         @for (service of services; track service.id) {
-          <mat-checkbox (change)="manageService(service.id)" [checked]="hasToBeChecked(service.id)" [value]="String(service.id)">{{getFeatureName(service.name)?.name! | translate}}</mat-checkbox>
+          <mat-checkbox (change)="manageService(service.id)" [checked]="hasToBeChecked()" [value]="String(service.id)">{{getFeatureName(service.name)?.name! | translate}}</mat-checkbox>
         }
       </div>
       <mat-dialog-actions align="end">

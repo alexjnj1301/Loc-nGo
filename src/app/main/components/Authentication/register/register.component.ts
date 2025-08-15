@@ -1,28 +1,34 @@
-import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms'
+import { Component, OnInit, inject } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators, ReactiveFormsModule } from '@angular/forms'
 import { MultipleTransLoaderHttp } from '../../../../MultipleTransLoaderHttp'
 import { AppComponent } from '../../../../app.component'
 import { AuthenticationService } from '../../../services/authentication.service'
 import { Constants } from '../../../Constants'
-import { Router } from '@angular/router'
+import { Router, RouterLink } from '@angular/router'
+import { MatButton } from '@angular/material/button';
+import { NgStyle, NgClass, NgOptimizedImage } from '@angular/common';
+import { MatIcon } from '@angular/material/icon';
+import { MatTabGroup, MatTab } from '@angular/material/tabs';
 
 @Component({
     selector: 'app-register',
     templateUrl: './register.component.html',
     styleUrl: '../authentication.styles.scss',
-    standalone: false
+    imports: [ReactiveFormsModule, MatButton, NgStyle, MatIcon, MatTabGroup, MatTab, NgClass, NgOptimizedImage, RouterLink]
 })
 export class RegisterComponent implements OnInit {
+  private formBuilder = inject(FormBuilder);
+  private translateService = inject(MultipleTransLoaderHttp);
+  private authenticationService = inject(AuthenticationService);
+  private constants = inject(Constants);
+  private appComponent = inject(AppComponent);
+  private router = inject(Router);
+
   public registerForm: FormGroup;
   public translateValues: any = {};
-  public selectedTab: number = 0;
+  public selectedTab = 0;
 
-  constructor(private formBuilder: FormBuilder,
-              private translateService: MultipleTransLoaderHttp,
-              private authenticationService: AuthenticationService,
-              private constants: Constants,
-              private appComponent: AppComponent,
-              private router: Router) {
+  constructor() {
     this.registerForm = this.formBuilder.group(
       {
         email: ['', [Validators.required]],
@@ -71,13 +77,13 @@ export class RegisterComponent implements OnInit {
   }
 
   public isFirstPartValid(): boolean {
-    return <boolean>this.registerForm.get('firstname')?.valid &&
-      <boolean>this.registerForm.get('lastname')?.valid
+    return this.registerForm.get('firstname')?.valid as boolean &&
+      this.registerForm.get('lastname')?.valid as boolean
   }
 
   public isSecondPartValid(): boolean {
-    return <boolean>this.registerForm.get('email')?.valid &&
-      <boolean>this.registerForm.get('phone')?.valid &&
+    return this.registerForm.get('email')?.valid as boolean &&
+      this.registerForm.get('phone')?.valid as boolean &&
       this.isFirstPartValid()
   }
 
