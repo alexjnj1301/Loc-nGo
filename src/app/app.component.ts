@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, inject } from '@angular/core'
 import { MultipleTransLoaderHttp } from './MultipleTransLoaderHttp'
 import { TranslateService } from '@ngx-translate/core'
 
@@ -9,13 +9,14 @@ import { TranslateService } from '@ngx-translate/core'
     standalone: false
 })
 export class AppComponent {
-  public title: string = 'Loc\'Ngo'
+  private translateService = inject(MultipleTransLoaderHttp);
+  private translate = inject(TranslateService);
+
+  public title = 'Loc\'Ngo'
   public selectedLanguage: string
-  public translateValues: any = {}
   public isLoading: boolean
 
-  constructor(private translateService: MultipleTransLoaderHttp,
-              private translate: TranslateService) {
+  constructor() {
     this.selectedLanguage = this.translateService.getLang() || 'fr'
     this.translateService.setLang(this.selectedLanguage)
     this.translate.use(this.selectedLanguage)

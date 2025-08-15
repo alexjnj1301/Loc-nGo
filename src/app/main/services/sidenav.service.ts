@@ -1,22 +1,23 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router'
 import { AuthenticationService } from './authentication.service'
 import { Constants } from '../Constants'
-import { HttpCallsService } from './httpCalls.service'
 
 @Injectable({
   providedIn: 'root',
 })
 export class SidenavService {
+  private router = inject(Router);
+  private authenticationService = inject(AuthenticationService);
+  private constants = inject(Constants);
+
   private toggleSidenavSubject = new Subject<void>()
-  private isSidenavOpen: boolean = false
+  private isSidenavOpen = false
 
   public toggleSidenav$ = this.toggleSidenavSubject.asObservable()
 
-  public constructor(private router: Router,
-                     private authenticationService: AuthenticationService,
-                     private constants: Constants) {
+  public constructor() {
     this.isSidenavOpen = this.hasToBeOpened()
   }
 

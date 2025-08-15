@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http'
-import { Injectable } from '@angular/core'
+import { Injectable, inject } from '@angular/core'
 import { Observable } from 'rxjs'
 import { UpdateBookRequest } from 'src/app/enums/admin'
 import { BookRequest } from 'src/app/models/ContactInformations'
@@ -12,8 +12,9 @@ import { GetAllServices } from '../../models/Services'
   providedIn: 'root'
 })
 export class HttpCallsService {
+  private http = inject(HttpClient);
+
   private baseUrl: string = environment.apiUrl + '/api'
-  constructor(private http: HttpClient) {}
 
   public getAllReservationsByUserId(userId: number): Observable<AllReservationsByUserId[]> {
     return this.http.get<AllReservationsByUserId[]>(`${this.baseUrl}/reservations/user/${userId}`)

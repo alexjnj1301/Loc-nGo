@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { TranslateLoader } from "@ngx-translate/core";
 import { forkJoin, Observable } from "rxjs";
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -9,12 +9,10 @@ import { map } from 'rxjs/operators';
 })
 
 export class MultipleTransLoaderHttp implements TranslateLoader {
-  private defaultLang: string = "fr"
-  private currentLang: string = this.getLang()
+  private http = inject(HttpClient);
 
-  constructor(
-    private http: HttpClient,
-  ) {}
+  private defaultLang = "fr"
+  private currentLang: string = this.getLang()
 
   getTranslation(): Observable<any> {
     this.currentLang = this.getLang()

@@ -51,70 +51,66 @@ import { TitlePictureComponent } from './main/components/title-picture/title-pic
 import { MatStep, MatStepper, MatStepperNext, MatStepperPrevious } from '@angular/material/stepper'
 import { MatCheckbox } from '@angular/material/checkbox'
 
-export function createTranslateLoader(http: HttpClient) {
-  return new MultipleTransLoaderHttp(http)
+export function createTranslateLoader() {
+  return new MultipleTransLoaderHttp()
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomePageComponent,
-    ErrorPageComponent,
-    NavBarComponent,
-    AdminComponent,
-    DialogComponent,
-    ValidDeletionDialogComponent,
-    LoginComponent,
-    RegisterComponent,
-    SidenavComponent,
-    ReservationCardComponent,
-    LieuCardComponent,
-    LieuDetailsComponent
-  ],
-  bootstrap: [AppComponent],
-  imports: [BrowserModule,
-    AppRoutingModule,
-    MatIconModule,
-    MatButtonModule,
-    MatToolbarModule,
-    MatTooltipModule,
-    MatMenuModule,
-    BrowserAnimationsModule,
-    MatCardModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatDatepickerModule,
-    MatSelectModule,
-    MatExpansionModule,
-    MatProgressBarModule,
-    MatTabsModule,
-    MatDialogModule,
-    MatProgressSpinnerModule,
-    MatChipsModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: createTranslateLoader,
-        deps: [HttpClient],
-      },
-    }),
-    LoaderComponent, NgOptimizedImage, MatDrawerContainer, MatDrawer, MatDivider, MatGridList, MatGridTile, MatTreeNodeToggle, MatRipple, FaIconComponent, TitlePictureComponent, MatStep, MatStepperNext, MatStepperPrevious, MatCheckbox, MatStepper],
-  exports: [
-    LieuCardComponent,
-  ],
-
-  providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
-    provideNativeDateAdapter(),
-    DatePipe,
-    provideAnimationsAsync(),
-    {
-      provide: MAT_DATE_LOCALE,
-      useFactory: () => localStorage.getItem('lang') || 'fr',
-    },
-    provideHttpClient(withInterceptorsFromDi()),
-  ],
+    declarations: [AppComponent],
+    bootstrap: [AppComponent],
+    imports: [BrowserModule,
+        AppRoutingModule,
+        MatIconModule,
+        MatButtonModule,
+        MatToolbarModule,
+        MatTooltipModule,
+        MatMenuModule,
+        BrowserAnimationsModule,
+        MatCardModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatDatepickerModule,
+        MatSelectModule,
+        MatExpansionModule,
+        MatProgressBarModule,
+        MatTabsModule,
+        MatDialogModule,
+        MatProgressSpinnerModule,
+        MatChipsModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: createTranslateLoader,
+                deps: [HttpClient],
+            },
+        }),
+        LoaderComponent, NgOptimizedImage, MatDrawerContainer, MatDrawer, MatDivider, MatGridList, MatGridTile, MatTreeNodeToggle, MatRipple, FaIconComponent, TitlePictureComponent, MatStep, MatStepperNext, MatStepperPrevious, MatCheckbox, MatStepper, HomePageComponent,
+        ErrorPageComponent,
+        NavBarComponent,
+        AdminComponent,
+        DialogComponent,
+        ValidDeletionDialogComponent,
+        LoginComponent,
+        RegisterComponent,
+        SidenavComponent,
+        ReservationCardComponent,
+        LieuCardComponent,
+        LieuDetailsComponent],
+    exports: [
+        LieuCardComponent,
+    ],
+    providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+        provideNativeDateAdapter(),
+        DatePipe,
+        provideAnimationsAsync(),
+        {
+            provide: MAT_DATE_LOCALE,
+            useFactory: () => localStorage.getItem('lang') || 'fr',
+        },
+        provideHttpClient(withInterceptorsFromDi()),
+    ],
 })
 export class AppModule {}
