@@ -7,7 +7,7 @@ COPY package*.json ./
 RUN npm ci
 COPY . .
 # adapte le nom d'appli si besoin ; ici on sort dans dist/app
-RUN npm run build -- --configuration production --output-path=dist/app
+RUN npm run build:prod -- --output-path=dist/app
 
 # Étape 2 : image finale NGINX pour la plateforme cible (amd64 pour ECS)
 FROM --platform=$TARGETPLATFORM nginx:alpine
