@@ -48,6 +48,8 @@ import { MatGridList, MatGridTile } from '@angular/material/grid-list'
 import { MatTreeNodeToggle } from '@angular/material/tree'
 import { FaIconComponent } from '@fortawesome/angular-fontawesome'
 import { TitlePictureComponent } from './main/components/title-picture/title-picture.component'
+import { MatStep, MatStepper, MatStepperNext, MatStepperPrevious } from '@angular/material/stepper'
+import { MatCheckbox } from '@angular/material/checkbox'
 
 export function createTranslateLoader(http: HttpClient) {
   return new MultipleTransLoaderHttp(http)
@@ -67,7 +69,7 @@ export function createTranslateLoader(http: HttpClient) {
     SidenavComponent,
     ReservationCardComponent,
     LieuCardComponent,
-    LieuDetailsComponent,
+    LieuDetailsComponent
   ],
   bootstrap: [AppComponent],
   imports: [BrowserModule,
@@ -98,7 +100,7 @@ export function createTranslateLoader(http: HttpClient) {
         deps: [HttpClient],
       },
     }),
-    LoaderComponent, NgOptimizedImage, MatDrawerContainer, MatDrawer, MatDivider, MatGridList, MatGridTile, MatTreeNodeToggle, MatRipple, FaIconComponent, TitlePictureComponent],
+    LoaderComponent, NgOptimizedImage, MatDrawerContainer, MatDrawer, MatDivider, MatGridList, MatGridTile, MatTreeNodeToggle, MatRipple, FaIconComponent, TitlePictureComponent, MatStep, MatStepperNext, MatStepperPrevious, MatCheckbox, MatStepper],
   exports: [
     LieuCardComponent,
   ],
