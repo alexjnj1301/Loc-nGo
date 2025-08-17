@@ -4,18 +4,17 @@ import {
   HttpInterceptor,
   HttpRequest,
   HttpErrorResponse,
-} from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { Router } from '@angular/router';
+} from '@angular/common/http'
+import { Injectable, inject } from '@angular/core'
+import { Observable, throwError } from 'rxjs'
+import { catchError } from 'rxjs/operators'
+import { Router } from '@angular/router'
 import { environment } from '../../../environments/environment'
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  private router = inject(Router);
-
-
+  private router = inject(Router)
+npm
   public intercept(
     req: HttpRequest<any>,
     next: HttpHandler

@@ -52,7 +52,7 @@ export class AddLieuDialogComponent implements OnInit {
   dialog = inject(MatDialog);
 
   protected readonly String = String
-  protected readonly featuresItem = featuresItem
+  featuresItem = featuresItem
   public lieu: LieuDetailsResponse | undefined
   public isAddModeOrIsUpdateMode = true
   public lieuForm: FormGroup
@@ -176,12 +176,10 @@ export class AddLieuDialogComponent implements OnInit {
         if (fileInput) {
           fileInput.value = ''
         }
-        // window.location.reload()
       },
       error: (error) => {
         console.error('Error adding image:', error)
         this.isLoading = false
-        // window.location.reload()
       }
     })
   }

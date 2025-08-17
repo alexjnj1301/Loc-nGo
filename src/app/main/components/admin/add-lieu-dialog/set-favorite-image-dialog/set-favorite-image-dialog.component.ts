@@ -26,15 +26,18 @@ export class SetFavoriteImageDialogComponent {
 
 
   public setFavoriteImage(imageId: number) {
-    console.log(imageId)
     this.httpService.setImageAsFavorite(this.data.lieuId, imageId).subscribe({
       next: () => {
         console.log('Image set as favorite successfully')
-        window.location.reload()
+        this.reloadPage()
       },
       error: (error) => {
         console.error('Error setting image as favorite:', error)
       }
     })
+  }
+
+  public reloadPage() {
+    window.location.reload();
   }
 }

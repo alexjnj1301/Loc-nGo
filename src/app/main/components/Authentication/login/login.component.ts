@@ -8,10 +8,11 @@ import { Router, RouterLink } from '@angular/router'
 import { NgClass, NgOptimizedImage } from '@angular/common';
 
 @Component({
-    selector: 'app-login',
-    templateUrl: './login.component.html',
-    styleUrl: '../authentication.styles.scss',
-    imports: [ReactiveFormsModule, NgClass, NgOptimizedImage, RouterLink]
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrl: '../authentication.styles.scss',
+  imports: [ReactiveFormsModule, NgClass, NgOptimizedImage, RouterLink],
+  standalone: true
 })
 export class LoginComponent implements OnInit {
   private formBuilder = inject(FormBuilder);
