@@ -1,0 +1,63 @@
+name: Frontend tests
+
+on:
+  push:
+    branches:
+      - develop
+      - main
+      - master
+      - 'feature/**'
+  pull_request:
+    branches:
+      - develop
+      - main
+      - master
+
+permissions:
+  contents: read
+
+concurrency:
+  group: test-frontend-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Setup Chrome (headless)
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
+
+      - name: Run unit tests (Karma + ChromeHeadless)
+        env:
+          CI: true
+          CHROME_BIN: google-chrome
+        run: |
+          npx ng test \
+            --watch=false \
+            --browsers=ChromeHeadless \
+            --progress=false \
+            --code-coverage
+
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: coverage/
