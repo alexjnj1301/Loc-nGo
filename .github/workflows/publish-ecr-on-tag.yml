@@ -29,6 +29,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Validate tag name (SemVer)
+        run: |
+          if [[ ! "${GITHUB_REF_NAME}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "❌ Tag '${GITHUB_REF_NAME}' must match vMAJOR.MINOR.PATCH (e.g. v1.2.3)"
+            exit 1
+          fi
+
+      - name: Ensure tag points to main
+        run: |
+          git fetch --no-tags origin main
+          if ! git merge-base --is-ancestor origin/main "$GITHUB_SHA"; then
+            echo "❌ The tagged commit is not on 'main'. Create releases from main only."
+            exit 1
+          fi
+
       - name: Configure AWS credentials (Access Keys)
         uses: aws-actions/configure-aws-credentials@v4
         with:
