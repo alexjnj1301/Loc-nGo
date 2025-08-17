@@ -1,0 +1,49 @@
+name: Lint (ESLint)
+
+on:
+  pull_request:
+    branches: [develop, master, main]
+    paths:
+      - '**/*.ts'
+      - '**/*.html'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.eslintrc*'
+      - 'angular.json'
+
+  push:
+    branches: [develop, master, main]
+    paths:
+      - '**/*.ts'
+      - '**/*.html'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.eslintrc*'
+      - 'angular.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: lint-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  eslint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install deps (ci)
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
