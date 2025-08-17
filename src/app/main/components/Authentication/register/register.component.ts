@@ -67,7 +67,6 @@ export class RegisterComponent implements OnInit {
         localStorage.setItem(this.constants.TOKEN_KEY, response.token)
         this.authenticationService.setCurrentUser()
         this.router.navigate(['/home'])
-        console.log('Success:', response)
       },
       error: (err) => {
         console.log('Error:', err)

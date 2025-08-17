@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { AddingLieuConfirmationComponent } from './adding-lieu-confirmation.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('AddingLieuConfirmationComponent', () => {
   let component: AddingLieuConfirmationComponent;
@@ -8,10 +8,12 @@ describe('AddingLieuConfirmationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AddingLieuConfirmationComponent]
-    })
-    .compileComponents();
+      imports: [TranslateModule.forRoot()],
+      declarations: [],
+    }).compileComponents();
+  });
 
+  beforeEach(() => {
     fixture = TestBed.createComponent(AddingLieuConfirmationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -19,5 +21,11 @@ describe('AddingLieuConfirmationComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should call reloadPage on close', () => {
+    spyOn(component, 'reloadPage');
+    component.close();
+    expect(component.reloadPage).toHaveBeenCalled();
   });
 });

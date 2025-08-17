@@ -10,5 +10,4 @@ import { MatCard } from "@angular/material/card"
     styleUrl: './loader.component.scss'
 })
 export class LoaderComponent {
-
 }

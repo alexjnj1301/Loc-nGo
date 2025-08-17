@@ -49,11 +49,12 @@ export class MyReservationsComponent implements OnInit {
   public getReservationsByLieuId(lieuId: number): void {
     this.httpCallService.getReservationsByLieuId(lieuId).subscribe({
       next: (res) => {
-        this.reservationsList.push(...res)
+        this.reservationsList = [
+          ...this.reservationsList.filter(r => r.lieu.id !== lieuId),
+          ...res
+        ]
       },
-      error: (error) => {
-        console.error('Error fetching reservations:', error)
-      }
+      error: (error) => console.error('Error fetching reservations:', error)
     })
   }
 

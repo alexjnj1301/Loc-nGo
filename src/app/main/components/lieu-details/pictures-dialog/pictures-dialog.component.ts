@@ -43,6 +43,9 @@ export class PicturesDialogComponent {
   }
 
   public changeImage(i: number) {
-    this.imgUrl = this.getImageToDisplayViaId(i)
+    const newUrl = this.getImageToDisplayViaId(i)
+    if (newUrl) {
+      this.imgUrl = newUrl
+    }
   }
 }

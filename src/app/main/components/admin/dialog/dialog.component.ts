@@ -1,13 +1,18 @@
 import { Component, DEFAULT_CURRENCY_CODE, inject } from '@angular/core'
-import { MAT_DIALOG_DATA, MatDialogClose, MatDialogTitle, MatDialogContent, MatDialogActions } from '@angular/material/dialog'
+import {
+  MAT_DIALOG_DATA,
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogTitle,
+} from '@angular/material/dialog'
 import { ReservationsActions, UpdateBookRequest } from '../../../../enums/admin'
 import { HttpCallsService } from 'src/app/main/services/httpCalls.service'
 import { Reservation } from '../../../../models/ReservationPerUser'
 import * as moment from 'moment'
-import { NgIf, CurrencyPipe, DatePipe, KeyValuePipe } from '@angular/common';
+import { CurrencyPipe, DatePipe, KeyValuePipe, NgIf } from '@angular/common';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatIcon } from '@angular/material/icon';
-import { CdkScrollable } from '@angular/cdk/scrolling';
 import { MatButton } from '@angular/material/button';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -18,12 +23,9 @@ import { TranslateModule } from '@ngx-translate/core';
         }],
     templateUrl: './dialog.component.html',
     styleUrl: './dialog.component.scss',
-    imports: [NgIf, MatProgressSpinner, MatIcon, MatDialogClose, MatDialogTitle, CdkScrollable, MatDialogContent, MatDialogActions, MatButton, CurrencyPipe, DatePipe, KeyValuePipe, TranslateModule]
+    imports: [NgIf, MatProgressSpinner, MatIcon, MatDialogClose, MatDialogTitle, MatDialogContent, MatDialogActions, MatButton, CurrencyPipe, DatePipe, KeyValuePipe, TranslateModule]
 })
-export class DialogComponent {
-  data = inject<{
-    reservation: Reservation;
-}>(MAT_DIALOG_DATA);
+export class DialogComponent { data = inject<{ reservation: Reservation; }>(MAT_DIALOG_DATA);
   private httpService = inject(HttpCallsService);
 
   public reservation: Reservation
@@ -45,7 +47,7 @@ export class DialogComponent {
     this.httpService.updateReservationStatus(this.reservation.id, this.updateRequest).subscribe({
       next: () => {
         this.isLoading = false
-        window.location.reload()
+        this.reloadPage()
       },
       error: (error) => {
         console.error(error)
@@ -61,5 +63,9 @@ export class DialogComponent {
       return end.diff(start, 'days')
     }
     return 0
+  }
+
+  public reloadPage() {
+    window.location.reload()
   }
 }

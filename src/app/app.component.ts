@@ -15,7 +15,7 @@ export class AppComponent {
   private translateService = inject(MultipleTransLoaderHttp);
   private translate = inject(TranslateService);
 
-  public title = 'Loc\'Ngo'
+  public title = 'LocNgo'
   public selectedLanguage: string
   public isLoading: boolean
 

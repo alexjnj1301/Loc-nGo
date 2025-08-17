@@ -4,15 +4,17 @@
   <div class="box-label">{{ lieu.name }}</div>
   <div class="box-title">{{ lieu.postal_code }} - {{ lieu.city }}</div>
   <div class="box-image">
-    <mat-progress-spinner *ngIf="!isImageLoaded" mode="indeterminate"></mat-progress-spinner>
+    @if (!isImageLoaded) {
+      <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+    }
 
-    <img
-      *ngIf="lieu.favorite_picture"
-      [src]="lieu.favorite_picture ? lieu.favorite_picture : constants.REPLACEMENT_PICTURE"
-      alt=""
-      (load)="onImageLoad()"
-      (error)="onImageLoad()"
-    >
+    @if (lieu.favorite_picture) {
+      <img [src]="lieu.favorite_picture ? lieu.favorite_picture : constants.REPLACEMENT_PICTURE"
+        alt=""
+        (load)="onImageLoad()"
+        (error)="onImageLoad()"
+      >
+    }
   </div>
   <div class="studio-button" (click)="redirect()">
     <div class="studio-button-icon">

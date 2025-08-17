@@ -15,8 +15,11 @@ import { MatButton } from '@angular/material/button'
   styleUrl: './adding-lieu-confirmation.component.scss'
 })
 export class AddingLieuConfirmationComponent {
+  public reloadPage() {
+    window.location.reload();
+  }
 
   public close() {
-    window.location.reload()
+    this.reloadPage();
   }
 }
