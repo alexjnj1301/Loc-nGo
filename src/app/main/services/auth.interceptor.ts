@@ -14,7 +14,7 @@ import { environment } from '../../../environments/environment'
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   private router = inject(Router)
-  
+
   public intercept(
     req: HttpRequest<any>,
     next: HttpHandler
