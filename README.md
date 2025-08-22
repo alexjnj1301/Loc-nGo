@@ -1,6 +1,8 @@
 # Locn'Go - Frontend (Angular 19)
 
 Ce projet a été généré avec [Angular CLI](https://github.com/angular/angular-cli) version 19.x.
+# Accès au site web
+- https://app-locngo.com
 # 📌 À propos du projet (Frontend)
 
 **Locn’Go** est une application de **location de logements en montagne de particulier à particulier**.  
@@ -16,7 +18,7 @@ Le frontend **consomme l’API Locn’Go** (backend) via des **services Angular*
 Qualité et performance :
 - **Lazy loading** des modules et **state management avec signals/store**.
 - **Budgets Angular** configurés pour surveiller les performances.
-- **Accessibilité** (labels ARIA, navigation clavier, contraste AA).
+- **Accessibilité** (navigation clavier, contraste AA).
 - **Internationalisation** (fr/en).
 - **Respect des bonnes pratiques Angular** (architecture en features, composants standalone, OnPush, trackBy, code stylé ESLint).
 
@@ -268,4 +270,4 @@ Cela garantit que les pipelines CI/CD fonctionnent correctement **sans exposer d
 
 ---
 **PS**: Concernant l'évaluation de ce projet, il est important de noter que des modifications peuvent être apportées à ce projet après la date butoir de l'évaluation.
-En conséquences, il est important de se fier au tag `v1.1.1` pour l'évaluation, les changements apportés après cette date ne doivent pas être pris en compte dans l'évaluation.
+En conséquences, il est important de se fier au tag `v1.1.2` pour l'évaluation, les changements apportés après cette date ne doivent pas être pris en compte dans l'évaluation.
