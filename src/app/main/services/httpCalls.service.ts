@@ -87,4 +87,8 @@ export class HttpCallsService {
   public setImageAsFavorite(lieuId: number, imageId: number): Observable<string> {
     return this.http.post<string>(`${this.baseUrl}/lieu/favorite-picture`, { lieuId: lieuId, imageId: imageId })
   }
+
+  public becomeProprietor(id: number): Observable<string> {
+    return this.http.post<string>(`${this.baseUrl}/user/role`, {userId: id, roleId: 2})
+  }
 }

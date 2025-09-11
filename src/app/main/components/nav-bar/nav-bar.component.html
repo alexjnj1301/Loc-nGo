@@ -32,6 +32,12 @@
             <mat-icon>calendar_today</mat-icon>
             <span>{{'nav_bar.links.booking' | translate}}</span>
           </button>
+          @if (!authService.isProprietor() && authService.isAuthenticated()) {
+            <button mat-menu-item (click)="becomeProprietor()">
+              <mat-icon>manage_accounts</mat-icon>
+              <span>{{'nav_bar.links.account' | translate}}</span>
+            </button>
+          }
           <button mat-menu-item (click)="logout()">
             <mat-icon fontIcon="logout"></mat-icon>
             <span>{{'nav_bar.links.logout' | translate}}</span>

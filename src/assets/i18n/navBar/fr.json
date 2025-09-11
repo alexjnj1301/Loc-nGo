@@ -9,7 +9,8 @@
       "login": "connexion",
       "logout": "déconnexion",
       "my-demands": "Mes demandes",
-      "my-lieux": "Mes logements"
+      "my-lieux": "Mes logements",
+      "account": "Devenir hôte"
     },
     "tooltips": {
       "home": "Retour à l'accueil",
@@ -21,6 +22,18 @@
       "closeMenu": "Fermer le menu",
       "my-demands": "Voir mes demandes",
       "my-lieux": "Voir mes logements"
+    },
+    "dialog": {
+      "confirm": {
+        "title": "Devenir hôte",
+        "message1": "Êtes-vous sûr de vouloir devenir hôte ?",
+        "message2": "Cette action entrainera une déconnexion immédiate.",
+        "message3": "Vous pourrez ensuite vous reconnecter pour ajouter vos logements.",
+        "buttons": {
+          "cancel": "Annuler",
+          "confirm": "Confirmer"
+        }
+      }
     }
   }
 }

@@ -9,6 +9,9 @@ import { MatIcon } from '@angular/material/icon'
 import { MatTooltip } from '@angular/material/tooltip'
 import { MatMenuTrigger, MatMenu, MatMenuItem } from '@angular/material/menu'
 import { TranslateModule } from '@ngx-translate/core'
+import { HttpCallsService } from '../../services/httpCalls.service'
+import { MatDialog } from '@angular/material/dialog'
+import { ConfirmHostDialogComponent } from './confirm-host-dialog/confirm-host-dialog.component'
 
 @Component({
     selector: 'app-nav-bar',
@@ -19,13 +22,15 @@ import { TranslateModule } from '@ngx-translate/core'
 export class NavBarComponent {
   private translateService = inject(MultipleTransLoaderHttp)
   private router = inject(Router)
-  private authService = inject(AuthenticationService)
+  protected authService = inject(AuthenticationService)
   protected sidenavService = inject(SidenavService)
+  protected dialog: MatDialog = inject(MatDialog)
+
 
   langSelector: string[] = ['fr', 'en']
   currentLangDisplay: string
 
-  public constructor() {
+  public constructor(private httpCallsService: HttpCallsService) {
     this.currentLangDisplay = this.translateService.getLang()
   }
 
@@ -56,5 +61,24 @@ export class NavBarComponent {
 
   public reloadPage(): void {
     window.location.reload()
+  }
+
+  public becomeProprietor() {
+    this.dialog.open(ConfirmHostDialogComponent).afterClosed().subscribe(
+      (result) => {
+        console.log("fermeture dialog", result)
+        if (result === true) {
+          this.httpCallsService.becomeProprietor(this.authService.getCurrentUser()?.id!).subscribe({
+            next: () => {
+              this.authService.logout()
+              this.router.navigate(['/login'])
+            },
+            error: (err: any) => {
+              console.error('Error becoming proprietor:', err)
+            }
+          })
+        }
+      }
+    )
   }
 }

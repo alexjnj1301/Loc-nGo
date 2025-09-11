@@ -9,7 +9,8 @@
       "login": "Log in",
       "logout": "log out",
       "my-demands": "My requests",
-      "my-lieux": "My accommodations"
+      "my-lieux": "My accommodations",
+      "account": "Become a host"
     },
     "tooltips": {
       "home": "Go to the home page",
@@ -21,6 +22,18 @@
       "closeMenu": "Close the menu",
       "my-demands": "View my requests",
       "my-lieux": "View my accommodations"
+    },
+    "dialog": {
+      "confirm": {
+        "title": "Become a host",
+        "message1": "Are you sure you want to become a host?",
+        "message2": "This action will log you out immediately.",
+        "message3": "You can then log in to add your accommodations.",
+        "buttons": {
+          "cancel": "Cancel",
+          "confirm": "Confirm"
+        }
+      }
     }
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core'
 import { TitlePictureComponent } from '../title-picture/title-picture.component'
 import { TranslateModule } from '@ngx-translate/core'
 import { HttpCallsService } from '../../services/httpCalls.service'
@@ -27,14 +27,14 @@ import { AddLieuDialogComponent } from '../admin/add-lieu-dialog/add-lieu-dialog
   standalone: true
 })
 export class MyLieuxComponent implements OnInit {
-  httpCallService = inject(HttpCallsService);
-  authService = inject(AuthenticationService);
-  dialog = inject(MatDialog);
+  httpCallService = inject(HttpCallsService)
+  authService = inject(AuthenticationService)
+  dialog = inject(MatDialog)
 
   public myLieux: AllLieuResponse[] = []
 
   public ngOnInit(): void {
-    this.getMyLieux();
+    this.getMyLieux()
   }
 
   public getMyLieux(): void {
