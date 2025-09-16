@@ -68,16 +68,15 @@
     </div>
 
     <div class="register-buttons-container">
-      <button class="login-button" type="submit" [hidden]="registerForm.invalid"
-              [disabled]="registerForm.invalid">
+      <button class="login-button" type="submit" [hidden]="registerForm.invalid">
         {{ translateValues?.button?.register }}
       </button>
-      <button class="login-button google-login" type="button" [disabled]="registerForm.invalid">
-        <span style="align-content: center; justify-content: center">
-          <img ngSrc="assets/svg/google.svg" alt="google login" height="25" width="25">
-          {{ translateValues?.button?.googleRegister }}
-        </span>
-      </button>
+<!--      <button class="login-button google-login" type="button" [disabled]="registerForm.invalid">-->
+<!--        <span style="align-content: center; justify-content: center">-->
+<!--          <img ngSrc="assets/svg/google.svg" alt="google login" height="25" width="25">-->
+<!--          {{ translateValues?.button?.googleRegister }}-->
+<!--        </span>-->
+<!--      </button>-->
       <p class="login-register-redirect" routerLink="/login">{{ translateValues?.labels?.goToLogin }}</p>
     </div>
   </form>

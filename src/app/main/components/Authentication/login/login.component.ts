@@ -1,17 +1,17 @@
 import { Component, inject, OnInit } from '@angular/core'
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms'
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { MultipleTransLoaderHttp } from '../../../../MultipleTransLoaderHttp'
 import { AuthenticationService } from '../../../services/authentication.service'
 import { AppComponent } from '../../../../app.component'
 import { Constants } from '../../../Constants'
 import { Router, RouterLink } from '@angular/router'
-import { NgClass, NgOptimizedImage } from '@angular/common';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrl: '../authentication.styles.scss',
-  imports: [ReactiveFormsModule, NgClass, NgOptimizedImage, RouterLink],
+  imports: [ReactiveFormsModule, NgClass, RouterLink],
   standalone: true
 })
 export class LoginComponent implements OnInit {

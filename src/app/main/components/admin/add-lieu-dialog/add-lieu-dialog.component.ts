@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import {
   MAT_DIALOG_DATA,
   MatDialog,
@@ -17,9 +17,12 @@ import { SetFavoriteImageDialogComponent } from './set-favorite-image-dialog/set
 import { TranslateModule } from '@ngx-translate/core'
 import { MatStep, MatStepper, MatStepperNext, MatStepperPrevious } from '@angular/material/stepper'
 import { NgClass } from '@angular/common'
-import { MatButton } from '@angular/material/button'
+import { MatButton, MatIconButton } from '@angular/material/button'
 import { MatCheckbox } from '@angular/material/checkbox'
 import { LoaderComponent } from '../../loader/loader.component'
+import { MatIcon } from '@angular/material/icon'
+import { MatProgressBar } from '@angular/material/progress-bar'
+import { MatRipple } from '@angular/material/core'
 
 @Component({
   selector: 'app-add-lieu-dialog',
@@ -39,7 +42,11 @@ import { LoaderComponent } from '../../loader/loader.component'
     MatStepperNext,
     MatCheckbox,
     MatStepperPrevious,
-    LoaderComponent
+    LoaderComponent,
+    MatIcon,
+    MatIconButton,
+    MatProgressBar,
+    MatRipple
   ],
   standalone: true,
 })
@@ -52,7 +59,8 @@ export class AddLieuDialogComponent implements OnInit {
   dialog = inject(MatDialog);
 
   protected readonly String = String
-  featuresItem = featuresItem
+  @ViewChild('fileInput') fileInput!: ElementRef
+  public featuresItem = featuresItem
   public lieu: LieuDetailsResponse | undefined
   public isAddModeOrIsUpdateMode = true
   public lieuForm: FormGroup
@@ -61,6 +69,11 @@ export class AddLieuDialogComponent implements OnInit {
   public file: File | null = null
   public isLoading = false
   public lieuImages: getImagesOfLieuResponse[] = []
+  public filesToSend = 0
+  public filesSent = 0
+  public files: File[] = []
+  public sending = false
+  public fileInError: File[] = []
 
   public constructor() {
     const data = this.data;
@@ -89,7 +102,6 @@ export class AddLieuDialogComponent implements OnInit {
 
   public ngOnInit() {
     this.getAllServices()
-    // this.getImagesOfLieu()
   }
 
   public addLieu() {
@@ -164,29 +176,59 @@ export class AddLieuDialogComponent implements OnInit {
     return false
   }
 
-  public openConfirmDialog() {
-    this.isLoading = true
-    this.httpService.addImageToLieu(this.file!, this.lieu?.id!).subscribe({
-      next: (response) => {
-        console.log('Image added successfully:', response)
-        this.isLoading = false
-        this.getImagesOfLieu()
-        // reset the file input
-        const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement
-        if (fileInput) {
-          fileInput.value = ''
-        }
-      },
-      error: (error) => {
-        console.error('Error adding image:', error)
-        this.isLoading = false
-      }
-    })
-  }
-
   public onFileSelected($event: Event) {
     const input = $event.target as HTMLInputElement
     this.file = input.files ? input.files[0] : null
+  }
+
+  public triggerFileInput() {
+    if (this.fileInput) {
+      this.fileInput.nativeElement.click()
+    }
+  }
+
+  public removeFile(file: File) {
+    if (this.files) {
+      const index = this.files.indexOf(file)
+      if (index > -1) {
+        this.files.splice(index, 1)
+      }
+    }
+  }
+
+  public openConfirmDialog() {
+    this.filesSent = 0
+    this.sending = true
+    for (const file of this.files) {
+      this.httpService.addImageToLieu(file!, this.lieu?.id!).subscribe({
+        next: () => {
+          this.filesSent++
+          this.getImagesOfLieu()
+          const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement
+          if (fileInput) {
+            fileInput.value = ''
+          }
+          this.files = this.files.filter(f => f !== file)
+        },
+        error: (error) => {
+          console.error('Error adding image:', error)
+        }
+      })
+    }
+  }
+
+  public onChange(event: Event) {
+    const input = event.target as HTMLInputElement
+    if (input.files) {
+      const existingFile = this.files.find(file => file.name === input.files![0].name)
+      if (existingFile) {
+        console.warn('File already exists:', existingFile.name)
+        return
+      }
+      this.files?.push(input.files[0])
+    }
+
+    this.filesToSend = this.files.length
   }
 
   public setFavoriteImage(imageUrl: string, imageId: number) {

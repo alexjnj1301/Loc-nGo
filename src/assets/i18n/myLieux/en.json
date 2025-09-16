@@ -30,6 +30,10 @@
           "postal_code": "Postal Code",
           "city": "City"
         },
+        "setFavorite": {
+          "title": "Set as Favorite",
+          "message": "Do you want to set this accommodation as your favorite accommodation?"
+        },
         "actions": {
           "confirm": "Add",
           "update": "Update",

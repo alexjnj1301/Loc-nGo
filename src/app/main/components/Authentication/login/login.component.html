@@ -17,12 +17,12 @@
       <button class="login-button" type="submit" [disabled]="loginForm.invalid">
         {{ translateValues?.button?.login }}
       </button>
-      <button class="login-button google-login" type="button" [disabled]="loginForm.invalid">
-        <span style="align-content: center; justify-content: center">
-          <img ngSrc="assets/svg/google.svg" alt="google login" height="25" width="25">
-          {{ translateValues?.button?.googleLogin }}
-        </span>
-      </button>
+<!--      <button class="login-button google-login" type="button" [disabled]="loginForm.invalid">-->
+<!--        <span style="align-content: center; justify-content: center">-->
+<!--          <img ngSrc="assets/svg/google.svg" alt="google login" height="25" width="25">-->
+<!--          {{ translateValues?.button?.googleLogin }}-->
+<!--        </span>-->
+<!--      </button>-->
       <p class="login-register-redirect" routerLink="/register">{{ translateValues?.labels?.goToRegister }}</p>
     </div>
   </form>

@@ -1,20 +1,28 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators, ReactiveFormsModule } from '@angular/forms'
+import { Component, inject, OnInit } from '@angular/core';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  ValidationErrors,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms'
 import { MultipleTransLoaderHttp } from '../../../../MultipleTransLoaderHttp'
 import { AppComponent } from '../../../../app.component'
 import { AuthenticationService } from '../../../services/authentication.service'
 import { Constants } from '../../../Constants'
 import { Router, RouterLink } from '@angular/router'
 import { MatButton } from '@angular/material/button';
-import { NgStyle, NgClass, NgOptimizedImage } from '@angular/common';
+import { NgClass, NgStyle } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
-import { MatTabGroup, MatTab } from '@angular/material/tabs';
+import { MatTab, MatTabGroup } from '@angular/material/tabs';
 
 @Component({
     selector: 'app-register',
     templateUrl: './register.component.html',
     styleUrl: '../authentication.styles.scss',
-    imports: [ReactiveFormsModule, MatButton, NgStyle, MatIcon, MatTabGroup, MatTab, NgClass, NgOptimizedImage, RouterLink]
+  imports: [ReactiveFormsModule, MatButton, NgStyle, MatIcon, MatTabGroup, MatTab, NgClass, RouterLink],
 })
 export class RegisterComponent implements OnInit {
   private formBuilder = inject(FormBuilder);
