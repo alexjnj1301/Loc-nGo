@@ -81,3 +81,54 @@ form {
   gap: 10px;
   width: 100%;
 }
+
+//////
+
+.container {
+  border: 3px grey dashed;
+  border-radius: 20px;
+  margin: 0 auto;
+  width: 90%;
+  height: 10vh;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+}
+
+.progress-bar {
+  width: 50vw;
+  margin: 2rem 0;
+}
+
+.file-item-container {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+}
+
+.file-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0 0.5rem;
+}
+
+.send-file-container {
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: row;
+  width: fit-content;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: start;
+  width: fit-content;
+}

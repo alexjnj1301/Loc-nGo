@@ -30,6 +30,10 @@
           "postal_code": "Code postal",
           "city": "Ville"
         },
+        "setFavorite": {
+          "title": "Définir comme favori",
+          "message": "Voulez-vous définir ce logement comme votre logement favori ?"
+        },
         "actions": {
           "confirm": "Ajouter",
           "update": "Mettre à jour",

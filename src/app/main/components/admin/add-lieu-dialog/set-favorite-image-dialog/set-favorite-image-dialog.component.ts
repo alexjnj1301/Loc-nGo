@@ -1,5 +1,11 @@
 import { Component, inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogActions, MatDialogClose, MatDialogContent } from '@angular/material/dialog'
+import {
+  MAT_DIALOG_DATA,
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogTitle,
+} from '@angular/material/dialog'
 import { HttpCallsService } from '../../../../services/httpCalls.service'
 import { TranslateModule } from '@ngx-translate/core'
 import { MatButton } from '@angular/material/button'
@@ -12,6 +18,7 @@ import { MatButton } from '@angular/material/button'
     TranslateModule,
     MatButton,
     MatDialogClose,
+    MatDialogTitle,
   ],
   templateUrl: './set-favorite-image-dialog.component.html',
   styleUrl: './set-favorite-image-dialog.component.scss'

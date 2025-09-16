@@ -72,12 +72,13 @@ export class HttpCallsService {
     return this.http.post<AllLieuResponse>(`${this.baseUrl}/lieu/${id}/addservice`, {servicesId})
   }
 
-  public addImageToLieu(file: File, lieuId: number): Observable<any> {
-    // add a multipart form data to send the file
+  public addImageToLieu(file: File, lieuId: number): Observable<string> {
     const formData = new FormData()
     formData.append('file', file)
 
-    return this.http.post<any>(`${this.baseUrl}/images/lieu/s3/${lieuId}`, formData)
+    return this.http.post<string>(`${this.baseUrl}/images/lieu/s3/${lieuId}`, formData, {
+      responseType: 'text' as 'json'
+    })
   }
 
   public getImagesOfLieu(lieuId: number): Observable<getImagesOfLieuResponse[]> {
